@@ -30,7 +30,7 @@
         android:layout_marginTop="77dp"
         android:text="@string/all" />
 
-    <com.tuolve.energymanagement.view.CircleProgressBar
+    <com.growatt.energymanagement.view.CircleProgressBar
         style="@style/circle_style"
         android:id="@+id/running_percent"/>
 

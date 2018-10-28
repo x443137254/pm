@@ -98,7 +98,7 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content">
 
-            <com.tuolve.energymanagement.view.CircleProgressBar
+            <com.growatt.energymanagement.view.CircleProgressBar
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerInParent="true" />
@@ -231,7 +231,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <com.tuolve.energymanagement.view.CircleProgressBar
+            <com.growatt.energymanagement.view.CircleProgressBar
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerInParent="true" />

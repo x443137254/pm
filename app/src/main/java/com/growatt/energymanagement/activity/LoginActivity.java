@@ -113,7 +113,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
                 pop.dismiss();
                 break;
             case R.id.third_reg:
-                Intent intent = new Intent(this, ThirdRegActivity.class);
+                Intent intent = new Intent(this, RegActivity.class);
                 intent.putExtra("appType", appType);
                 intent.putExtra("thirdUnique", thirdUnique);
                 startActivity(intent);

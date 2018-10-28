@@ -25,7 +25,7 @@
         android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
-        <com.tuolve.energymanagement.view.CircleProgressBar
+        <com.growatt.energymanagement.view.CircleProgressBar
             android:id="@+id/pb_home"
             app:roundColor="#0443AF"
             app:roundProgressColor="#5E93FF"
@@ -109,7 +109,7 @@
 
         </LinearLayout>
 
-        <com.tuolve.energymanagement.view.CircleProgressBar
+        <com.growatt.energymanagement.view.CircleProgressBar
             android:id="@+id/pb_home2"
             app:roundColor="#008759"
             app:roundProgressColor="#5E93FF"
@@ -236,7 +236,7 @@
             android:layout_marginTop="8dp"
             android:layout_weight="1">
 
-            <com.tuolve.energymanagement.view.CircleProgressBar
+            <com.growatt.energymanagement.view.CircleProgressBar
                 app:roundColor="#06FF5E"
                 app:roundProgressColor="#5E93FF"
                 app:roundWidth="6dp"

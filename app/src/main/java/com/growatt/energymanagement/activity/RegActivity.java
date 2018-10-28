@@ -135,7 +135,13 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
                     Toast.makeText(this, getResources().getString(R.string.code_error), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (legal) {
+                Intent intent = getIntent();
+                String appType  = intent.getStringExtra("appType");
+                String thirdUnique  = intent.getStringExtra("thirdUnique");
+                if (thirdUnique != null && thirdUnique.length() > 0) {
+                    InternetUtils.thirdRegist(appType,thirdUnique,account,account,company,
+                            country.getText().toString(),language.getText().toString(),addr,userType);
+                }else {
                     InternetUtils.regist(password,account,country.getText().toString(),"中文",company,addr,userType);
                 }
                 break;

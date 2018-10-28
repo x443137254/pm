@@ -26,7 +26,7 @@ public class PMApplication extends Application {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        UMConfigure.init(this,"5b9f2a15f29d982006000190","umeng", UMConfigure.DEVICE_TYPE_PHONE,"");
+        UMConfigure.init(this,"5ba054a7f1f5565137000184","umeng", UMConfigure.DEVICE_TYPE_PHONE,"");
         PlatformConfig.setWeixin("wxd35b09ff1d12f3ce", "0e360ecc00be1ca75f85da2ab029e743");
         PlatformConfig.setQQZone("101500767", "a8251b3caaa19725b20ac6bb29797ac7");
         UMShareAPI.get(this);

@@ -70,7 +70,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
-        <com.tuolve.energymanagement.view.GradientTextView
+        <com.growatt.energymanagement.view.GradientTextView
             android:id="@+id/gen_ele_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
-        <com.tuolve.energymanagement.view.GradientTextView
+        <com.growatt.energymanagement.view.GradientTextView
             android:id="@+id/con_ele_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

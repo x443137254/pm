@@ -29,7 +29,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/medText" />
 
-            <com.tuolve.energymanagement.view.GradientTextView
+            <com.growatt.energymanagement.view.GradientTextView
                 android:id="@+id/shape_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

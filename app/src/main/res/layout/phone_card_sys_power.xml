@@ -45,7 +45,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp">
 
-                <com.tuolve.energymanagement.view.CircleProgressBar
+                <com.growatt.energymanagement.view.CircleProgressBar
                     android:id="@+id/pb_home"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -124,7 +124,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp">
 
-                <com.tuolve.energymanagement.view.CircleProgressBar
+                <com.growatt.energymanagement.view.CircleProgressBar
                     android:id="@+id/pb_home2"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -243,7 +243,7 @@
             android:layout_height="64dp"
             android:layout_marginTop="7dp">
 
-            <com.tuolve.energymanagement.view.CircleProgressBar
+            <com.growatt.energymanagement.view.CircleProgressBar
                 android:id="@+id/load_power_circle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
