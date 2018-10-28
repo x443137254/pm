@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/fl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <RadioGroup
+            android:id="@+id/tab_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTabBg"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/radio_home"
+                style="@style/TabStyle"
+                android:drawableTop="@drawable/tab_top_01"
+                android:text="@string/over_view" />
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/radio_ele"
+                style="@style/TabStyle"
+                android:drawableTop="@drawable/tab_top_02"
+                android:text="@string/ele_gen" />
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/radio_energy"
+                style="@style/TabStyle"
+                android:drawableTop="@drawable/tab_top_03"
+                android:text="@string/energy_consume" />
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/radio_analyze"
+                style="@style/TabStyle"
+                android:drawableTop="@drawable/tab_top_04"
+                android:text="@string/analyze" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="start">
+
+        <LinearLayout
+            android:id="@+id/user_item"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:gravity="center"
+            android:background="#ff022732"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@mipmap/defult_head_ic"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/draw_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    android:text="@string/click_login"/>
+
+                <TextView
+                    android:id="@+id/draw_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorText_01"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:src="@mipmap/more"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#ff032d3a"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@mipmap/info_maintain"/>
+
+                <TextView
+                    android:id="@+id/info_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/station_info_maintain"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:src="@mipmap/price_conf"/>
+
+                <TextView
+                    android:id="@+id/conf_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/price_conf"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="250dp"
+                android:layout_height="1dp"
+                android:background="#ff07455a"
+                android:layout_gravity="end"
+                android:layout_marginTop="19dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:gravity="center"
+            android:background="#ff022732"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="9dp"
+                android:src="@mipmap/setting"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="9dp" />
+
+            <TextView
+                android:id="@+id/setting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                android:text="@string/setting"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

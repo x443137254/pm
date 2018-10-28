@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="450dp"
+    android:paddingBottom="15dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/big_circle"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/bg_tatolpower" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ele_gen_cum"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_18"
+                android:textColor="@color/color_bg_10"
+                android:textSize="45sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_69"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout style="@style/GroupStyle_01">
+
+            <ImageView
+                style="@style/ImageStyle_01"
+                android:src="@mipmap/icon_home1" />
+
+            <LinearLayout style="@style/GroupStyle_02">
+
+                <TextView
+                    style="@style/TextStyle_01"
+                    android:text="@string/text_18" />
+
+                <TextView
+                    style="@style/TextStyle_02"
+                    android:text="@string/text_39" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextStyle_03"
+                android:text="@string/ele_gen_month" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/GroupStyle_01">
+
+            <ImageView
+                style="@style/ImageStyle_01"
+                android:src="@mipmap/icon_home2" />
+
+            <LinearLayout style="@style/GroupStyle_02">
+
+                <TextView
+                    style="@style/TextStyle_02"
+                    android:text="@string/text_63" />
+
+                <TextView
+                    style="@style/TextStyle_01"
+                    android:text="@string/text_18" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextStyle_03"
+                android:text="@string/ele_fee_month" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/GroupStyle_01">
+
+            <ImageView
+                style="@style/ImageStyle_01"
+                android:src="@mipmap/icon_home3" />
+
+            <LinearLayout style="@style/GroupStyle_02">
+
+                <TextView
+                    style="@style/TextStyle_02"
+                    android:text="@string/text_63" />
+
+                <TextView
+                    style="@style/TextStyle_01"
+                    android:text="@string/text_18" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextStyle_03"
+                android:text="@string/month_earnings" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/GroupStyle_01">
+
+            <ImageView
+                style="@style/ImageStyle_01"
+                android:src="@mipmap/icon_home4" />
+
+            <LinearLayout style="@style/GroupStyle_02">
+
+                <TextView
+                    style="@style/TextStyle_01"
+                    android:text="@string/text_18" />
+
+                <TextView
+                    style="@style/TextStyle_02"
+                    android:text="@string/text_25" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextStyle_03"
+                android:text="@string/ele_con_month" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

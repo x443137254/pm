@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_login"
+    android:orientation="vertical"
+    tools:context="com.tuolve.powermanager.activity.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageView
+            android:id="@+id/login_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/login"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/titleSize"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/login_reg_bt"
+            android:layout_width="50dp"
+            android:layout_height="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/frame"
+            android:text="@string/reg"
+            android:textSize="15sp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorWhite"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include layout="@layout/layout_login"/>
+
+
+</LinearLayout>

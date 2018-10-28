@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:text="@string/ele_gen"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/titleSize" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:src="@mipmap/_add" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/card_title"
+                    android:layout_margin="10dp"
+                    android:text="@string/sys_running" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/drop_menu_bt"
+                    android:layout_width="115dp"
+                    android:layout_height="22dp"
+                    android:text="@string/temp_text"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/round_dark_blue_edg"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:drawableRight="@mipmap/drop"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@mipmap/drop" />
+            </LinearLayout>
+
+            <include layout="@layout/layout_inverter_block"/>
+
+            <include layout="@layout/phone_card_device_manage"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

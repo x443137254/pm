@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:gravity="center"
+    android:layout_marginBottom="30dp">
+
+    <TextView
+        android:id="@+id/consume_ele_classify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:text="@string/all"
+        android:layout_margin="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0dffffff"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp">
+
+        <TextView
+            android:id="@+id/from_ele_net_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#feae15"/>
+
+        <ProgressBar
+            android:id="@+id/from_ele_net_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/progress_yellow"/>
+
+        <TextView
+            android:id="@+id/fee_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:textColor="#a290ff"/>
+
+        <ProgressBar
+            android:id="@+id/fee_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/progress_purple"/>
+
+        <TextView
+            android:id="@+id/light_offer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:textColor="#06f2d8"/>
+
+        <ProgressBar
+            android:id="@+id/light_offer_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/progress_blue"/>
+    </LinearLayout>
+</LinearLayout>

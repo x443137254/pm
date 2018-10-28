@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/add_device_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:scaleType="center"
+            android:src="@mipmap/back"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="@string/add_device"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:text="@string/select_device_kind"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:id="@+id/air_condition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame2"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:src="@drawable/frame_past"
+            android:scaleType="fitStart"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            android:drawableTop="@mipmap/add_aircondition"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/air_conditioner"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/illumination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame2"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:src="@drawable/frame_past"
+            android:scaleType="fitStart"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            android:drawableTop="@mipmap/add_light"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/illumination"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/charge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame2"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:src="@drawable/frame_past"
+            android:scaleType="fitStart"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            android:drawableTop="@mipmap/add_charger"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/charge_station"/>
+    </LinearLayout>
+</LinearLayout>

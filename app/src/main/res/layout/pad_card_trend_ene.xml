@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="255dp"
+    android:layout_margin="7dp"
+    android:background="@drawable/person_bg_pad"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="@string/ene_trend"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/maxText" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <RadioGroup
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_dark_blue_edg"
+            android:orientation="horizontal"
+            android:padding="1dp">
+
+            <RadioButton
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_day_selector"
+                android:text="@string/day" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorText_03" />
+
+            <RadioButton
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_month_selector"
+                android:text="@string/month" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorText_03" />
+
+            <RadioButton
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_year_selector"
+                android:text="@string/year" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/trend_time"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_dark_blue_edg"
+            android:gravity="center"
+            android:text="@string/text_18"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/cc_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp" />
+</LinearLayout>

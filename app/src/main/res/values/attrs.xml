@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CircleProgressBar">
+        <!-- 圆形进度条进度显示的颜色 -->
+        <attr name="roundProgressColor" format="color"/>
+        <!-- 圆形第二进度条进度显示的颜色 -->
+        <attr name="secondProgressColor" format="color"/>
+        <!-- 外圈圆的颜色 -->
+        <attr name="roundColor" format="color"/>
+        <!-- 圆的总宽度 -->
+        <attr name="roundWidth" format="dimension"/>
+        <!-- 字体显示的大小 -->
+        <attr name="textSize" format="dimension"/>
+        <!-- 字体显示的颜色　-->
+        <attr name="textColor" format="color"/>
+        <!-- 进度的最大值 -->
+        <attr name="max" format="integer"/>
+        <!-- 进度值 -->
+        <attr name="progress" format="integer"/>
+        <!-- 第二进度值 -->
+        <attr name="secondProgress" format="integer"/>
+        <!-- 是否显示文字 -->
+        <attr name="textShow" format="boolean"/>
+        <!-- 是否显示第二进度条 -->
+        <attr name="showSecondProgress" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="CircleCake">
+        <!-- 圆圈背景颜色 -->
+        <attr name="restColor" format="color"/>
+        <!-- 百分比的颜色 -->
+        <attr name="percentColor" format="color"/>
+        <!-- 最大值 -->
+        <attr name="maxPercent" format="integer"/>
+        <!-- 百分比 -->
+        <attr name="percent" format="integer"/>
+    </declare-styleable>
+</resources>

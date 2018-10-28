@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/color_bg_07"
+    android:layout_height="400dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/pop_cancel"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/round_dark_blue_edg"
+            android:text="@string/cancel"
+            android:textColor="@color/colorBlue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/bind_account"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/third_reg"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/blue_bt_shape"
+            android:text="@string/reg"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/bind_account"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorText_04"
+        android:hint="@string/input_account"
+        android:textColorHint="@color/colorText_04"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/round_dark_blue_edg"/>
+
+    <EditText
+        android:id="@+id/bind_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorText_04"
+        android:hint="@string/input_pwd"
+        android:textColorHint="@color/colorText_04"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/round_dark_blue_edg"/>
+
+    <Button
+        android:id="@+id/bind"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/blue_bt_shape"
+        android:layout_margin="40dp"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:text="@string/bind"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+</LinearLayout>

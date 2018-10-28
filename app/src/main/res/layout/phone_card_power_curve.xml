@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/frame2"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/frame_past" />
+
+    <TextView
+        style="@style/card_title"
+        android:layout_gravity="center"
+        android:text="@string/rate_graphic" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/time_group"
+            android:layout_width="180dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_dark_blue_edg"
+            android:orientation="horizontal"
+            android:divider="@drawable/radio_divider"
+            android:showDividers="middle"
+            android:padding="1dp">
+
+            <RadioButton
+                android:id="@+id/time_cur"
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_day_selector"
+                android:text="@string/now" />
+
+            <RadioButton
+                android:id="@+id/time_day"
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_month_selector"
+                android:text="@string/day" />
+
+            <RadioButton
+                android:id="@+id/time_month"
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_month_selector"
+                android:text="@string/month" />
+
+            <RadioButton
+                android:id="@+id/time_year"
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_year_selector"
+                android:text="@string/year" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/time_pick"
+            android:layout_width="105dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/round_dark_blue_edg"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="@string/text_17"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart_2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/from_bms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/colorWhite" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/from_grid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_percent"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="300dp"
+        android:layout_height="12dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:max="100"
+        android:progressDrawable="@drawable/progress_style_01" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/from_bms_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/colorText_06" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/from_grid_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/colorText_07" />
+    </LinearLayout>
+</LinearLayout>

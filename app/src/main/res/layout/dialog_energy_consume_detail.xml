@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="500dp"
+    android:layout_height="match_parent"
+    android:background="@drawable/round_dark_blue_edg_2"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/consume_detail"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/last" />
+
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_margin="3dp"
+            android:background="@drawable/round_dark_blue_edg"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="@string/text_17"
+            android:textColor="@color/colorWhite" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/next" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@mipmap/temp_ic_04" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_bg_04"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <RadioGroup
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:background="@drawable/round_dark_blue_edg"
+                android:orientation="horizontal"
+                android:padding="1dp">
+
+                <RadioButton
+                    style="@style/RadioButtonStyle_01"
+                    android:background="@drawable/radio_day_selector"
+                    android:text="@string/month" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorText_03" />
+
+                <RadioButton
+                    style="@style/RadioButtonStyle_01"
+                    android:background="@drawable/radio_year_selector"
+                    android:text="@string/year" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/round_dark_blue_edg"
+                android:gravity="center"
+                android:padding="1dp"
+                android:text="@string/text_17"
+                android:textColor="@color/colorWhite" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/energy_consume_detail_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:padding="10dp"
+            android:scrollbars="none" />
+    </LinearLayout>
+</LinearLayout>

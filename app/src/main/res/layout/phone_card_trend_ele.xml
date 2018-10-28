@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/card_title"
+            android:layout_centerInParent="true"
+            android:layout_margin="8dp"
+            android:text="@string/ele_trend"/>
+
+        <TextView
+            android:id="@+id/area_selector_1"
+            android:layout_width="75dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_height="22dp"
+            android:background="@drawable/text_bg_07"
+            android:textColor="@color/colorWhite"
+            android:text="@string/all_area"
+            android:textSize="12sp"
+            android:ellipsize="end"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center_vertical"
+            android:drawableRight="@mipmap/drop"
+            android:drawableEnd="@mipmap/drop"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/ele_trend_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/ele_trend_radio_now"
+                style="@style/RadioButtonStyle_02"
+                android:text="@string/now" />
+
+            <RadioButton
+                android:id="@+id/ele_trend_radio_day"
+                style="@style/RadioButtonStyle_02"
+                android:text="@string/day" />
+
+            <RadioButton
+                android:id="@+id/ele_trend_radio_mon"
+                style="@style/RadioButtonStyle_02"
+                android:text="@string/month" />
+
+            <RadioButton
+                android:id="@+id/ele_trend_radio_year"
+                style="@style/RadioButtonStyle_02"
+                android:text="@string/year" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/time_picker_01"
+            android:layout_width="100dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/round_dark_blue_edg"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:text="@string/text_17"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart_1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp"/>
+</LinearLayout>

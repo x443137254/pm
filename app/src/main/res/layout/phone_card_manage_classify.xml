@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/frame2"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/frame_past" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/card_title"
+            android:layout_centerInParent="true"
+            android:text="@string/classify_manage" />
+
+        <ImageView
+            android:id="@+id/add_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/_add" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/cut_group"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        android:divider="@drawable/radio_divider"
+        android:showDividers="middle"
+        android:background="@drawable/round_dark_blue_edg"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio_device"
+            style="@style/RadioButtonStyle_01"
+            android:background="@drawable/radio_day_selector"
+            android:text="@string/device" />
+
+        <RadioButton
+            android:id="@+id/radio_consume"
+            style="@style/RadioButtonStyle_01"
+            android:background="@drawable/radio_year_selector"
+            android:text="@string/expend" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/list_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="@drawable/divider"
+        android:showDividers="beginning|middle"
+        android:layout_marginBottom="5dp"/>
+
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="105dp">
+
+        <TextView
+            style="@style/TextStyle_15"
+            android:text="@string/air_conditioner" />
+
+        <ImageView
+            style="@style/img_03"
+            android:src="@mipmap/classify_aircondition" />
+
+        <TextView
+            style="@style/TextStyle_16"
+            android:text="@string/text_25"
+            android:layout_marginTop="55dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp" />
+
+        <TextView
+            style="@style/TextStyle_17"
+            android:text="@string/all"
+            android:layout_marginTop="77dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp" />
+
+        <com.tuolve.powermanager.view.CircleProgressBar
+           style="@style/circle_style" />
+
+        <TextView
+            style="@style/TextStyle_18"
+            android:text="@string/text_25" />
+
+        <TextView
+            style="@style/TextStyle_17"
+            android:text="@string/running"
+            android:layout_marginTop="77dp"
+            android:layout_marginLeft="164dp"
+            android:layout_marginStart="164dp" />
+
+        <ImageView
+            android:id="@+id/anim_01"
+            style="@style/img_04"
+            android:src="@mipmap/float_power_03" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="55dp"
+            android:layout_marginLeft="277dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="277dp">
+
+            <TextView
+                style="@style/TextStyle_16"
+                android:text="@string/text_25" />
+
+            <TextView
+                style="@style/TextStyle_19"
+                android:text="@string/text_39" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextStyle_17"
+            android:text="@string/consume_energy"
+            android:layout_marginTop="77dp"
+            android:layout_marginLeft="277dp"
+            android:layout_marginStart="277dp" />
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="105dp">
+
+        <TextView
+            style="@style/TextStyle_15"
+            android:text="@string/illumination" />
+
+        <ImageView
+            style="@style/img_03"
+            android:src="@mipmap/classify_light" />
+
+        <TextView
+            style="@style/TextStyle_16"
+            android:text="@string/text_25"
+            android:layout_marginTop="55dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp" />
+
+        <TextView
+            style="@style/TextStyle_17"
+            android:text="@string/all"
+            android:layout_marginTop="77dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp" />
+
+        <com.tuolve.powermanager.view.CircleProgressBar
+            style="@style/circle_style" />
+
+        <TextView
+            style="@style/TextStyle_18"
+            android:text="@string/text_25" />
+
+        <TextView
+            style="@style/TextStyle_17"
+            android:text="@string/running"
+            android:layout_marginTop="77dp"
+            android:layout_marginLeft="164dp"
+            android:layout_marginStart="164dp" />
+
+        <ImageView
+            android:id="@+id/anim_02"
+            style="@style/img_04"
+            android:src="@mipmap/float_power_03" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="55dp"
+            android:layout_marginLeft="277dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="277dp">
+
+            <TextView
+                style="@style/TextStyle_16"
+                android:text="@string/text_25" />
+
+            <TextView
+                style="@style/TextStyle_19"
+                android:text="@string/text_39" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextStyle_17"
+            android:text="@string/consume_energy"
+            android:layout_marginTop="77dp"
+            android:layout_marginLeft="277dp"
+            android:layout_marginStart="277dp" />
+    </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="105dp">
+
+        <TextView
+            style="@style/TextStyle_15"
+            android:text="@string/charge_station" />
+
+        <ImageView
+            style="@style/img_03"
+            android:src="@mipmap/classify_charger" />
+
+        <TextView
+            style="@style/TextStyle_16"
+            android:text="@string/text_25"
+            android:layout_marginTop="55dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp" />
+
+        <TextView
+            style="@style/TextStyle_17"
+            android:text="@string/all"
+            android:layout_marginTop="77dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginStart="50dp" />
+
+        <com.tuolve.powermanager.view.CircleProgressBar
+            style="@style/circle_style" />
+
+        <TextView
+            style="@style/TextStyle_18"
+            android:text="@string/text_25" />
+
+        <TextView
+            style="@style/TextStyle_17"
+            android:text="@string/running"
+            android:layout_marginTop="77dp"
+            android:layout_marginLeft="164dp"
+            android:layout_marginStart="164dp" />
+
+        <ImageView
+            android:id="@+id/anim_03"
+            style="@style/img_04"
+            android:src="@mipmap/float_power_03" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="55dp"
+            android:layout_marginLeft="277dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="277dp">
+
+            <TextView
+                style="@style/TextStyle_16"
+                android:text="@string/text_25" />
+
+            <TextView
+                style="@style/TextStyle_19"
+                android:text="@string/text_39" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/TextStyle_17"
+            android:text="@string/consume_energy"
+            android:layout_marginTop="77dp"
+            android:layout_marginLeft="277dp"
+            android:layout_marginStart="277dp" />
+    </android.support.constraint.ConstraintLayout>-->
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="105dp"
+    tools:ignore="ContentDescription">
+
+    <TextView
+        android:id="@+id/device_name"
+        style="@style/TextStyle_15"
+        android:text="@string/air_conditioner" />
+
+    <ImageView
+        style="@style/img_03"
+        android:src="@mipmap/classify_aircondition" />
+
+    <TextView
+        android:id="@+id/total_num"
+        style="@style/TextStyle_16"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="55dp"
+        android:text="@string/text_25" />
+
+    <TextView
+        style="@style/TextStyle_17"
+        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="77dp"
+        android:text="@string/all" />
+
+    <com.tuolve.powermanager.view.CircleProgressBar
+        style="@style/circle_style"
+        android:id="@+id/running_percent"/>
+
+    <TextView
+        android:id="@+id/running_num"
+        style="@style/TextStyle_18"
+        android:text="@string/text_25" />
+
+    <TextView
+        style="@style/TextStyle_17"
+        android:layout_marginLeft="164dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="77dp"
+        android:text="@string/running" />
+
+    <ImageView
+        android:id="@+id/anim_01"
+        style="@style/img_04"
+        android:src="@mipmap/float_power_00" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="277dp"
+        android:layout_marginStart="277dp"
+        android:layout_marginTop="55dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/ele_cost"
+            style="@style/TextStyle_16"
+            android:text="@string/text_25" />
+
+        <TextView
+            style="@style/TextStyle_19"
+            android:text="@string/text_39" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/TextStyle_17"
+        android:layout_marginLeft="277dp"
+        android:layout_marginStart="277dp"
+        android:layout_marginTop="77dp"
+        android:text="@string/consume_energy" />
+</android.support.constraint.ConstraintLayout>

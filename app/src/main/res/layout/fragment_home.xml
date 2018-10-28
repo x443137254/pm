@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:src="@mipmap/user" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/over_view"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/titleSize" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/iv_notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/message" />
+
+            <View
+                android:id="@+id/tip_notice_point"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:visibility="invisible"
+                android:layout_alignRight="@id/iv_notice"
+                android:background="@drawable/red_point"
+                android:layout_alignEnd="@id/iv_notice" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/phone_card_overview_circle"/>
+
+            <include layout="@layout/phone_card_sys_power"/>
+
+            <include layout="@layout/phone_card_cur_device"/>
+
+            <include layout="@layout/phone_card_warn"/>
+
+            <include layout="@layout/phone_card_trend_ene"/>
+
+            <include layout="@layout/phone_card_evn_pro"/>
+
+            <include layout="@layout/phone_card_weather"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

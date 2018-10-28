@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    tools:ignore="ContentDescription"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/frame2"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/frame_past" />
+
+    <TextView
+        style="@style/card_title"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:text="@string/ene_con_data" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:src="@mipmap/icon_home4" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/ele_total"
+                    style="@style/TextStyle_21"
+                    android:text="@string/text_0" />
+
+                <TextView
+                    style="@style/TextStyle_22"
+                    android:text="@string/text_39" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_save_ele"
+                android:textColor="@color/colorText_04"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/statistics_earn" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextStyle_22"
+                    android:text="@string/text_63" />
+
+                <TextView
+                    android:id="@+id/fee_total"
+                    style="@style/TextStyle_21"
+                    android:text="@string/text_0" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_save_fee"
+                android:textColor="@color/colorText_04"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/divider" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/compare"
+        android:textColor="@color/colorText_04"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/compare"
+            style="@style/TextStyle_21"
+            android:text="@string/text_0" />
+
+        <TextView
+            style="@style/TextStyle_22"
+            android:text="@string/text_39" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/circle_bg"
+            android:layout_centerInParent="true"/>
+
+        <com.tuolve.powermanager.view.CircleProgressBar
+            android:id="@+id/percent_circle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:roundColor="#ff447880"
+            app:progress="0"
+            android:layout_centerInParent="true"
+            app:roundProgressColor="#ff16f4f7"
+            app:roundWidth="6dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/compare_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_0"
+                android:textColor="#ff16f4f7"/>
+
+            <ImageView
+                android:id="@+id/compare_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/reduce"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="22dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:orientation="vertical"
+            android:layout_marginStart="22dp">
+
+            <TextView
+                style="@style/TextStyle_23"
+                android:text="@string/ele_con_month"/>
+
+            <TextView
+                style="@style/TextStyle_23"
+                android:text="@string/ele_con_last_month"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/ele_curr"
+                    style="@style/TextStyle_21"
+                    android:text="@string/text_0" />
+
+                <TextView
+                    style="@style/TextStyle_22"
+                    android:text="@string/text_39" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/ele_last"
+                    style="@style/TextStyle_21"
+                    android:text="@string/text_0" />
+
+                <TextView
+                    style="@style/TextStyle_22"
+                    android:text="@string/text_39" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/divider"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextStyle_23"
+                android:text="@string/ele_fee_month"/>
+
+            <TextView
+                style="@style/TextStyle_23"
+                android:text="@string/ele_fee_last_month"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextStyle_22"
+                    android:text="@string/text_63" />
+
+                <TextView
+                    android:id="@+id/fee_curr"
+                    style="@style/TextStyle_21"
+                    android:text="@string/text_0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextStyle_22"
+                    android:text="@string/text_63" />
+
+                <TextView
+                    android:id="@+id/fee_last"
+                    style="@style/TextStyle_21"
+                    android:text="@string/text_0" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

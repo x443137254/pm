@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/frame2"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:src="@drawable/frame_past"
+        android:scaleType="fitStart"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/status_ic_container"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/circle_green_bg"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/detail_aircondition"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/status_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/running"
+                android:textColor="@color/color_bg_09"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_margin="10dp"
+                android:text="@string/air_conditioner_meeting"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2">
+
+                <TextView
+                    android:id="@+id/status_02"
+                    android:text="@string/online"
+                    android:textColor="@color/colorWhite"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:layout_margin="3dp"/>
+
+                <TextView
+                    android:id="@+id/temperature"
+                    android:text="@string/text_21"
+                    android:textColor="@color/colorWhite"
+                    android:layout_margin="3dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"/>
+
+                <TextView
+                    android:text="@string/collect_state"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:textColor="@color/colorText_04"
+                    android:layout_margin="3dp"/>
+
+                <TextView
+                    android:text="@string/room_temperature"
+                    android:layout_margin="3dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/colorText_04"/>
+            </GridLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/switch_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/list_on"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.tuolve.powermanager">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:name=".PMApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:resizeableActivity="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="n">
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.PersonActivity" />
+        <activity android:name=".activity.NoticeActivity" />
+        <activity android:name=".activity.WarnListActivity" />
+        <activity android:name=".activity.AddDeviceActivity" />
+        <activity android:name=".activity.DeviceDetailActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.WarmDetailActivity" />
+        <activity android:name=".activity.ReportDetailActivity" />
+        <activity android:name=".activity.InfoMaintainActivity" />
+        <activity android:name=".activity.PriceConfActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.ModifyActivity" />
+        <activity android:name=".activity.ModifyPwdActivity" />
+        <activity android:name=".activity.ModifyPhoneActivity" />
+        <activity android:name=".activity.PriceConfDetailActivity" />
+        <activity android:name=".activity.AddPriceActivity" />
+        <activity android:name=".activity.FindPwdActivity" />
+        <activity android:name=".activity.RegActivity" />
+        <activity android:name=".activity.EnergyConsumeDetailActivity" />
+        <activity android:name=".activity.DeviceClassifyActivity" />
+        <activity android:name=".activity.EnergyDetailActivity" />
+        <!-- 微信 -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- QQ -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activity.ThirdRegActivity" />
+        <activity android:name=".activity.EditTimeActivity" />
+
+        <service
+            android:name=".service.CheckUpdateService"
+            android:exported="false" />
+
+        <activity android:name=".activity.BasicActivity" />
+
+        <service
+            android:name=".service.DownloadService"
+            android:exported="false" />
+        <service
+            android:name=".service.MyIntentService"
+            android:exported="false"></service>
+    </application>
+
+</manifest>

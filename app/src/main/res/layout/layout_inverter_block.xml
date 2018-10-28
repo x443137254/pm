@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/pv_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_25"
+                    android:textSize="15sp"
+                    android:textColor="#ffeba600"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_39"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_55"
+                android:textSize="13sp"
+                android:textColor="@color/colorText_04" />
+
+            <TextView
+                android:id="@+id/pv_in_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_56"
+                android:textSize="12sp"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/anim_01"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@mipmap/float_left_"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.tuolve.powermanager.view.CircleProgressBar
+                android:id="@+id/percent_circle_pv"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerInParent="true"
+                app:roundColor="#ffeba600"
+                app:progress="40"
+                app:roundProgressColor="#ff25ce4d"
+                app:roundWidth="6dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/pv_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_25"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorWhite" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_39"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/text_57"
+                    android:textColor="@color/colorText_04" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/anim_02"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@mipmap/float_right_1_" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/pv_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_25"
+                    android:textSize="15sp"
+                    android:textColor="#ff25ce4d" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_39"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feedback_ele"
+                android:textSize="13sp"
+                android:textColor="@color/colorText_04" />
+
+            <TextView
+                android:id="@+id/pv_out_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_56"
+                android:textSize="12sp"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/phone_card_sys_status_light"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/frame2"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:scaleType="fitStart"
+            android:src="@drawable/frame_past" />
+
+        <TextView
+            style="@style/card_title"
+            android:layout_gravity="center"
+            android:text="@string/statistics_data"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/statistics_rate" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/power_theory"
+                        android:text="@string/text_02"
+                        style="@style/TextStyle_12"/>
+
+                    <TextView
+                        android:text="@string/text_64"
+                        style="@style/TextStyle_13"/>
+                </LinearLayout>
+
+
+                <TextView
+                    style="@style/TextStyle_14"
+                    android:text="@string/install_rate"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/statistics_total" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/ele_total"
+                        android:text="@string/text_02"
+                        style="@style/TextStyle_12"/>
+
+                    <TextView
+                        android:text="@string/text_64"
+                        style="@style/TextStyle_13"/>
+                </LinearLayout>
+
+                <TextView
+                    style="@style/TextStyle_14"
+                    android:text="@string/total_gen_ele"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/statistics_earn" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:text="@string/text_63"
+                        style="@style/TextStyle_13"/>
+
+                    <TextView
+                        android:id="@+id/benifit_total"
+                        android:text="@string/text_02"
+                        style="@style/TextStyle_12"/>
+                </LinearLayout>
+
+                <TextView
+                    style="@style/TextStyle_14"
+                    android:text="@string/accumulated_earnings"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/cost_pv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_25"
+                        android:textSize="15sp"
+                        android:textColor="#ffeba600" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_39"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_58"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorText_04" />
+
+                <TextView
+                    android:id="@+id/cost_pv_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_56"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/anim_03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:src="@mipmap/float_right_" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.tuolve.powermanager.view.CircleProgressBar
+                    android:id="@+id/circle_percent"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_centerInParent="true"
+                    app:roundColor="#ffeba600"
+                    app:progress="40"
+                    app:roundProgressColor="#fff35833"
+                    app:roundWidth="6dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/ele_cost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_25"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorWhite" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_39"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorWhite" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/consume"
+                        android:textColor="@color/colorText_04" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/anim_04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:src="@mipmap/float_left_1_" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/cost_grid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_25"
+                        android:textSize="15sp"
+                        android:textColor="#fff35833" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_39"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/from_ele_net"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorText_04" />
+
+                <TextView
+                    android:id="@+id/cost_grid_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_56"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/time_group"
+                android:layout_width="200dp"
+                android:layout_height="22dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/round_dark_blue_edg"
+                android:orientation="horizontal"
+                android:divider="@drawable/radio_divider"
+                android:showDividers="middle"
+                android:padding="1dp">
+
+                <RadioButton
+                    android:id="@+id/time_cur"
+                    style="@style/RadioButtonStyle_01"
+                    android:background="@drawable/radio_day_selector"
+                    android:text="@string/now" />
+
+                <RadioButton
+                    android:id="@+id/time_day"
+                    style="@style/RadioButtonStyle_01"
+                    android:background="@drawable/radio_month_selector"
+                    android:text="@string/day" />
+
+                <RadioButton
+                    android:id="@+id/time_month"
+                    style="@style/RadioButtonStyle_01"
+                    android:background="@drawable/radio_month_selector"
+                    android:text="@string/month" />
+
+                <RadioButton
+                    android:id="@+id/time_year"
+                    style="@style/RadioButtonStyle_01"
+                    android:background="@drawable/radio_year_selector"
+                    android:text="@string/year" />
+            </RadioGroup>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/time_picker"
+                android:layout_width="90dp"
+                android:layout_height="22dp"
+                android:background="@drawable/round_dark_blue_edg"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="@string/text_18"
+                android:textSize="12sp"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lint_chart"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginBottom="14dp"/>
+    </LinearLayout>
+</LinearLayout>

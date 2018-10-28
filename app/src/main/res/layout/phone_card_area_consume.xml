@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/frame2"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/frame_past" />
+
+    <TextView
+        style="@style/card_title"
+        android:layout_gravity="center"
+        android:text="@string/zone_consume" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/time_group"
+            android:layout_width="150dp"
+            android:layout_height="22dp"
+            android:background="@drawable/round_dark_blue_edg"
+            android:orientation="horizontal"
+            android:padding="1dp"
+            android:divider="@drawable/radio_divider"
+            android:showDividers="middle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp">
+
+            <RadioButton
+                android:id="@+id/time_day"
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_day_selector"
+                android:text="@string/day" />
+
+            <RadioButton
+                android:id="@+id/time_month"
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_month_selector"
+                android:text="@string/month" />
+
+            <RadioButton
+                android:id="@+id/time_year"
+                style="@style/RadioButtonStyle_01"
+                android:background="@drawable/radio_year_selector"
+                android:text="@string/year" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/time_picker_02"
+            android:layout_width="105dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_dark_blue_edg"
+            android:gravity="center"
+            android:padding="1dp"
+            android:text="@string/text_17"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/zone_consume_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <include layout="@layout/layout_more"
+        android:visibility="gone"/>
+</LinearLayout>

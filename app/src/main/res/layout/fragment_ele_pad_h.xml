@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_h_pad"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:paddingBottom="10dp"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+
+        <include layout="@layout/pad_card_lig_str_sys" />
+
+        <include layout="@layout/pad_card_data_sta_bat" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:padding="7dp"
+        android:orientation="vertical">
+
+        <include layout="@layout/pad_card_ele_sys_state_2" />
+
+        <include layout="@layout/pad_card_ele_device_manage"/>
+    </LinearLayout>
+</LinearLayout>

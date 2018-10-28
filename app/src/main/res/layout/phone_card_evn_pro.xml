@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/frame2"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/frame_past" />
+
+    <TextView
+        style="@style/card_title"
+        android:layout_gravity="center"
+        android:text="@string/evn_pro_contribute"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout style="@style/GroupStyle_03">
+
+            <ImageView
+                style="@style/ImageStyle_02"
+                android:src="@mipmap/env_ic_01" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/CO2"
+                    style="@style/TextStyle_04"
+                    android:text="@string/text_0" />
+
+                <TextView
+                    style="@style/TextStyle_05"
+                    android:text="@string/text_66" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextStyle_06"
+                android:text="@string/carbon_dioxide_reduction" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/GroupStyle_03">
+
+            <ImageView
+                style="@style/ImageStyle_02"
+                android:src="@mipmap/env_ic_02" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/TCE"
+                    style="@style/TextStyle_04"
+                    android:text="@string/text_0" />
+
+                <TextView
+                    style="@style/TextStyle_05"
+                    android:text="@string/text_66" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextStyle_06"
+                android:text="@string/save_coal" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/GroupStyle_03">
+
+            <ImageView
+                style="@style/ImageStyle_02"
+                android:src="@mipmap/env_ic_03" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/plants"
+                    style="@style/TextStyle_04"
+                    android:text="@string/text_0" />
+
+                <TextView
+                    style="@style/TextStyle_05"
+                    android:text="@string/one" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/TextStyle_06"
+                android:text="@string/tree_planting" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

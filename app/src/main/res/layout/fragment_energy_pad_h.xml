@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_h_pad"
+    android:padding="8dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <include layout="@layout/phone_card_trend_ele"/>
+
+        <include layout="@layout/pad_card_consume_order"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <include layout="@layout/pad_card_manage_classify"/>
+
+        <include layout="@layout/pad_card_cur_data"/>
+    </LinearLayout>
+</LinearLayout>

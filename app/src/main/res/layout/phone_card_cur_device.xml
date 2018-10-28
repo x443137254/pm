@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/frame2"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/frame_past" />
+
+    <TextView
+        style="@style/card_title"
+        android:layout_gravity="center"
+        android:text="@string/cur_device"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/img_02"
+                android:src="@mipmap/icon_device1" />
+
+            <TextView
+                android:id="@+id/inverter"
+                style="@style/TextStyle_10"
+                android:text="@string/text_25"/>
+
+            <TextView
+                style="@style/TextStyle_11"
+                android:text="@string/inverter" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#1c3942" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/img_02"
+                android:src="@mipmap/icon_device2" />
+
+            <TextView
+                android:id="@+id/ameter"
+                style="@style/TextStyle_10"
+                android:text="@string/text_25"/>
+
+            <TextView
+                style="@style/TextStyle_11"
+                android:text="@string/ele_meter"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#1c3942" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/img_02"
+                android:src="@mipmap/icon_device3" />
+
+            <TextView
+                android:id="@+id/aircondition"
+                style="@style/TextStyle_10"
+                android:text="@string/text_25"/>
+
+            <TextView
+                style="@style/TextStyle_11"
+                android:text="@string/air_conditioner" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#1c3942" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                style="@style/img_02"
+                android:src="@mipmap/icon_device4" />
+
+            <TextView
+                android:id="@+id/socket"
+                style="@style/TextStyle_10"
+                android:text="@string/text_25" />
+
+            <TextView
+                style="@style/TextStyle_11"
+                android:text="@string/socket" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

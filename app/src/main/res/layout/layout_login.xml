@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#aa022632"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:src="@drawable/frame_past"
+            android:scaleType="fitStart"/>
+
+        <EditText
+            android:id="@+id/account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="9dp"
+            android:background="@null"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:drawableLeft="@mipmap/login_user"
+            android:hint="@string/login_input_username"
+            android:textColorHint="@color/colorText_04"
+            android:textColor="@color/colorText_04"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#06526C"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"/>
+
+        <EditText
+            android:id="@+id/pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:textColor="@color/colorText_04"
+            android:drawableLeft="@mipmap/login_pwd"
+            android:layout_marginTop="29dp"
+            android:layout_marginBottom="9dp"
+            android:hint="@string/input_pwd"
+            android:textColorHint="@color/colorText_04" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#06526C"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"/>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/login_bt_shape"
+            android:text="@string/login_1"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/maxText" />
+
+        <TextView
+            android:id="@+id/forget_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            android:text="@string/forget_pwd"
+            android:textSize="15sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="30dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#A4ABAF"
+        android:layout_marginTop="13dp"
+        android:textSize="12sp"
+        android:text="@string/login_fast"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        
+        <ImageView
+            android:id="@+id/login_qq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/qq_click"/>
+
+        <ImageView
+            android:id="@+id/login_wechat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/wechat_click"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="titleSize">20sp</dimen>
+    <dimen name="maxText">18sp</dimen>
+    <dimen name="medText">16sp</dimen>
+    <dimen name="minText">14sp</dimen>
+
+</resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/color_bg_07"
+    android:layout_height="400dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/round_dark_blue_edg"
+            android:text="@string/cancel"
+            android:textColor="@color/colorBlue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/check_collector_sn"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/modify_confirm"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/blue_bt_shape"
+            android:text="@string/confirm_"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorText_04"
+        android:hint="@string/input_collector_sn"
+        android:textColorHint="@color/colorText_04"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/round_dark_blue_edg"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="18sp"
+        android:textColor="@color/colorText_04"
+        android:hint="@string/input_collector_check_code"
+        android:textColorHint="@color/colorText_04"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/round_dark_blue_edg"/>
+
+    <TextView
+        android:id="@+id/scan_qr_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:text="@string/tip_01"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="12sp"
+        android:layout_marginBottom="150dp"
+        android:gravity="center"/>
+</LinearLayout>
