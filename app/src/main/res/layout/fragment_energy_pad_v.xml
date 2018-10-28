@@ -179,7 +179,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2" />
 
-                <com.tuolve.powermanager.view.CircleProgressBar
+                <com.tuolve.energymanagement.view.CircleProgressBar
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_margin="10dp" />
@@ -305,7 +305,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2" />
 
-                <com.tuolve.powermanager.view.CircleProgressBar
+                <com.tuolve.energymanagement.view.CircleProgressBar
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_margin="10dp" />
@@ -431,7 +431,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2" />
 
-                <com.tuolve.powermanager.view.CircleProgressBar
+                <com.tuolve.energymanagement.view.CircleProgressBar
                     android:id="@+id/classify_manage_percent"
                     android:layout_width="35dp"
                     android:layout_height="35dp"

@@ -306,7 +306,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp">
 
-                    <com.tuolve.powermanager.view.CircleProgressBar
+                    <com.tuolve.energymanagement.view.CircleProgressBar
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:roundColor="#0443AF"

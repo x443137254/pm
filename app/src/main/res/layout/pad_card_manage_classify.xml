@@ -102,7 +102,7 @@
                 android:textColor="@color/colorText_01" />
         </LinearLayout>
 
-        <com.tuolve.powermanager.view.CircleProgressBar
+        <com.tuolve.energymanagement.view.CircleProgressBar
             app:roundColor="#0443AF"
             app:roundProgressColor="#5E93FF"
             app:roundWidth="6dp"
@@ -209,7 +209,7 @@
                 android:textColor="@color/colorText_01" />
         </LinearLayout>
 
-        <com.tuolve.powermanager.view.CircleProgressBar
+        <com.tuolve.energymanagement.view.CircleProgressBar
             app:roundColor="#0443AF"
             app:roundProgressColor="#5E93FF"
             app:roundWidth="6dp"
@@ -316,7 +316,7 @@
                 android:textColor="@color/colorText_01" />
         </LinearLayout>
 
-        <com.tuolve.powermanager.view.CircleProgressBar
+        <com.tuolve.energymanagement.view.CircleProgressBar
             android:id="@+id/classify_manage_percent"
             app:roundColor="#0443AF"
             app:roundProgressColor="#5E93FF"

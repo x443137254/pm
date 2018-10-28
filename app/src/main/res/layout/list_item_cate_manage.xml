@@ -30,7 +30,7 @@
         android:layout_marginTop="77dp"
         android:text="@string/all" />
 
-    <com.tuolve.powermanager.view.CircleProgressBar
+    <com.tuolve.energymanagement.view.CircleProgressBar
         style="@style/circle_style"
         android:id="@+id/running_percent"/>
 

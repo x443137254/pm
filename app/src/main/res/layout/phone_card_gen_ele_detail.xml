@@ -32,7 +32,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.tuolve.powermanager.view.CircleCake
+    <com.tuolve.energymanagement.view.CircleCake
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:maxPercent="100"

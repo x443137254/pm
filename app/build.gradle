@@ -5,8 +5,8 @@ android {
     }
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.tuolve.powermanager"
-        minSdkVersion 16
+        applicationId "com.growatt.energymanagement"
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "v1.0"

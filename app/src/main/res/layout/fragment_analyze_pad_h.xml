@@ -318,7 +318,7 @@
                         android:textColor="@color/colorWhite" />
                 </GridLayout>
 
-                <com.tuolve.powermanager.view.CircleProgressBar
+                <com.tuolve.energymanagement.view.CircleProgressBar
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     app:roundColor="#0443AF"

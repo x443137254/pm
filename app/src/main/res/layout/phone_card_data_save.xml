@@ -150,7 +150,7 @@
             android:src="@mipmap/circle_bg"
             android:layout_centerInParent="true"/>
 
-        <com.tuolve.powermanager.view.CircleProgressBar
+        <com.tuolve.energymanagement.view.CircleProgressBar
             android:id="@+id/percent_circle"
             android:layout_width="80dp"
             android:layout_height="80dp"

@@ -1,4 +1,4 @@
-package com.tuolve.powermanager;
+package com.tuolve.energymanagement;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

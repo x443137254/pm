@@ -1,4 +1,4 @@
-package com.tuolve.powermanager;
+package com.tuolve.energymanagement;
 
 import org.junit.Test;
 
