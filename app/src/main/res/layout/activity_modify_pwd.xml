@@ -43,9 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorText_07"
-            android:text="@string/text_34"
+            android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -58,11 +57,13 @@
             android:text="@string/old_pwd"/>
 
         <EditText
+            android:id="@+id/original_pwd"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null"
             android:inputType="textPassword"
             android:layout_gravity="center"
+            android:textSize="15sp"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_pwd"
             android:textColorHint="@color/colorText_01" />
@@ -90,9 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorText_07"
-            android:text="@string/text_34"
+            android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -105,10 +105,12 @@
             android:text="@string/new_pwd"/>
 
         <EditText
+            android:id="@+id/new_pwd"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null"
             android:inputType="textPassword"
+            android:textSize="15sp"
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_new_pwd"
@@ -131,9 +133,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorText_07"
-            android:text="@string/text_34"
+            android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -146,10 +147,12 @@
             android:text="@string/confirm_new_pwd"/>
 
         <EditText
+            android:id="@+id/confirm_pwd"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null"
             android:inputType="textPassword"
+            android:textSize="15sp"
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_new_pwd_2"
@@ -162,6 +165,7 @@
         android:background="@color/color_bg_08"/>
 
     <Button
+        android:id="@+id/confirm_button"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="40dp"

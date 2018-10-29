@@ -43,9 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorText_07"
-            android:text="@string/text_34"
+            android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -58,10 +57,12 @@
             android:text="@string/old_phone"/>
 
         <EditText
+            android:id="@+id/original_phone"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null"
             android:inputType="phone"
+            android:textSize="15sp"
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_phone"
@@ -90,9 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorText_07"
-            android:text="@string/text_34"
+            android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -105,10 +105,12 @@
             android:text="@string/new_phone"/>
 
         <EditText
+            android:id="@+id/new_phone"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null"
             android:inputType="phone"
+            android:textSize="15sp"
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_new_phone"
@@ -131,9 +133,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorText_07"
-            android:text="@string/text_34"
+            android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -146,17 +147,19 @@
             android:text="@string/verification_code"/>
 
         <EditText
+            android:id="@+id/code"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"
             android:background="@null"
-            android:inputType="number"
+            android:textSize="15sp"
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_verification_code"
             android:textColorHint="@color/colorText_01" />
 
         <Button
+            android:id="@+id/get_code"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text="@string/get_verification_code"
@@ -171,6 +174,7 @@
         android:background="@color/color_bg_08"/>
 
     <Button
+        android:id="@+id/confirm"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="40dp"

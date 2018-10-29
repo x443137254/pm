@@ -60,6 +60,7 @@
     <string name="text_37">1888888888</string>
     <string name="text_38">123456@123.com</string>
     <string name="text_39">kWh</string>
+
     <string name="text_40">7/1~7/31累计用电</string>
     <string name="text_41">7月10日</string>
     <string name="text_42">200h</string>
@@ -395,6 +396,7 @@
     <string name="text_81">三相电流不平衡度</string>
     <string name="text_82">三相电压不平衡度</string>
     <string name="text_83">功率因数</string>
+    <string name="text_84">MWh</string>
     <string name="reg_success">注册成功</string>
     <string name="reg_fail">注册失败</string>
     <string name="reg_account_exist">用户名已存在，请重新输入</string>

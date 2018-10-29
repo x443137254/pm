@@ -20,6 +20,7 @@ import com.growatt.energymanagement.msgs.EleCostMsg;
 import com.growatt.energymanagement.msgs.ElePriceInfoMsg;
 import com.growatt.energymanagement.msgs.ElePriceMsg;
 import com.growatt.energymanagement.msgs.EnergyTendencyMsg;
+import com.growatt.energymanagement.msgs.ForgetPwdMsg;
 import com.growatt.energymanagement.msgs.GenerateEleOverviewMsg;
 import com.growatt.energymanagement.msgs.GenerateElectricityMsg;
 import com.growatt.energymanagement.msgs.GenerateElectricitysMsg;
@@ -287,6 +288,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void elePrice(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "elePrice";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -304,6 +306,7 @@ public class InternetUtils {
     }
 
     public static void addElePrice(String uniqueId, String name, String time, double price, String effectiveTime, int status) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "addElePrice";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -331,6 +334,7 @@ public class InternetUtils {
      * @param uniqueId 用户唯一识别号
      */
     public static void elePriceInfo(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "elePriceInfo";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -356,6 +360,7 @@ public class InternetUtils {
      * @param devType    设备类型
      */
     public static void notice(String uniqueId, int page, String noticeType, String devType) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "notice";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -383,6 +388,7 @@ public class InternetUtils {
      * @param timeType 天2、月3、年4
      */
     public static void energyTendency(String uniqueId, final int timeType, final String time) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "energyTendency";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -407,6 +413,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void getDevWarningNum(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "getDevWarningNum";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -429,6 +436,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void greenBenifit(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "greenBenifit";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -528,6 +536,7 @@ public class InternetUtils {
      * @param uniqueId 账户
      */
     public static void generateEleOverview(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "generateEleOverview";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -552,6 +561,7 @@ public class InternetUtils {
      * @param time     时间
      */
     public static void outputAndInputOfEle(String uniqueId, final int timeType, final String time) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "outputAndInputOfEle";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -632,6 +642,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void home(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "home";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -654,6 +665,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void inverters(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "inverters";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -676,6 +688,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void ammeters(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "ammeters";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -698,6 +711,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void analysisData(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "analysisData";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -722,6 +736,7 @@ public class InternetUtils {
      * @param authCode 采集器校检码
      */
     public static void addCollector(String uniqueId, String devId, String authCode) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "addCollector";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -747,6 +762,7 @@ public class InternetUtils {
      * @param path     区域路径
      */
     public static void generateElectricitys(String uniqueId, String path) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "generateElectricitys";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -772,6 +788,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void areaInfo(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "areaInfo";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -794,6 +811,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void userAllDevs(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "userAllDevs";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -816,6 +834,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void statisticsData(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "statisticsData";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -839,6 +858,7 @@ public class InternetUtils {
      * @param devId    设备ID
      */
     public static void statisticsData(String uniqueId, String devId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "statisticsData";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -863,6 +883,7 @@ public class InternetUtils {
      * @param devId    设备ID
      */
     public static void storageSystemData(String uniqueId, String devId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "storageSystemData";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -888,6 +909,7 @@ public class InternetUtils {
      * @param time     时间
      */
     public static void areaEleRank(String uniqueId, int timeType, String time) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "areaEleRank";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -914,6 +936,7 @@ public class InternetUtils {
      * @param time     时间
      */
     public static void devTypeEleCost(String uniqueId, int timeType, String time) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "devTypeEleCost";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -938,6 +961,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void devRunningState(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "devRunningState";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -961,6 +985,7 @@ public class InternetUtils {
      * @param devType  设备类型
      */
     public static void devsDetailInfo(String uniqueId, String devType) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "devRunningState";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -984,6 +1009,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void areaDevsState(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "areaDevsState";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1008,6 +1034,7 @@ public class InternetUtils {
      * @param time     时间
      */
     public static void eleCost(String uniqueId, final int timeType, final String time) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "eleCost";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1058,6 +1085,7 @@ public class InternetUtils {
      * @param time     时间
      */
     public static void analysisInfo(String uniqueId, final int timeType, final String time) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "analysisInfo";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1082,6 +1110,7 @@ public class InternetUtils {
      * @param uniqueId 用户ID
      */
     public static void powerStation(String uniqueId) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "powerStation";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1124,6 +1153,7 @@ public class InternetUtils {
     }
 
     public static void areaEleInfo(String uniqueId, final int timeType, final String time,String path) {
+        if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "areaEleInfo";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1150,6 +1180,29 @@ public class InternetUtils {
             public void run() {
                 String s = InternetUtils.access(url, "");
                 EventBus.getDefault().post(new AllAreaMsg(s));
+            }
+        }).start();
+    }
+
+    /**
+     * 找回密码
+     * @param phone 手机号
+     * @param password  密码
+     */
+    public static void forgetPwd(String phone,String password) {
+        final String url = host + "forgetPwd";
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("phone", phone);
+            jsonObject.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = InternetUtils.access(url, jsonObject.toString());
+                EventBus.getDefault().post(new ForgetPwdMsg(s));
             }
         }).start();
     }

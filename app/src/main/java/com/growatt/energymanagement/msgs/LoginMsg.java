@@ -11,17 +11,17 @@ import org.json.JSONObject;
 public class LoginMsg {
     public String code;
     public String errMsg;
-    public static String account;
-    public static String addr;
+    public static String nick;
+    public static long registTime;
+    public static String password;
     public static String companyId;
+    public static boolean hasMsg;
     public static String phone;
+    public static String companyName;
+    public static String account;
     public static String email;
     public static String uniqueId;
-    public static String companyName;
-    public static String password;
-    public static boolean hasMsg;
     public static int cid = 0;
-    public static long registTime;
 
     public LoginMsg(String s) {
         JSONObject jsonObject = null;
@@ -37,8 +37,8 @@ public class LoginMsg {
         }else {
             JSONObject data = jsonObject.optJSONObject("data");
             account = data.optString("account");
+            nick = data.optString("nick");
 //            password = data.optString("password");
-            addr = data.optString("addr");
             companyId = data.optString("companyId");
             phone = data.optString("phone");
             email = data.optString("email");
@@ -52,7 +52,7 @@ public class LoginMsg {
 
     public static void cleanUserInfo(){
         account = "";
-        addr = "";
+        nick = "";
         companyId = "";
         phone = "";
         email = "";

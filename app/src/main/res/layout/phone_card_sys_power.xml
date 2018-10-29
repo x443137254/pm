@@ -51,8 +51,7 @@
                     android:layout_height="60dp"
                     app:roundColor="#FF0443AF"
                     app:roundProgressColor="#FF5E93FF"
-                    app:roundWidth="6dp"
-                    app:progress="30"/>
+                    app:roundWidth="6dp"/>
 
                 <TextView
                     android:id="@+id/running_percent"
@@ -80,6 +79,7 @@
 
                 <TextView
                     android:id="@+id/photovoltaicRunningPower"
+                    android:text="@string/text_0"
                     style="@style/TextStyle_08"/>
 
                 <TextView
@@ -103,6 +103,7 @@
 
                 <TextView
                     android:id="@+id/photovoltaicTheroyPower"
+                    android:text="@string/text_0"
                     style="@style/TextStyle_08"/>
 
                 <TextView
@@ -131,7 +132,6 @@
                     app:roundColor="#FF008759"
                     app:roundProgressColor="#FF11d693"
                     app:roundWidth="6dp"
-                    app:progress="30"
                     app:max="100"
                     app:textColor="@color/colorWhite"
                     app:textSize="@dimen/medText" />
@@ -162,6 +162,7 @@
 
                 <TextView
                     android:id="@+id/gridPower"
+                    android:text="@string/text_0"
                     style="@style/TextStyle_08"/>
 
                 <TextView
@@ -185,6 +186,7 @@
 
                 <TextView
                     android:id="@+id/devicesPower"
+                    android:text="@string/text_0"
                     style="@style/TextStyle_08"/>
 
                 <TextView
@@ -211,7 +213,6 @@
         <RelativeLayout
             android:layout_width="32dp"
             android:layout_height="80dp"
-            android:layout_marginLeft="8dp"
             android:layout_weight="1"
             android:padding="12dp"
             android:layout_marginStart="8dp">
@@ -233,7 +234,6 @@
             android:id="@+id/float_left_1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:src="@mipmap/rate_float_00"
             android:layout_marginEnd="8dp" />
@@ -250,7 +250,6 @@
                 app:roundColor="#FF06ff5e"
                 app:roundProgressColor="#ffffc100"
                 app:roundWidth="6dp"
-                app:progress="30"
                 app:max="100"
                 app:textShow="false"/>
 
@@ -265,7 +264,6 @@
             android:id="@+id/float_right_1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
             android:layout_weight="1"
             android:src="@mipmap/float_power_00"
             android:layout_marginStart="8dp" />
@@ -273,7 +271,6 @@
         <RelativeLayout
             android:layout_width="32dp"
             android:layout_height="80dp"
-            android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:padding="12dp"
             android:layout_marginEnd="8dp">
@@ -310,7 +307,7 @@
                 android:id="@+id/light_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_25"
+                android:text="@string/text_0"
                 android:textSize="15sp"
                 android:textColor="#FF06ff5e" />
 
@@ -333,7 +330,7 @@
                 android:id="@+id/load_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_25"
+                android:text="@string/text_0"
                 android:textColor="#00fdff"
                 android:textSize="15sp"/>
 
@@ -356,7 +353,7 @@
                 android:id="@+id/ele_net_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_25"
+                android:text="@string/text_0"
                 android:textSize="15sp"
                 android:textColor="#ffffc100" />
 

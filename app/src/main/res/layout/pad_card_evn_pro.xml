@@ -35,8 +35,9 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/CO2"
                     style="@style/TextStyle_04"
-                    android:text="@string/text_18" />
+                    android:text="@string/text_0" />
 
                 <TextView
                     style="@style/TextStyle_05"
@@ -61,8 +62,9 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/TCE"
                     style="@style/TextStyle_04"
-                    android:text="@string/text_18" />
+                    android:text="@string/text_0" />
 
                 <TextView
                     style="@style/TextStyle_05"
@@ -87,8 +89,9 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/plants"
                     style="@style/TextStyle_04"
-                    android:text="@string/text_18" />
+                    android:text="@string/text_0" />
 
                 <TextView
                     style="@style/TextStyle_05"

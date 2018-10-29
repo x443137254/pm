@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="273dp"
     android:layout_margin="7dp"
+    tools:ignore="ContentDescription"
     android:background="@drawable/person_bg_pad"
     android:gravity="center"
     android:orientation="vertical">
@@ -25,17 +27,32 @@
         android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
-        <com.growatt.energymanagement.view.CircleProgressBar
-            android:id="@+id/pb_home"
-            app:roundColor="#0443AF"
-            app:roundProgressColor="#5E93FF"
-            app:roundWidth="6dp"
-            app:textColor="@color/colorWhite"
-            app:textSize="@dimen/medText"
+        <RelativeLayout
             android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:layout_margin="8dp" />
+            android:layout_height="64dp">
+
+            <com.growatt.energymanagement.view.CircleProgressBar
+                android:id="@+id/pb_home"
+                app:roundColor="#0443AF"
+                app:roundProgressColor="#5E93FF"
+                app:roundWidth="6dp"
+                app:textColor="@color/colorWhite"
+                app:textSize="@dimen/medText"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/running_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="@color/colorWhite"
+                android:text="@string/text_0"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="0dp"
@@ -52,7 +69,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:padding="6dp"
                     android:src="@drawable/circle1" />
 
@@ -65,13 +82,13 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/text_13"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12sp" />
+                    android:id="@+id/photovoltaicRunningPower"
+                    android:text="@string/text_0"
+                    style="@style/TextStyle_08"/>
+
+                <TextView
+                    style="@style/TextStyle_09"
+                    android:text="@string/text_64"/>
 
             </LinearLayout>
 
@@ -84,7 +101,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:padding="6dp"
                     android:src="@drawable/circle2" />
 
@@ -97,29 +114,45 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/text_13"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12sp" />
+                    android:id="@+id/photovoltaicTheroyPower"
+                    android:text="@string/text_0"
+                    style="@style/TextStyle_08"/>
+
+                <TextView
+                    style="@style/TextStyle_09"
+                    android:text="@string/text_64"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <com.growatt.energymanagement.view.CircleProgressBar
-            android:id="@+id/pb_home2"
-            app:roundColor="#008759"
-            app:roundProgressColor="#5E93FF"
-            app:roundWidth="6dp"
-            app:textColor="@color/colorWhite"
-            app:textSize="@dimen/medText"
+
+        <RelativeLayout
             android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:layout_margin="8dp" />
+            android:layout_height="64dp">
+
+            <com.growatt.energymanagement.view.CircleProgressBar
+                android:id="@+id/pb_home2"
+                app:roundColor="#008759"
+                app:roundProgressColor="#5E93FF"
+                app:roundWidth="6dp"
+                app:textColor="@color/colorWhite"
+                app:textSize="@dimen/medText"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:layout_margin="8dp" />
+
+            <TextView
+                android:id="@+id/power_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                android:text="@string/text_0"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="0dp"
@@ -136,7 +169,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:padding="6dp"
                     android:src="@drawable/circle3" />
 
@@ -149,13 +182,13 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/text_13"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12sp" />
+                    android:id="@+id/gridPower"
+                    android:text="@string/text_0"
+                    style="@style/TextStyle_08"/>
+
+                <TextView
+                    style="@style/TextStyle_09"
+                    android:text="@string/text_64"/>
 
             </LinearLayout>
 
@@ -168,9 +201,9 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     android:padding="6dp"
-                    android:src="@drawable/circle2" />
+                    android:src="@drawable/circle4" />
 
                 <TextView
                     android:layout_width="64dp"
@@ -181,13 +214,13 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/text_13"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12sp" />
+                    android:id="@+id/devicesPower"
+                    android:text="@string/text_0"
+                    style="@style/TextStyle_08"/>
+
+                <TextView
+                    style="@style/TextStyle_09"
+                    android:text="@string/text_64"/>
 
             </LinearLayout>
 
@@ -237,6 +270,7 @@
             android:layout_weight="1">
 
             <com.growatt.energymanagement.view.CircleProgressBar
+                android:id="@+id/load_power_circle"
                 app:roundColor="#06FF5E"
                 app:roundProgressColor="#5E93FF"
                 app:roundWidth="6dp"
@@ -287,7 +321,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -297,10 +332,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/light_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_25"
-                android:textColor="#06ff5e" />
+                android:text="@string/text_0"
+                android:textSize="15sp"
+                android:textColor="#FF06ff5e" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -317,10 +354,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/load_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_25"
-                android:textColor="#00fdff" />
+                android:text="@string/text_0"
+                android:textColor="#00fdff"
+                android:textSize="15sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -337,10 +376,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/ele_net_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_25"
-                android:textColor="#ffc100" />
+                android:text="@string/text_0"
+                android:textSize="15sp"
+                android:textColor="#ffffc100" />
 
             <TextView
                 android:layout_width="wrap_content"

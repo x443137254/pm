@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="110dp"
     android:layout_margin="7dp"
+    tools:ignore="ContentDescription"
     android:background="@drawable/person_bg_pad"
     android:orientation="vertical">
 
@@ -34,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:padding="8dp"
-                android:src="@mipmap/icon_device1" />
+                android:src="@mipmap/icon_device1"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -42,10 +44,11 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/inverter"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:gravity="center"
-                    android:text="@string/text_25"
+                    android:text="@string/text_0"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
@@ -84,10 +87,11 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/ameter"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:gravity="center"
-                    android:text="@string/text_25"
+                    android:text="@string/text_0"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
@@ -126,10 +130,11 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/aircondition"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:gravity="center"
-                    android:text="@string/text_25"
+                    android:text="@string/text_0"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
@@ -168,10 +173,11 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/socket"
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:gravity="center"
-                    android:text="@string/text_25"
+                    android:text="@string/text_0"
                     android:textColor="@color/colorWhite" />
 
                 <TextView

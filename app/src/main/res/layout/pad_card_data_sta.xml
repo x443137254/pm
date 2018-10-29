@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    tools:ignore="ContentDescription"
     android:layout_height="390dp"
     android:paddingBottom="15dp">
 
@@ -19,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -169,7 +172,6 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:background="@drawable/round_dark_blue_edg"
                 android:gravity="center"
                 android:paddingLeft="10dp"

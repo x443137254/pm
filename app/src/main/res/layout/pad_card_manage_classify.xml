@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="400dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="7dp"
+    tools:ignore="ContentDescription"
     android:background="@drawable/person_bg_pad"
     android:gravity="center"
     android:orientation="vertical">
@@ -19,34 +21,37 @@
             android:text="@string/classify_manage"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
 
         <ImageView
             android:id="@+id/add_device"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
             android:src="@mipmap/add" />
     </RelativeLayout>
 
     <RadioGroup
+        android:id="@+id/cut_group"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="3dp"
         android:background="@drawable/round_dark_blue_edg"
         android:orientation="horizontal"
-        android:padding="3dp">
+        android:padding="1dp">
 
         <RadioButton
+            android:id="@+id/radio_device"
             style="@style/RadioButtonStyle_01"
             android:background="@drawable/radio_day_selector"
             android:text="@string/device" />
 
         <RadioButton
+            android:id="@+id/radio_consume"
             style="@style/RadioButtonStyle_01"
             android:background="@drawable/radio_year_selector"
             android:text="@string/expend" />
@@ -64,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:drawableRight="@mipmap/more"
+        android:drawableEnd="@mipmap/more"
         android:text="@string/air_conditioner"
         android:textColor="@color/colorWhite"
         android:textSize="15sp" />
@@ -108,13 +113,11 @@
             app:roundWidth="6dp"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginLeft="35dp"
             android:layout_marginStart="35dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:gravity="center"
             android:orientation="vertical">
@@ -172,7 +175,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:drawableRight="@mipmap/more"
+        android:drawableEnd="@mipmap/more"
         android:text="@string/illumination"
         android:textColor="@color/colorWhite"
         android:textSize="15sp" />
@@ -215,13 +218,11 @@
             app:roundWidth="6dp"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginLeft="35dp"
             android:layout_marginStart="35dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:gravity="center"
             android:orientation="vertical">
@@ -279,7 +280,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:drawableRight="@mipmap/more"
+        android:drawableEnd="@mipmap/more"
         android:text="@string/charge_station"
         android:textColor="@color/colorWhite"
         android:textSize="15sp" />
@@ -323,13 +324,11 @@
             app:roundWidth="6dp"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginLeft="35dp"
             android:layout_marginStart="35dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:gravity="center"
             android:orientation="vertical">

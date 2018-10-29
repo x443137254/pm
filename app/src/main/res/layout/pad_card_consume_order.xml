@@ -9,6 +9,7 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
+        android:id="@+id/consume_list_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabSelectedTextColor="@color/colorWhite"
@@ -31,50 +32,31 @@
         android:orientation="horizontal">
 
         <RadioGroup
-            android:id="@+id/zone_radio_group"
+            android:id="@+id/time_group"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            android:divider="@drawable/radio_divider"
+            android:showDividers="middle"
             android:background="@drawable/round_dark_blue_edg"
             android:orientation="horizontal"
             android:padding="1dp">
 
             <RadioButton
-                android:id="@+id/zone_radio_now"
+                android:id="@+id/time_day"
                 style="@style/RadioButtonStyle_01"
                 android:background="@drawable/radio_day_selector"
-                android:text="@string/now" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorText_03" />
-
-            <RadioButton
-                android:id="@+id/zone_radio_day"
-                style="@style/RadioButtonStyle_01"
-                android:background="@drawable/radio_month_selector"
                 android:text="@string/day" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorText_03" />
-
             <RadioButton
-                android:id="@+id/zone_radio_month"
+                android:id="@+id/time_month"
                 style="@style/RadioButtonStyle_01"
                 android:background="@drawable/radio_month_selector"
                 android:text="@string/month" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorText_03" />
-
             <RadioButton
-                android:id="@+id/zone_radio_year"
+                android:id="@+id/time_year"
                 style="@style/RadioButtonStyle_01"
                 android:background="@drawable/radio_year_selector"
                 android:text="@string/year" />

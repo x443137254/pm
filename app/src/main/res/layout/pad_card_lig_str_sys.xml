@@ -25,12 +25,12 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/drop_menu_bt"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/round_dark_blue_edg"
             android:drawableEnd="@mipmap/drop"
-            android:drawableRight="@mipmap/drop"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/temp_text"

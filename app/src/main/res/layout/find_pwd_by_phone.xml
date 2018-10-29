@@ -22,7 +22,6 @@
             android:textColor="@color/colorText_07"
             android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -35,11 +34,13 @@
             android:text="@string/phone"/>
 
         <EditText
+            android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null"
             android:inputType="phone"
             android:layout_gravity="center"
+            android:textSize="15sp"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_phone"
             android:textColorHint="@color/colorText_01" />
@@ -63,7 +64,6 @@
             android:textColor="@color/colorText_07"
             android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -76,17 +76,20 @@
             android:text="@string/phone_verification_code"/>
 
         <EditText
+            android:id="@+id/code"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"
             android:background="@null"
             android:inputType="number"
+            android:textSize="15sp"
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_verification_code"
             android:textColorHint="@color/colorText_01" />
 
         <Button
+            android:id="@+id/get_code"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="@string/get_verification_code"
@@ -119,7 +122,6 @@
             android:textColor="@color/colorText_07"
             android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -132,11 +134,13 @@
             android:text="@string/new_pwd"/>
 
         <EditText
+            android:id="@+id/pwd"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null"
             android:inputType="textPassword"
             android:layout_gravity="center"
+            android:textSize="15sp"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_pwd"
             android:textColorHint="@color/colorText_01" />
@@ -160,7 +164,6 @@
             android:textColor="@color/colorText_07"
             android:text="@string/text_47"
             android:layout_margin="3dp"
-            android:paddingLeft="15dp"
             android:paddingStart="15dp" />
 
         <TextView
@@ -173,10 +176,12 @@
             android:text="@string/confirm_new_pwd"/>
 
         <EditText
+            android:id="@+id/pwd_confirm"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null"
             android:inputType="textPassword"
+            android:textSize="15sp"
             android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:hint="@string/input_pwd_again"

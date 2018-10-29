@@ -44,7 +44,7 @@
         <activity android:name=".activity.WarnListActivity" />
         <activity android:name=".activity.AddDeviceActivity" />
         <activity android:name=".activity.DeviceDetailActivity" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.WarmDetailActivity" />
         <activity android:name=".activity.ReportDetailActivity" />
         <activity android:name=".activity.InfoMaintainActivity" />
@@ -87,18 +87,11 @@
         <activity android:name=".activity.ThirdRegActivity" />
         <activity android:name=".activity.EditTimeActivity" />
 
-        <service
-            android:name=".service.CheckUpdateService"
-            android:exported="false" />
+        <service android:name=".service.CheckUpdateService" android:exported="false" />
 
         <activity android:name=".activity.BasicActivity" />
 
-        <service
-            android:name=".service.DownloadService"
-            android:exported="false" />
-        <service
-            android:name=".service.MyIntentService"
-            android:exported="false"></service>
+        <service android:name=".service.DownloadService" android:exported="false" />
     </application>
 
 </manifest>

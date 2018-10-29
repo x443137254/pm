@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="ContentDescription">
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,34 +19,34 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView style="@style/star_style"/>
+        <TextView style="@style/star_style" />
 
         <TextView
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
             android:layout_marginBottom="10dp"
-            android:text="@string/phone"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/phone"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@null"
-            android:inputType="phone"
-            android:textSize="14sp"
             android:layout_gravity="center"
-            android:textColor="@color/colorText_04"
+            android:background="@null"
             android:hint="@string/input_phone"
-            android:textColorHint="@color/colorText_04" />
+            android:inputType="phone"
+            android:textColor="@color/colorText_04"
+            android:textColorHint="@color/colorText_04"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,55 +55,55 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView style="@style/star_style"/>
+        <TextView style="@style/star_style" />
 
         <TextView
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
             android:layout_marginBottom="10dp"
-            android:text="@string/phone_verification_code"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/phone_verification_code"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/phone_code"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="30dp"
-            android:background="@null"
-            android:textSize="14sp"
             android:layout_gravity="center"
-            android:textColor="@color/colorText_04"
+            android:layout_weight="1"
+            android:background="@null"
             android:hint="@string/input_verification_code"
-            android:textColorHint="@color/colorText_04" />
+            android:textColor="@color/colorText_04"
+            android:textColorHint="@color/colorText_04"
+            android:textSize="14sp"
+            tools:ignore="TextFields" />
 
         <TextView
             android:id="@+id/get_code"
             android:layout_width="90dp"
             android:layout_height="25dp"
-            android:text="@string/get_verification_code"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/round_blue_edg"
+            android:gravity="center"
+            android:paddingBottom="2dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:gravity="center"
             android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:layout_marginRight="5dp"
-            android:textColor="@color/colorBlue"
-            android:layout_marginEnd="5dp" />
+            android:text="@string/get_verification_code"
+            android:textColor="@color/colorBlue" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,34 +112,34 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView style="@style/star_style"/>
+        <TextView style="@style/star_style" />
 
         <TextView
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
             android:layout_marginBottom="10dp"
-            android:text="@string/set_pwd"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/set_pwd"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/pwd"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@null"
-            android:inputType="phone"
-            android:textSize="14sp"
             android:layout_gravity="center"
-            android:textColor="@color/colorText_04"
+            android:background="@null"
             android:hint="@string/input_pwd"
-            android:textColorHint="@color/colorText_04" />
+            android:inputType="phone"
+            android:textColor="@color/colorText_04"
+            android:textColorHint="@color/colorText_04"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -146,40 +148,40 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView style="@style/star_style"/>
+        <TextView style="@style/star_style" />
 
         <TextView
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
             android:layout_marginBottom="10dp"
-            android:text="@string/confirm_pwd"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/confirm_pwd"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/reg_input_pwd_again"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@null"
-            android:inputType="phone"
-            android:textSize="14sp"
             android:layout_gravity="center"
-            android:textColor="@color/colorText_04"
+            android:background="@null"
             android:hint="@string/input_pwd_again"
-            android:textColorHint="@color/colorText_04" />
+            android:inputType="phone"
+            android:textColor="@color/colorText_04"
+            android:textColorHint="@color/colorText_04"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -188,39 +190,39 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView style="@style/star_style"/>
+        <TextView style="@style/star_style" />
 
         <TextView
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
             android:layout_marginBottom="10dp"
-            android:text="@string/company_name"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/company_name"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/company"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@null"
-            android:textSize="14sp"
             android:layout_gravity="center"
-            android:textColor="@color/colorText_04"
+            android:background="@null"
             android:hint="@string/input_company_name"
-            android:textColorHint="@color/colorText_04" />
+            android:textColor="@color/colorText_04"
+            android:textColorHint="@color/colorText_04"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -228,53 +230,41 @@
         android:background="#cc011f28"
         android:orientation="horizontal">
 
-        <TextView style="@style/star_style"/>
+        <TextView style="@style/star_style" />
 
         <TextView
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"
             android:layout_marginBottom="10dp"
-            android:text="@string/country"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/country"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/country"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/country"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorText_04"
-                    android:layout_gravity="center"
-                    android:text="中国"/>
-
-                <ImageView
-                    android:id="@+id/country_ic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/down_blue"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"/>
-            </LinearLayout>
+                android:layout_marginEnd="10dp"
+                android:drawableEnd="@mipmap/down_blue"
+                android:gravity="center_vertical"
+                android:text="中国"
+                android:textColor="@color/colorText_04"
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#07455A"/>
+                android:background="#07455A" />
 
             <LinearLayout
+                android:id="@+id/select_city_bar"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:gravity="center"
@@ -283,93 +273,86 @@
                 <TextView
                     android:id="@+id/province"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="14sp"
                     android:textColor="@color/colorText_04"
-                    android:text="广东"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="14sp" />
 
                 <ImageView
-                    android:id="@+id/province_ic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/down_blue"/>
+                    android:src="@mipmap/down_blue" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:background="#07455A"/>
+                    android:background="#07455A" />
 
                 <TextView
                     android:id="@+id/city"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="14sp"
                     android:textColor="@color/colorText_04"
-                    android:text="深圳"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="14sp" />
 
                 <ImageView
-                    android:id="@+id/city_ic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/down_blue"/>
+                    android:src="@mipmap/down_blue" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="30dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:background="#07455A"/>
+                    android:background="#07455A" />
 
                 <TextView
                     android:id="@+id/area"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="14sp"
                     android:textColor="@color/colorText_04"
-                    android:text="福田区"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="14sp" />
 
                 <ImageView
-                    android:id="@+id/area_ic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/down_blue"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginEnd="10dp" />
+                    android:layout_marginEnd="10dp"
+                    android:src="@mipmap/down_blue" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#07455A"/>
+                android:background="#07455A" />
 
             <EditText
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="@null"
-                android:textSize="14sp"
                 android:layout_gravity="center"
-                android:textColor="@color/colorText_04"
+                android:background="@null"
                 android:hint="@string/address_detail"
-                android:textColorHint="@color/colorText_04" />
+                android:textColor="@color/colorText_04"
+                android:textColorHint="@color/colorText_04"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -378,43 +361,43 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView style="@style/star_style"/>
+        <TextView style="@style/star_style" />
 
         <TextView
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
             android:layout_marginBottom="10dp"
-            android:text="@string/language"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/language"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/language"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="中文"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorText_04"/>
+            android:textColor="@color/colorText_04" />
 
         <ImageView
             android:id="@+id/language_ic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/down_blue"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:src="@mipmap/down_blue" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -423,33 +406,33 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView style="@style/star_style"/>
+        <TextView style="@style/star_style" />
 
         <TextView
             android:layout_width="97dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp"
             android:layout_marginBottom="10dp"
-            android:text="@string/installer_sn"/>
+            android:layout_marginTop="10dp"
+            android:text="@string/installer_sn"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/sn"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@null"
             android:layout_gravity="center"
-            android:textSize="14sp"
-            android:textColor="@color/colorText_04"
+            android:background="@null"
             android:hint="@string/input_installer_sn"
-            android:textColorHint="@color/colorText_04" />
+            android:textColor="@color/colorText_04"
+            android:textColorHint="@color/colorText_04"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:background="#07455A" />
 
     <CheckBox
         android:id="@+id/agreement"
@@ -457,11 +440,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="20dp"
+        android:button="@drawable/agreement_check"
         android:checked="true"
         android:gravity="center"
-        android:button="@drawable/agreement_check"
-        android:textColor="@color/colorWhite"
-        android:text="@string/agreement" />
+        android:text="@string/agreement"
+        android:textColor="@color/colorWhite" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -472,7 +455,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/cancel"
@@ -482,12 +465,12 @@
             android:text="@string/cancel"
             android:textColor="@color/colorWhite"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/next_step"
@@ -497,11 +480,11 @@
             android:text="@string/next_step"
             android:textColor="@color/colorWhite"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

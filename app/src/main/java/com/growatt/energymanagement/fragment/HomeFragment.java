@@ -18,7 +18,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,8 +34,8 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.growatt.energymanagement.activity.MainActivity;
 import com.growatt.energymanagement.R;
+import com.growatt.energymanagement.activity.MainActivity;
 import com.growatt.energymanagement.activity.NoticeActivity;
 import com.growatt.energymanagement.activity.WarnListActivity;
 import com.growatt.energymanagement.msgs.EnergyTendencyMsg;
@@ -68,17 +67,13 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private ImageView iv_person, iv_notice;
-    private RelativeLayout rl_1, rl_2, rl_3, rl_4, rl_5;
     private TextView tv_trend;
     private LineChart mChart;
     private GradientTextView shapeText;
     private TextView location;
     private TextView windText;
     private TextView weatherText;
-    private ImageView weatherImg;
     private View newsPoint;
-    //    private Chart mChart;
 
     private TextView ele_in;
     private TextView ele_out;
@@ -137,6 +132,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         InternetUtils.notice(LoginMsg.uniqueId,1,"warning","");
         InternetUtils.greenBenifit(LoginMsg.uniqueId);
         InternetUtils.home(LoginMsg.uniqueId);
+        if (MainActivity.isPad) return;
         if (LoginMsg.cid != 0 && LoginMsg.hasMsg) {
             newsPoint.setVisibility(View.VISIBLE);
         } else {
@@ -166,7 +162,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         location = view.findViewById(R.id.location);
         windText = view.findViewById(R.id.wind_text);
         weatherText = view.findViewById(R.id.weather_text);
-        weatherImg = view.findViewById(R.id.weather_ic);
         shapeText = view.findViewById(R.id.shape_text);
         shapeText.setShapeColors(0xff08ffce, 0xff00c0ff);
         newsPoint = view.findViewById(R.id.tip_notice_point);
@@ -206,7 +201,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void showChart(int id) {
         if (time.equals("")) {
-            time = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            time = new SimpleDateFormat("yyyy-MM-dd",getResources().getConfiguration().locale).format(new Date());
         }
         switch (id) {
             case R.id.time_type_day:
@@ -408,7 +403,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void showWeather(WeatherMsg msg) {
-        if (!msg.city.equals("")) {
+        if (!msg.city.equals("") && !MainActivity.isPad) {
             location.setText(msg.city);
             String s = "风速：" + msg.winddirection + msg.windpower + "级";
             windText.setText(s);
@@ -432,7 +427,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getContext(), msg.errMsg, Toast.LENGTH_SHORT).show();
             return;
         }
-        shapeText.setText(new DecimalFormat("#.0").format(msg.ele_out_total));
+        shapeText.setText(String.format(getResources().getConfiguration().locale,"%.1f",msg.ele_out_total));
         ele_in.setText(String.valueOf(msg.ele_in));
         ele_out.setText(String.valueOf(msg.ele_out));
         ele_cost.setText(String.valueOf(msg.ele_cost));

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+    tools:ignore="ContentDescription"
     android:layout_marginTop="5dp"
     android:background="@drawable/frame2"
     android:orientation="vertical">
@@ -46,7 +48,7 @@
             <TextView
                 android:id="@+id/inverter"
                 style="@style/TextStyle_10"
-                android:text="@string/text_25"/>
+                android:text="@string/text_0"/>
 
             <TextView
                 style="@style/TextStyle_11"
@@ -74,7 +76,7 @@
             <TextView
                 android:id="@+id/ameter"
                 style="@style/TextStyle_10"
-                android:text="@string/text_25"/>
+                android:text="@string/text_0"/>
 
             <TextView
                 style="@style/TextStyle_11"
@@ -97,12 +99,12 @@
 
             <ImageView
                 style="@style/img_02"
-                android:src="@mipmap/icon_device3" />
+                android:src="@mipmap/icon_device3"/>
 
             <TextView
                 android:id="@+id/aircondition"
                 style="@style/TextStyle_10"
-                android:text="@string/text_25"/>
+                android:text="@string/text_0"/>
 
             <TextView
                 style="@style/TextStyle_11"
@@ -130,7 +132,7 @@
             <TextView
                 android:id="@+id/socket"
                 style="@style/TextStyle_10"
-                android:text="@string/text_25" />
+                android:text="@string/text_0" />
 
             <TextView
                 style="@style/TextStyle_11"

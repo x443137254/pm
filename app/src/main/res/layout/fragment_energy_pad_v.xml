@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:ignore="ContentDescription"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/bg_v_pad">
@@ -68,7 +70,6 @@
                 android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
                 android:background="@drawable/round_dark_blue_edg"
                 android:gravity="center"
                 android:padding="1dp"
@@ -107,18 +108,41 @@
                     android:text="@string/classify_manage"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
 
                 <ImageView
                     android:id="@+id/add_device"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="10dp"
-                    android:src="@mipmap/add" />
+                    android:src="@mipmap/add"/>
             </RelativeLayout>
+
+            <RadioGroup
+                android:id="@+id/cut_group"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_dark_blue_edg"
+                android:orientation="horizontal"
+                android:padding="1dp">
+
+                <RadioButton
+                    android:id="@+id/radio_device"
+                    style="@style/RadioButtonStyle_01"
+                    android:background="@drawable/radio_day_selector"
+                    android:text="@string/device" />
+
+                <RadioButton
+                    android:id="@+id/radio_consume"
+                    style="@style/RadioButtonStyle_01"
+                    android:background="@drawable/radio_year_selector"
+                    android:text="@string/expend" />
+            </RadioGroup>
 
             <View
                 android:layout_width="match_parent"
@@ -131,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:drawableRight="@mipmap/more"
+                android:drawableEnd="@mipmap/more"
                 android:text="@string/air_conditioner"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
@@ -258,7 +282,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:drawableRight="@mipmap/more"
+                android:drawableEnd="@mipmap/more"
                 android:text="@string/illumination"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
@@ -384,7 +408,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:drawableRight="@mipmap/more"
+                android:drawableEnd="@mipmap/more"
                 android:text="@string/charge_station"
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
@@ -515,7 +539,8 @@
                 android:text="@string/real_time_data"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="TooManyViews" />
 
             <LinearLayout
                 android:layout_width="match_parent"

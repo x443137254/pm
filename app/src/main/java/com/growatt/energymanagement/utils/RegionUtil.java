@@ -45,9 +45,10 @@ public class RegionUtil {
 
     public List<String> getAreaList(int provincePosition, int cityPosition){
         List<String> provinceList = new ArrayList<>();
-        JSONObject jsonObject = provinceArray.optJSONObject(provincePosition).optJSONArray("city").optJSONObject(cityPosition);
-        for (int i = 0; i < provinceArray.length(); i ++){
-            provinceList.add(provinceArray.optJSONObject(i).optString("name"));
+        JSONArray areaArray = provinceArray.optJSONObject(provincePosition).optJSONArray("city")
+                .optJSONObject(cityPosition).optJSONArray("area");
+        for (int i = 0; i < areaArray.length(); i ++){
+            provinceList.add(areaArray.optString(i));
         }
         return provinceList;
     }

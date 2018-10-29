@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:ignore="ContentDescription"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/bg_h_pad"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -16,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/person_bg_pad"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
@@ -116,7 +118,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:background="@drawable/person_bg_pad"
             android:orientation="vertical"
             android:layout_marginStart="16dp">
@@ -132,7 +133,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:drawableLeft="@mipmap/warm"
                     android:drawableStart="@mipmap/warm"
                     android:text="@string/warn_classify"
                     android:textColor="@color/colorWhite"
@@ -153,7 +153,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
-                    android:layout_marginRight="10dp"
                     android:src="@mipmap/more" />
             </LinearLayout>
         </LinearLayout>
@@ -318,7 +317,7 @@
                         android:textColor="@color/colorWhite" />
                 </GridLayout>
 
-                <com.tuolve.energymanagement.view.CircleProgressBar
+                <com.growatt.energymanagement.view.CircleProgressBar
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     app:roundColor="#0443AF"
@@ -441,7 +440,6 @@
                     android:layout_gravity="center"
                     android:layout_margin="3dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     android:background="@drawable/round_dark_blue_edg"
                     android:gravity="center"
                     android:padding="1dp"
@@ -452,7 +450,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/temp_ic" />
+                android:src="@mipmap/temp_ic"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

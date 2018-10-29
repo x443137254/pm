@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -25,7 +24,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.fragment.AnalyzeFragment;
 import com.growatt.energymanagement.fragment.EleFragment;
@@ -38,6 +36,7 @@ import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.msgs.PopMsg;
 import com.growatt.energymanagement.msgs.UpdateMsg;
 import com.growatt.energymanagement.msgs.UpdateProgressMsg;
+import com.growatt.energymanagement.msgs.WeatherMsg;
 import com.growatt.energymanagement.service.DownloadService;
 import com.growatt.energymanagement.utils.CommentUtils;
 import com.growatt.energymanagement.utils.InternetUtils;
@@ -72,6 +71,9 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     private ProgressBar updateProgress;
     private String city;
     private List<AllAreaMsg.CityInfo> mAllCitylist;
+    private TextView weather;
+    private TextView temperature;
+    private TextView wind_speed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,13 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
             mFragmentManager.beginTransaction().add(R.id.fl, homeFragment).commit();
         }
 
-        readCacheInfo();
+        if (isPad){
+            weather = findViewById(R.id.weather);
+            temperature = findViewById(R.id.temperature);
+            wind_speed = findViewById(R.id.wind_speed);
+        }
+
+
         if (CommentUtils.checkPermission(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 888)) {
             LocationUtils.getAddress(this);
         }
@@ -105,17 +113,6 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             LocationUtils.getAddress(this);
         }
-    }
-
-    /**
-     * 读取本地缓存数据
-     */
-    private void readCacheInfo() {
-        SharedPreferences sp = getSharedPreferences("userInfo", MODE_PRIVATE);
-        String account = sp.getString("account", "");
-        if (account.equals("")) return;
-        String password = sp.getString("password", "");
-        InternetUtils.login(account, password);
     }
 
     private void init() {
@@ -192,13 +189,13 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void showPop(PopMsg msg) {
         drawer.openDrawer(Gravity.START);
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void ll(LoginMsg msg) {
-        if (LoginMsg.cid == 0) return;
-        account.setText(LoginMsg.account);
-        company.setText(LoginMsg.companyName);
+        if (LoginMsg.cid == 0) {
+            account.setText(getResources().getString(R.string.click_login));
+            company.setText("");
+        } else {
+            account.setText(LoginMsg.account);
+            company.setText(LoginMsg.companyName);
+        }
     }
 
     @Override
@@ -207,6 +204,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
             case R.id.user_item:
                 if (LoginMsg.cid == 0) {
                     startActivity(new Intent(this, LoginActivity.class));
+                    finish();
                 } else {
                     startActivity(new Intent(this, PersonActivity.class));
                 }
@@ -215,6 +213,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
             case R.id.info_item:
                 if (LoginMsg.cid == 0) {
                     startActivity(new Intent(this, LoginActivity.class));
+                    finish();
                 } else {
                     startActivity(new Intent(this, InfoMaintainActivity.class));
                 }
@@ -223,6 +222,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
             case R.id.conf_item:
                 if (LoginMsg.cid == 0) {
                     startActivity(new Intent(this, LoginActivity.class));
+                    finish();
                 } else {
                     startActivity(new Intent(this, PriceConfActivity.class));
                 }
@@ -327,12 +327,23 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     }
 
     private void getWeather() {
-        for (int i = 0; i < mAllCitylist.size(); i++){
+        for (int i = 0; i < mAllCitylist.size(); i++) {
             AllAreaMsg.CityInfo info = mAllCitylist.get(i);
-            if (info.name.equals(city)){
+            if (info.name.equals(city)) {
                 InternetUtils.weather(info.adCode);
                 break;
             }
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void showWeather(WeatherMsg msg) {
+        if (!msg.city.equals("") && isPad) {
+            String s = msg.winddirection + msg.windpower + "级";
+            wind_speed.setText(s);
+            s = msg.temperature + "°";
+            temperature.setText(s);
+            weather.setText(msg.weather);
         }
     }
 }

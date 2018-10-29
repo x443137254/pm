@@ -10,7 +10,8 @@
         android:orientation="vertical"
         android:padding="15dp">
 
-        <include layout="@layout/pad_card_warn" />
+        <include layout="@layout/pad_card_warn"
+            android:id="@+id/warn_bar"/>
 
         <include layout="@layout/pad_card_overview_circle" />
 

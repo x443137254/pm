@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.msgs.LoginMsg;
+import com.growatt.energymanagement.utils.CommentUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,48 +49,48 @@ public class PersonActivity extends BasicActivity implements View.OnClickListene
         regTime = findViewById(R.id.reg_time);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         account.setText(LoginMsg.account);
         company.setText(LoginMsg.companyName);
         regTime.setText(getDate(LoginMsg.registTime));
+        nick.setText(LoginMsg.nick);
+        phone.setText(LoginMsg.phone);
+        email.setText(LoginMsg.email);
     }
 
+
     private String getDate(long time) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", getResources().getConfiguration().locale);
         Date date = new Date(time);
         return format.format(date);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.person_back:
                 finish();
                 break;
             case R.id.person_modify_name:
                 Intent intent = new Intent(this, ModifyActivity.class);
-                intent.putExtra("key","nick");
-                startActivityForResult(intent,MODIFY_NICK);
+                intent.putExtra("key", "nick");
+                startActivityForResult(intent, MODIFY_NICK);
                 break;
             case R.id.person_modify_pwd:
-                startActivity(new Intent(this,ModifyPwdActivity.class));
+                startActivity(new Intent(this, ModifyPwdActivity.class));
                 break;
             case R.id.person_modify_phone:
-                startActivityForResult(new Intent(this,ModifyPhoneActivity.class),MODIFY_PHONE);
+                startActivity(new Intent(this, ModifyPhoneActivity.class));
                 break;
             case R.id.logout:
                 LoginMsg.cleanUserInfo();
-                startActivity(new Intent(this,LoginActivity.class));
+                CommentUtils.save(this);
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 break;
             case R.id.company_edit:
                 Intent intent1 = new Intent(this, ModifyActivity.class);
-                intent1.putExtra("key","company");
-                startActivityForResult(intent1,MODIFY_COMPANY);
+                intent1.putExtra("key", "company");
+                startActivityForResult(intent1, MODIFY_COMPANY);
                 break;
 //            case R.id.modify_email:
 //                startActivityForResult(new Intent(this,ModifyActivity.class),MODIFY_EMAIL);
@@ -102,18 +103,12 @@ public class PersonActivity extends BasicActivity implements View.OnClickListene
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != 1000) return;
         String s = data.getStringExtra("data");
-        switch (requestCode){
+        switch (requestCode) {
             case MODIFY_NICK:
                 nick.setText(s);
                 break;
-            case MODIFY_PHONE:
-                phone.setText(s);
-                break;
             case MODIFY_COMPANY:
                 company.setText(s);
-                break;
-            case MODIFY_EMAIL:
-                email.setText(s);
                 break;
         }
     }

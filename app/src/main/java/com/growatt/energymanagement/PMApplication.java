@@ -2,9 +2,11 @@ package com.growatt.energymanagement;
 
 import android.app.Application;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
 import com.growatt.energymanagement.service.CheckUpdateService;
+import com.growatt.energymanagement.utils.InternetUtils;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -33,5 +35,17 @@ public class PMApplication extends Application {
         Intent intent = new Intent(this, CheckUpdateService.class);
         intent.setAction("check_big_version");
         startService(intent);
+        readCacheInfo();
+    }
+
+    /**
+     * 读取本地缓存数据
+     */
+    private void readCacheInfo() {
+        SharedPreferences sp = getSharedPreferences("userInfo", MODE_PRIVATE);
+        String account = sp.getString("account", "");
+        if (account.equals("")) return;
+        String password = sp.getString("password", "");
+        InternetUtils.login(account, password);
     }
 }

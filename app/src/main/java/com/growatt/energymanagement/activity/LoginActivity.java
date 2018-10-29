@@ -245,6 +245,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
             startActivity(new Intent(this, MainActivity.class));
             LoginMsg.password = pwd;
             CommentUtils.save(this);
+            finish();
         }
     }
 

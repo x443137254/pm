@@ -1,5 +1,6 @@
 package com.growatt.energymanagement.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -17,18 +18,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.msgs.CountryDataMsg;
 import com.growatt.energymanagement.msgs.GetCodeMsg;
 import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.msgs.RegistMsg;
+import com.growatt.energymanagement.msgs.ThirdRegistMsg;
 import com.growatt.energymanagement.msgs.UserNameExistMsg;
 import com.growatt.energymanagement.utils.CommentUtils;
 import com.growatt.energymanagement.utils.InternetUtils;
+import com.growatt.energymanagement.utils.RegionUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,11 +57,6 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
     private TextView city;
     private TextView area;
     private TextView language;
-    private ImageView country_ic;
-    private ImageView province_ic;
-    private ImageView city_ic;
-    private ImageView area_ic;
-    private ImageView language_ic;
     private CheckBox agreement;
     private boolean legal = true;
     private String account;
@@ -66,6 +69,10 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
     private int countDown = 60;
     private String CODE = "";
     private EditText phone_code;
+
+    private List<String> provinceList;
+    private List<List<String>> cityList;
+    private List<List<List<String>>> areaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,31 +90,22 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
         getCode = findViewById(R.id.get_code);
         pwd = findViewById(R.id.pwd);
         confirmPwd = findViewById(R.id.reg_input_pwd_again);
-        companyName = findViewById(R.id.reg_company_name);
-        address = findViewById(R.id.address_detail);
-        install_sn = findViewById(R.id.installer_sn);
+        companyName = findViewById(R.id.company);
+        address = findViewById(R.id.address);
+        install_sn = findViewById(R.id.sn);
         country = findViewById(R.id.country);
         province = findViewById(R.id.province);
         city = findViewById(R.id.city);
         area = findViewById(R.id.area);
         language = findViewById(R.id.language);
-        country_ic = findViewById(R.id.country_ic);
-        province_ic = findViewById(R.id.province_ic);
-        city_ic = findViewById(R.id.city_ic);
-        area_ic = findViewById(R.id.area_ic);
-        language_ic = findViewById(R.id.language_ic);
         agreement = findViewById(R.id.agreement);
         findViewById(R.id.reg_back).setOnClickListener(this);
         findViewById(R.id.next_step).setOnClickListener(this);
         findViewById(R.id.cancel).setOnClickListener(this);
         findViewById(R.id.country).setOnClickListener(this);
+        findViewById(R.id.select_city_bar).setOnClickListener(this);
         if (MainActivity.isPad) findViewById(R.id.back_to_login).setOnClickListener(this);
-        country_ic.setOnClickListener(this);
-        province_ic.setOnClickListener(this);
-        city_ic.setOnClickListener(this);
         getCode.setOnClickListener(this);
-        area_ic.setOnClickListener(this);
-        language_ic.setOnClickListener(this);
         phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -118,6 +116,20 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
                 }
             }
         });
+
+        RegionUtil regionUtil = new RegionUtil(this);
+        provinceList = regionUtil.getProvinceList();
+        cityList = new ArrayList<>();
+        areaList = new ArrayList<>();
+        for (int i = 0; i < provinceList.size(); i++) {
+            List<String> city_list = regionUtil.getCityList(i);
+            cityList.add(city_list);
+            List<List<String>> list = new ArrayList<>();
+            for (int j = 0; j < city_list.size(); j++) {
+                list.add(regionUtil.getAreaList(i, j));
+            }
+            areaList.add(list);
+        }
     }
 
     @Override
@@ -138,11 +150,12 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
                 Intent intent = getIntent();
                 String appType  = intent.getStringExtra("appType");
                 String thirdUnique  = intent.getStringExtra("thirdUnique");
+                String address = province.getText().toString() + city.getText() + area.getText() + addr;
                 if (thirdUnique != null && thirdUnique.length() > 0) {
                     InternetUtils.thirdRegist(appType,thirdUnique,account,account,company,
-                            country.getText().toString(),language.getText().toString(),addr,userType);
+                            country.getText().toString(),language.getText().toString(),address,userType);
                 }else {
-                    InternetUtils.regist(password,account,country.getText().toString(),"中文",company,addr,userType);
+                    InternetUtils.regist(password,account,country.getText().toString(),"中文",company,address,userType);
                 }
                 break;
             case R.id.country:
@@ -181,6 +194,9 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
                     }
                 };
                 timer.schedule(timerTask, 0, 1000);
+                break;
+            case R.id.select_city_bar:
+                showPickView();
                 break;
         }
     }
@@ -309,5 +325,41 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
             Toast.makeText(this, getResources().getString(R.string.send_tips), Toast.LENGTH_SHORT).show();
             CODE = msg.data;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void b1(ThirdRegistMsg msg) {
+        if (msg.code.equals("0")) {
+            Toast.makeText(this, getResources().getString(R.string.reg_success), Toast.LENGTH_SHORT).show();
+            finish();
+        } else Toast.makeText(this, getResources().getString(R.string.reg_fail), Toast.LENGTH_SHORT).show();
+    }
+
+    private void showPickView() {
+        OptionsPickerView<String> pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(final int options1, final int options2, final int options3, View v) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        province.setText(provinceList.get(options1));
+                        city.setText(cityList.get(options1).get(options2));
+                        area.setText(areaList.get(options1).get(options2).get(options3));
+                    }
+                });
+            }
+        })
+                .setTitleText("请选择：")
+                .setTitleBgColor(0xff032d3a)
+                .setTitleColor(0xffffffff)
+                .setSubmitColor(0xffffffff)
+                .setCancelColor(0xff058ef0)
+                .setBgColor(0xff032d3a)
+                .setTitleSize(22)
+                .setTextColorCenter(0xffffffff)
+                .build();
+        pvOptions.setPicker(provinceList,cityList,areaList);
+        pvOptions.show();
+
     }
 }

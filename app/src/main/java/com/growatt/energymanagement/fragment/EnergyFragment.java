@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
@@ -97,7 +98,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         RadioGroup mCutRadioGroup = view.findViewById(R.id.cut_group);
         RadioGroup mTimeGroup1 = view.findViewById(R.id.ele_trend_radio_group);
         RadioGroup mTimeGroup2 = view.findViewById(R.id.time_group);
-        RadioGroup mTimeGroup3 = view.findViewById(R.id.time_group3);
+
         mZoneConsumeList = view.findViewById(R.id.zone_consume_list);
         mConsumeOrderList = view.findViewById(R.id.consume_order_contain);
         chart_1 = view.findViewById(R.id.line_chart_1);
@@ -109,7 +110,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         InternetUtils.devRunningState(LoginMsg.uniqueId);
         mTimeGroup1.check(R.id.ele_trend_radio_now);
         mTimeGroup2.check(R.id.time_month);
-        mTimeGroup3.check(R.id.time3_month);
+
         String format = new SimpleDateFormat("yyyy-MM-dd", getResources().getConfiguration().locale).format(new Date());
         if (time_1.equals("")) {
             time_1 = format;
@@ -182,30 +183,49 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
+        if (MainActivity.isPad){
+            ((TabLayout)view.findViewById(R.id.consume_list_tabs)).addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
 
-        mTimeGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.time3_day:
-                        timeType_3 = 2;
-                        timePick03.setText(time_3);
-                        InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4) + time_3.substring(5, 7) + time_3.substring(8, 10));
-                        break;
-                    case R.id.time3_month:
-                        timeType_3 = 3;
-                        timePick03.setText(time_3.substring(0, 7));
-                        InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4) + time_3.substring(5, 7));
-                        break;
-                    case R.id.time3_year:
-                        timeType_3 = 4;
-                        timePick03.setText(time_3.substring(0, 4));
-                        InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4));
-                        break;
                 }
-            }
-        });
 
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
+        }else {
+            RadioGroup mTimeGroup3 = view.findViewById(R.id.time_group3);
+            mTimeGroup3.check(R.id.time3_month);
+            mTimeGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    switch (checkedId) {
+                        case R.id.time3_day:
+                            timeType_3 = 2;
+                            timePick03.setText(time_3);
+                            InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4) + time_3.substring(5, 7) + time_3.substring(8, 10));
+                            break;
+                        case R.id.time3_month:
+                            timeType_3 = 3;
+                            timePick03.setText(time_3.substring(0, 7));
+                            InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4) + time_3.substring(5, 7));
+                            break;
+                        case R.id.time3_year:
+                            timeType_3 = 4;
+                            timePick03.setText(time_3.substring(0, 4));
+                            InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4));
+                            break;
+                    }
+                }
+            });
+        }
         mCutRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

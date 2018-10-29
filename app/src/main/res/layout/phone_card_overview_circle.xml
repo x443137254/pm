@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    tools:ignore="ContentDescription"
     android:layout_height="wrap_content">
 
     <FrameLayout
@@ -34,14 +36,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/text_02"
+                android:text="@string/text_0"
                 android:textStyle="bold"
                 android:textSize="30sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_39"
+                android:text="@string/text_84"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/medText" />
         </LinearLayout>
@@ -58,12 +60,13 @@
 
             <ImageView
                 style="@style/ImageStyle_01"
-                android:src="@mipmap/icon_home1" />
+                android:src="@mipmap/icon_home1"/>
 
             <LinearLayout style="@style/GroupStyle_02">
 
                 <TextView
                     android:id="@+id/ele_out"
+                    android:text="@string/text_0"
                     style="@style/TextStyle_01"/>
 
                 <TextView
@@ -91,6 +94,7 @@
 
                 <TextView
                     android:id="@+id/ele_cost"
+                    android:text="@string/text_0"
                     style="@style/TextStyle_01"/>
             </LinearLayout>
 
@@ -113,6 +117,7 @@
 
                 <TextView
                     android:id="@+id/ele_earnings"
+                    android:text="@string/text_0"
                     style="@style/TextStyle_01" />
             </LinearLayout>
 
@@ -132,6 +137,7 @@
 
                 <TextView
                     android:id="@+id/ele_in"
+                    android:text="@string/text_0"
                     style="@style/TextStyle_01" />
 
                 <TextView
