@@ -272,7 +272,7 @@
             <com.growatt.energymanagement.view.CircleProgressBar
                 android:id="@+id/load_power_circle"
                 app:roundColor="#06FF5E"
-                app:roundProgressColor="#5E93FF"
+                app:roundProgressColor="#ffffc100"
                 app:roundWidth="6dp"
                 app:textColor="@color/colorWhite"
                 app:textSize="@dimen/medText"

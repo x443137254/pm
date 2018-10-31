@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="14dp"
-        android:scaleType="fitStart"
+        android:scaleType="fitXY"
         android:src="@drawable/frame_past" />
 
     <TextView
@@ -36,7 +36,6 @@
             android:textSize="12sp"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:drawableRight="@mipmap/drop"
             android:paddingRight="10dp"
             android:drawableEnd="@mipmap/drop" />
 

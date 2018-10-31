@@ -1,20 +1,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:ignore="ContentDescription"
     android:background="@mipmap/bg_h_pad"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <LinearLayout
+        android:id="@+id/pad_container_left"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:paddingBottom="10dp"
-        android:orientation="vertical"
-        android:layout_margin="8dp">
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="14dp"
+        android:orientation="vertical">
 
-        <include layout="@layout/pad_card_lig_str_sys" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
 
-        <include layout="@layout/pad_card_data_sta_bat" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/sys_running"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/drop_menu_bt"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/round_dark_blue_edg"
+                android:drawableEnd="@mipmap/drop"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/temp_text"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_inverter_block_pad_1"/>
     </LinearLayout>
 
     <LinearLayout
@@ -24,8 +59,40 @@
         android:padding="7dp"
         android:orientation="vertical">
 
-        <include layout="@layout/pad_card_ele_sys_state_2" />
+        <RelativeLayout
+            android:id="@+id/container_2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="7dp"
+            android:background="@drawable/person_bg_pad">
 
-        <include layout="@layout/pad_card_ele_device_manage"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/text_bg_01"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sys_state_"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/combined_net"
+                    android:textColor="@color/color_yellow_end" />
+            </LinearLayout>
+
+            <include layout="@layout/layout_inverter_block_pad_2"/>
+        </RelativeLayout>
+
+        <include layout="@layout/pad_card_ele_device_manage" />
     </LinearLayout>
 </LinearLayout>

@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,8 +89,12 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     private final int MENU_2 = 2;
     private TextView title;
     private LinearLayout container;
+    private LinearLayout container_pad_1;
+    private RelativeLayout container_pad_2;
 
-    private View dynamicView;
+    private View dynamicView_phone;
+    private View dynamicView_pad_1;
+    private View dynamicView_pad_2;
     private String sysType;
     private final String INVERTER = "INVERTER"; //光伏系统
     private final String BIG_HPS = "BIG_HPS";   //光储系统
@@ -98,15 +103,41 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     private int timeType = 1;
     private String time = "";
     private TextView timeText;
+    private TextView power_grid;
+    private TextView power_cost;
+    private TextView power_pv;
+    private TextView pv_in;
+    private TextView pv_out;
+    private TextView status;
+    private TextView pv_in_percent;
+    private TextView pv_out_percent;
+    private TextView pv_total;
+    private TextView power_cost_percent;
+    private CircleProgressBar c1;
+    private ImageView imageView6;
+    private ImageView imageView7;
+    private ImageView imageView8;
+    private ImageView imageView1;
+    private ImageView imageView2;
+    private RadioGroup timeGroup;
+    private TextView power_theory;
+    private TextView ele_total;
+    private TextView benifit_total;
+    private TextView ele_cost;
+    private TextView cost_pv;
+    private TextView cost_grid;
+    private TextView cost_pv_percent;
+    private TextView cost_grid_percent;
+    private CircleProgressBar c2;
+    private ImageView imageView3;
+    private ImageView imageView4;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (MainActivity.isPad) {
-            Resources resources = getResources();
-            DisplayMetrics dm = resources.getDisplayMetrics();
-            if (dm.widthPixels > dm.heightPixels) {
-                mRootView = inflater.inflate(R.layout.fragment_ele_pad_h, container, false);
-            } else mRootView = inflater.inflate(R.layout.fragment_ele_pad_v, container, false);
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+            mRootView = inflater.inflate(R.layout.fragment_ele_pad_h, container, false);
         } else mRootView = inflater.inflate(R.layout.fragment_ele, container, false);
         return mRootView;
     }
@@ -116,7 +147,14 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.add_device).setOnClickListener(this);
         title = view.findViewById(R.id.title);
-        container = view.findViewById(R.id.container);
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
+        if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+            container_pad_1 = view.findViewById(R.id.pad_container_left);
+            container_pad_2 = view.findViewById(R.id.container_2);
+        }else {
+            container = view.findViewById(R.id.container);
+        }
         deviceList = view.findViewById(R.id.device_list);
         areaSelector1 = view.findViewById(R.id.drop_menu_bt);
         areaSelector2 = view.findViewById(R.id.area_selector_2);
@@ -447,27 +485,96 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         areaSelector1.setText(bean.datalog_sn);
         InternetUtils.statisticsData(LoginMsg.uniqueId, bean.inverterId);
         InternetUtils.storageSystemData(LoginMsg.uniqueId, bean.inverterId);
+        Resources resources = getResources();
+        DisplayMetrics dm = resources.getDisplayMetrics();
         switch (bean.type) {
             case "INVERTER":
                 sysType = INVERTER;
                 title.setText("光伏系统运行图");
-                dynamicView = LayoutInflater.from(getContext()).inflate(R.layout.layout_inverter_block, container, false);
+                if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+                    dynamicView_pad_1 = LayoutInflater.from(getContext()).inflate(R.layout.layout_inverter_block_pad_1, container, false);
+                    dynamicView_pad_2 = LayoutInflater.from(getContext()).inflate(R.layout.layout_inverter_block_pad_2, container, false);
+                } else {
+                    dynamicView_phone = LayoutInflater.from(getContext()).inflate(R.layout.layout_inverter_block, container, false);
+                }
                 break;
             case "BIG_HPS":
                 sysType = BIG_HPS;
                 title.setText("光储系统运行图");
-                dynamicView = LayoutInflater.from(getContext()).inflate(R.layout.layout_big_hps_block, container, false);
+                dynamicView_phone = LayoutInflater.from(getContext()).inflate(R.layout.layout_big_hps_block, container, false);
                 break;
             case "BATTERY":
                 sysType = BATTERY;
                 title.setText("储能系统运行图");
-                dynamicView = LayoutInflater.from(getContext()).inflate(R.layout.layout_battery_block, container, false);
+                dynamicView_phone = LayoutInflater.from(getContext()).inflate(R.layout.layout_battery_block, container, false);
                 break;
         }
-        timeText = dynamicView.findViewById(R.id.time_picker);
+
+        if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+            power_grid = dynamicView_pad_2.findViewById(R.id.power_grid);
+            power_cost = dynamicView_pad_2.findViewById(R.id.power_cost);
+            power_pv = dynamicView_pad_2.findViewById(R.id.power_pv);
+            pv_in = dynamicView_pad_1.findViewById(R.id.pv_in);
+            pv_out = dynamicView_pad_1.findViewById(R.id.pv_out);
+            status = dynamicView_pad_2.findViewById(R.id.status);
+            pv_in_percent = dynamicView_pad_1.findViewById(R.id.pv_in_percent);
+            pv_out_percent = dynamicView_pad_1.findViewById(R.id.pv_out_percent);
+            pv_total = dynamicView_pad_1.findViewById(R.id.pv_total);
+            power_cost_percent = dynamicView_pad_2.findViewById(R.id.power_cost_percent);
+            c1 = dynamicView_pad_1.findViewById(R.id.percent_circle_pv);
+            imageView6 = dynamicView_pad_2.findViewById(R.id.anim_06);
+            imageView7 = dynamicView_pad_2.findViewById(R.id.anim_07);
+            imageView8 = dynamicView_pad_2.findViewById(R.id.anim_08);
+            imageView1 = dynamicView_pad_1.findViewById(R.id.anim_01);
+            imageView2 = dynamicView_pad_1.findViewById(R.id.anim_02);
+            timeText = dynamicView_pad_1.findViewById(R.id.time_picker);
+            mChart = dynamicView_pad_1.findViewById(R.id.lint_chart);
+            timeGroup = dynamicView_pad_1.findViewById(R.id.time_group);
+            power_theory = dynamicView_pad_1.findViewById(R.id.power_theory);
+            ele_total = dynamicView_pad_1.findViewById(R.id.ele_total);
+            benifit_total = dynamicView_pad_1.findViewById(R.id.benifit_total);
+            ele_cost = dynamicView_pad_1.findViewById(R.id.ele_cost);
+            cost_pv = dynamicView_pad_1.findViewById(R.id.cost_pv);
+            cost_grid = dynamicView_pad_1.findViewById(R.id.cost_grid);
+            cost_pv_percent = dynamicView_pad_1.findViewById(R.id.cost_pv_percent);
+            cost_grid_percent = dynamicView_pad_1.findViewById(R.id.cost_grid_percent);
+            c2 = dynamicView_pad_1.findViewById(R.id.circle_percent);
+            imageView3 = dynamicView_pad_1.findViewById(R.id.anim_03);
+            imageView4 = dynamicView_pad_1.findViewById(R.id.anim_04);
+        }else {
+            power_grid = dynamicView_phone.findViewById(R.id.power_grid);
+            power_cost = dynamicView_phone.findViewById(R.id.power_cost);
+            power_pv = dynamicView_phone.findViewById(R.id.power_pv);
+            pv_in = dynamicView_phone.findViewById(R.id.pv_in);
+            pv_out = dynamicView_phone.findViewById(R.id.pv_out);
+            status = dynamicView_phone.findViewById(R.id.status);
+            pv_in_percent = dynamicView_phone.findViewById(R.id.pv_in_percent);
+            pv_out_percent = dynamicView_phone.findViewById(R.id.pv_out_percent);
+            pv_total = dynamicView_phone.findViewById(R.id.pv_total);
+            power_cost_percent = dynamicView_phone.findViewById(R.id.power_cost_percent);
+            c1 = dynamicView_phone.findViewById(R.id.percent_circle_pv);
+            imageView6 = dynamicView_phone.findViewById(R.id.anim_06);
+            imageView7 = dynamicView_phone.findViewById(R.id.anim_07);
+            imageView8 = dynamicView_phone.findViewById(R.id.anim_08);
+            imageView1 = dynamicView_phone.findViewById(R.id.anim_01);
+            imageView2 = dynamicView_phone.findViewById(R.id.anim_02);
+            timeText = dynamicView_phone.findViewById(R.id.time_picker);
+            mChart = dynamicView_phone.findViewById(R.id.lint_chart);
+            timeGroup = dynamicView_phone.findViewById(R.id.time_group);
+            power_theory = dynamicView_phone.findViewById(R.id.power_theory);
+            ele_total = dynamicView_phone.findViewById(R.id.ele_total);
+            benifit_total = dynamicView_phone.findViewById(R.id.benifit_total);
+            ele_cost = dynamicView_phone.findViewById(R.id.ele_cost);
+            cost_pv = dynamicView_phone.findViewById(R.id.cost_pv);
+            cost_grid = dynamicView_phone.findViewById(R.id.cost_grid);
+            cost_pv_percent = dynamicView_phone.findViewById(R.id.cost_pv_percent);
+            cost_grid_percent = dynamicView_phone.findViewById(R.id.cost_grid_percent);
+            c2 = dynamicView_phone.findViewById(R.id.circle_percent);
+            imageView3 = dynamicView_phone.findViewById(R.id.anim_03);
+            imageView4 = dynamicView_phone.findViewById(R.id.anim_04);
+        }
+
         timeText.setOnClickListener(this);
-        mChart = dynamicView.findViewById(R.id.lint_chart);
-        RadioGroup timeGroup = dynamicView.findViewById(R.id.time_group);
         timeGroup.check(R.id.time_cur);
         if (time == null || time.equals("") || time.equals("null")) {
             time = new SimpleDateFormat("yyyy-MM-dd", getResources().getConfiguration().locale).format(new Date());
@@ -507,8 +614,16 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             }
         });
         InternetUtils.outputAndInputOfEle(LoginMsg.uniqueId, timeType, time.substring(0, 4) + time.substring(5, 7) + time.substring(8, 10));
-        container.removeViewAt(1);
-        container.addView(dynamicView, 1);
+
+        if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+            container_pad_1.removeViewAt(1);
+            container_pad_1.addView(dynamicView_pad_1, 1);
+            container_pad_2.removeViewAt(1);
+            container_pad_2.addView(dynamicView_pad_2, 1);
+        }else {
+            container.removeViewAt(1);
+            container.addView(dynamicView_phone, 1);
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -557,22 +672,6 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setInverterData(StorageSystemDataMsg msg) {
-        TextView power_grid = dynamicView.findViewById(R.id.power_grid);
-        TextView power_cost = dynamicView.findViewById(R.id.power_cost);
-        TextView power_pv = dynamicView.findViewById(R.id.power_pv);
-        TextView pv_in = dynamicView.findViewById(R.id.pv_in);
-        TextView pv_out = dynamicView.findViewById(R.id.pv_out);
-        TextView status = dynamicView.findViewById(R.id.status);
-        TextView pv_in_percent = dynamicView.findViewById(R.id.pv_in_percent);
-        TextView pv_out_percent = dynamicView.findViewById(R.id.pv_out_percent);
-        TextView pv_total = dynamicView.findViewById(R.id.pv_total);
-        TextView power_cost_percent = dynamicView.findViewById(R.id.power_cost_percent);
-        CircleProgressBar c = dynamicView.findViewById(R.id.percent_circle_pv);
-        ImageView imageView6 = dynamicView.findViewById(R.id.anim_06);
-        ImageView imageView7 = dynamicView.findViewById(R.id.anim_07);
-        ImageView imageView8 = dynamicView.findViewById(R.id.anim_08);
-        ImageView imageView1 = dynamicView.findViewById(R.id.anim_01);
-        ImageView imageView2 = dynamicView.findViewById(R.id.anim_02);
 
         Locale locale = getResources().getConfiguration().locale;
         String tempString;
@@ -599,7 +698,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         pv_in_percent.setText(tempString);
         tempString = String.valueOf(Math.round(d2 * 100 / total)) + "%";
         pv_out_percent.setText(tempString);
-        c.setProgress((int) (d2 * 100 / total));
+        c1.setProgress((int) (d2 * 100 / total));
 
         AnimationDrawable animation;
         if (parseDouble1 > 0) {
@@ -630,17 +729,6 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setInverterData(StatisticsDataMsg msg) {
-        TextView power_theory = dynamicView.findViewById(R.id.power_theory);
-        TextView ele_total = dynamicView.findViewById(R.id.ele_total);
-        TextView benifit_total = dynamicView.findViewById(R.id.benifit_total);
-        TextView ele_cost = dynamicView.findViewById(R.id.ele_cost);
-        TextView cost_pv = dynamicView.findViewById(R.id.cost_pv);
-        TextView cost_grid = dynamicView.findViewById(R.id.cost_grid);
-        TextView cost_pv_percent = dynamicView.findViewById(R.id.cost_pv_percent);
-        TextView cost_grid_percent = dynamicView.findViewById(R.id.cost_grid_percent);
-        CircleProgressBar c = dynamicView.findViewById(R.id.circle_percent);
-        ImageView imageView3 = dynamicView.findViewById(R.id.anim_03);
-        ImageView imageView4 = dynamicView.findViewById(R.id.anim_04);
 
         Locale locale = getResources().getConfiguration().locale;
         String tempString;
@@ -663,7 +751,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         cost_grid_percent.setText(tempString);
         tempString = String.valueOf(Math.round(d1 * 100 / d)) + "%";
         cost_pv_percent.setText(tempString);
-        c.setProgress((int) (d2 * 100));
+        c2.setProgress((int) (d2 * 100));
 
         if (d1 > 0) {
             imageView3.setImageResource(R.drawable.anim_05);

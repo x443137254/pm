@@ -73,7 +73,6 @@
                     android:layout_margin="10dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:drawableRight="@mipmap/drop"
                     android:gravity="center_vertical"
                     android:drawableEnd="@mipmap/drop" />
             </LinearLayout>

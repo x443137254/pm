@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal"
+    tools:ignore="ContentDescription">
+
+    <TextView
+        android:id="@+id/power_grid"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorText_04"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:layout_marginTop="50dp"
+        android:drawablePadding="10dp"
+        android:drawableTop="@mipmap/system_grid"/>
+
+    <ImageView
+        android:id="@+id/anim_06"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:src="@mipmap/float_right_"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/system_system"/>
+
+        <ImageView
+            android:id="@+id/anim_08"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:src="@mipmap/float_down_green_2"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/system_load"/>
+
+        <TextView
+            android:id="@+id/power_cost"
+            android:layout_width="wrap_content"
+            android:textColor="@color/colorText_04"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/anim_07"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:src="@mipmap/float_left_green_1"/>
+
+    <TextView
+        android:id="@+id/power_pv"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/colorText_04"
+        android:gravity="center"
+        android:drawablePadding="10dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/system_solor"/>
+</LinearLayout>

@@ -428,7 +428,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             return;
         }
         shapeText.setText(String.format(getResources().getConfiguration().locale,"%.1f",msg.ele_out_total));
-        ele_in.setText(String.valueOf(msg.ele_in));
+        ele_in.setText(String.valueOf((int) msg.ele_in));
         ele_out.setText(String.valueOf(msg.ele_out));
         ele_cost.setText(String.valueOf(msg.ele_cost));
         ele_earnings.setText(String.valueOf(msg.ele_earnings));
