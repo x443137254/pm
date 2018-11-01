@@ -13,12 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.activity.PriceConfDetailActivity;
+import com.growatt.energymanagement.msgs.ElePriceInfoMsg;
+import com.growatt.energymanagement.msgs.LoginMsg;
+import com.growatt.energymanagement.utils.InternetUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by Administrator on 2018/9/10.
+ *
  */
 
 public class PriceConfFragment extends Fragment {
@@ -28,6 +37,7 @@ public class PriceConfFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (LoginMsg.cid != 0) InternetUtils.elePriceInfo(LoginMsg.uniqueId);
         return inflater.inflate(R.layout.fragment_price_conf_pad,container,false);
     }
 
@@ -41,10 +51,18 @@ public class PriceConfFragment extends Fragment {
             }
         });
         confList = view.findViewById(R.id.price_conf_list);
-        addConfItem("平时电价","¥0.91/kWh","18:00-23:59","永久有效","是");
-        addConfItem("谷时电价","¥0.91/kWh","18:00-23:59","永久有效","是");
-        addConfItem("尖时电价","¥0.91/kWh","18:00-23:59","永久有效","是");
-        addConfItem("峰时电价","¥0.91/kWh","18:00-23:59","永久有效","是");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
     }
 
     private void addItem() {
@@ -56,7 +74,15 @@ public class PriceConfFragment extends Fragment {
         dialog.show();
     }
 
-    private void addConfItem(String title, String price, String startTime, String  validTime, String isValid) {
+    /**
+     * 添加电价配置条目
+     * @param title 电价名称
+     * @param price 单价
+     * @param time 起始时间
+     * @param validTime 有效时间
+     * @param isValid 是否有效
+     */
+    private void addConfItem(final int cid,final String title, final String price, final String time, final String  validTime, final String isValid) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.list_item_price_conf_pad,confList,false);
         TextView titleView = view.findViewById(R.id.title);
         TextView priceView = view.findViewById(R.id.price);
@@ -65,15 +91,39 @@ public class PriceConfFragment extends Fragment {
         TextView isValidView = view.findViewById(R.id.is_valid);
         titleView.setText(title);
         priceView.setText(price);
-        startTimeView.setText(startTime);
+        startTimeView.setText(time);
         validTimeView.setText(validTime);
         isValidView.setText(isValid);
         confList.addView(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), PriceConfDetailActivity.class));
+                Intent intent = new Intent(getContext(), PriceConfDetailActivity.class);
+                intent.putExtra("priceName",title);
+                intent.putExtra("price",price);
+                intent.putExtra("time",time);
+                intent.putExtra("effTime",validTime);
+                intent.putExtra("isEff",isValid);
+                intent.putExtra("cid",cid);
+                startActivity(intent);
             }
         });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void showList(ElePriceInfoMsg msg){
+        if (msg.code.equals("1")){
+            Toast.makeText(getContext(), msg.errMsg, Toast.LENGTH_SHORT).show();
+        }else {
+            confList.removeAllViews();
+            for (int i = 0; i < msg.elePriceList.size(); i++){
+                ElePriceInfoMsg.ElePrice elePrice = msg.elePriceList.get(i);
+                String validTime = "永久有效";
+                if (elePrice.effectiveTime != null && !elePrice.effectiveTime.equals("")) validTime = elePrice.effectiveTime;
+                String isValid = "是";
+                if (elePrice.status == 1) isValid = "否";
+                addConfItem(elePrice.cid,elePrice.name,String.valueOf(elePrice.price),elePrice.timeValue,validTime,isValid);
+            }
+        }
     }
 }

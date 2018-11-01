@@ -15,7 +15,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="14dp"
-        android:scaleType="fitStart"
+        android:scaleType="fitXY"
         android:src="@drawable/frame_past" />
 
     <TextView
@@ -33,7 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="25dp"
             android:layout_marginStart="25dp"
             android:src="@mipmap/icon_home4" />
 
@@ -41,7 +40,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -79,7 +77,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:orientation="vertical">

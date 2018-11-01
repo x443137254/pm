@@ -92,15 +92,14 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
     private TextView fromBms;
     private TextView fromBmsPercent;
     private ProgressBar percentProgress;
+    private DisplayMetrics dm;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (MainActivity.isPad) {
-            Resources resources = getResources();
-            DisplayMetrics dm = resources.getDisplayMetrics();
-            if (dm.widthPixels > dm.heightPixels) {
-                return inflater.inflate(R.layout.fragment_analyze_pad_h, container, false);
-            } else return inflater.inflate(R.layout.fragment_analyze_pad_v, container, false);
+        Resources resources = getResources();
+        dm = resources.getDisplayMetrics();
+        if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+            return inflater.inflate(R.layout.fragment_analyze_pad_h, container, false);
         } else return inflater.inflate(R.layout.fragment_analyze, container, false);
     }
 
@@ -238,15 +237,15 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                switch (timeType){
+                switch (timeType) {
                     case 1:
                         return null;
                     case 2:
-                        return (int)value + "日";
+                        return (int) value + "日";
                     case 3:
-                        return (int)value + "月";
+                        return (int) value + "月";
                     case 4:
-                        return (int)value + "年";
+                        return (int) value + "年";
                 }
                 return null;
             }
@@ -268,19 +267,19 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
 
         List<ILineDataSet> dataSets = new ArrayList<>();
 
-        if (line_1 != null && line_1.size() > 0){
+        if (line_1 != null && line_1.size() > 0) {
             LineDataSet dataSet_1 = new LineDataSet(line_1, "BMS电池功率");
             ChartUtil.lineSet(getContext(), dataSet_1, 0xFF00FF7C, LineDataSet.Mode.CUBIC_BEZIER, 0);
             dataSets.add(dataSet_1);
         }
 
-        if (line_2 != null && line_2.size() > 0){
+        if (line_2 != null && line_2.size() > 0) {
             LineDataSet dataSet_2 = new LineDataSet(line_2, "总功率");
             ChartUtil.lineSet(getContext(), dataSet_2, 0xFF288DFF, LineDataSet.Mode.CUBIC_BEZIER, 0);
             dataSets.add(dataSet_2);
         }
 
-        if (line_2 != null && line_2.size() > 0){
+        if (line_2 != null && line_2.size() > 0) {
             LineDataSet dataSet_3 = new LineDataSet(line_3, "电网功率");
             ChartUtil.lineSet(getContext(), dataSet_3, 0xFF805EFF, LineDataSet.Mode.CUBIC_BEZIER, 0);
             dataSets.add(dataSet_3);
@@ -370,7 +369,7 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         leftYAxis.setGridColor(0xff1B363F);
         leftYAxis.setAxisLineColor(getResources().getColor(R.color.colorText_01));
         leftYAxis.removeAllLimitLines();
-        LimitLine limitLine = new LimitLine(limit,"报警值");
+        LimitLine limitLine = new LimitLine(limit, "报警值");
         limitLine.setLineColor(0xFFFF5252);
         limitLine.setTextColor(Color.WHITE);
         leftYAxis.addLimitLine(limitLine);
@@ -581,7 +580,7 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void wdwe(AnalysisInfoMsg msg) {
         if (msg.code.equals("0")) {
-            showChart2(msg.bmsList,msg.allList,msg.gridList);
+            showChart2(msg.bmsList, msg.allList, msg.gridList);
 
             String s1 = msg.value_grid + "";
             String s2 = msg.value_bms + "";

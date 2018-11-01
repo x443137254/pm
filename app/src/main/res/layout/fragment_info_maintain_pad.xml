@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="1dp"
+    tools:ignore="ContentDescription"
     android:orientation="vertical">
 
     <TextView
@@ -27,7 +29,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
                 android:text="@string/install_info"
                 android:layout_marginBottom="10dp"
                 android:textColor="@color/colorText_04"
@@ -51,10 +52,10 @@
                     android:text="@string/station_name"/>
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/text_26"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
 
@@ -75,11 +76,11 @@
                     android:text="@string/install_date"/>
 
                 <TextView
+                    android:id="@+id/setDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="@string/text_17"
                     android:textColor="@color/colorWhite" />
 
                 <ImageView
@@ -87,7 +88,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/pick_date"
-                    android:layout_marginRight="30dp"
                     android:layout_marginEnd="30dp" />
             </LinearLayout>
 
@@ -109,10 +109,10 @@
                     android:text="@string/design_firm"/>
 
                 <TextView
+                    android:id="@+id/designCompany"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/text_27"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
 
@@ -134,10 +134,10 @@
                     android:text="@string/design_rate"/>
 
                 <TextView
+                    android:id="@+id/power"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/text_12"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
 
@@ -149,7 +149,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
                 android:text="@string/geographic_info"
                 android:layout_marginTop="18dp"
                 android:layout_marginBottom="10dp"
@@ -170,6 +169,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/station"
                     style="@style/TextStyle_24"
                     android:text="@string/nation"/>
 
@@ -184,7 +184,6 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
                     android:layout_marginEnd="30dp"
                     android:src="@mipmap/more" />
             </LinearLayout>
@@ -195,6 +194,7 @@
                 android:background="#007791" />
 
             <LinearLayout
+                android:id="@+id/city_item"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:gravity="center_vertical"
@@ -206,17 +206,16 @@
                     android:text="@string/city" />
 
                 <TextView
+                    android:id="@+id/city"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="@string/text_29"
                     android:textColor="@color/colorWhite" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
                     android:layout_marginEnd="30dp"
                     android:src="@mipmap/more" />
             </LinearLayout>
@@ -238,17 +237,16 @@
                     android:text="@string/time_zone" />
 
                 <TextView
+                    android:id="@+id/timeArea"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="@string/text_30"
                     android:textColor="@color/colorWhite" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
                     android:layout_marginEnd="30dp"
                     android:src="@mipmap/more" />
             </LinearLayout>
@@ -270,19 +268,18 @@
                     android:text="@string/longitude_and_latitude" />
 
                 <TextView
+                    android:id="@+id/Latitude"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:text="@string/text_01"
                     android:textColor="@color/colorWhite" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="30dp"
                     android:layout_marginEnd="30dp"
-                    android:src="@mipmap/more" />
+                    android:src="@mipmap/more"/>
             </LinearLayout>
 
             <View
@@ -297,7 +294,6 @@
                 android:text="@string/capital_gains"
                 android:textColor="@color/colorText_04"
                 android:layout_marginTop="18dp"
-                android:layout_marginLeft="30dp"
                 android:layout_marginStart="30dp" />
 
             <View
@@ -317,10 +313,10 @@
                     android:text="@string/subsidy_price"/>
 
                 <TextView
+                    android:id="@+id/subsidy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/text_31"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
 

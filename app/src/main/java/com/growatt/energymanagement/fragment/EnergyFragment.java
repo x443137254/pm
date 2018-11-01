@@ -78,16 +78,15 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
     private String time_2 = "";
     private String time_3 = "";
     private LinearLayout listContainer;
+    private DisplayMetrics dm;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        if (MainActivity.isPad) {
-            Resources resources = getResources();
-            DisplayMetrics dm = resources.getDisplayMetrics();
-            if (dm.widthPixels > dm.heightPixels) {
-                return inflater.inflate(R.layout.fragment_energy_pad_h, container, false);
-            } else return inflater.inflate(R.layout.fragment_energy_pad_v, container, false);
+        Resources resources = getResources();
+        dm = resources.getDisplayMetrics();
+        if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+            return inflater.inflate(R.layout.fragment_energy_pad_h, container, false);
         } else return inflater.inflate(R.layout.fragment_energy, container, false);
     }
 
@@ -183,49 +182,31 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-        if (MainActivity.isPad){
-            ((TabLayout)view.findViewById(R.id.consume_list_tabs)).addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
 
+        RadioGroup mTimeGroup3 = view.findViewById(R.id.time_group3);
+        mTimeGroup3.check(R.id.time3_month);
+        mTimeGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.time3_day:
+                        timeType_3 = 2;
+                        timePick03.setText(time_3);
+                        InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4) + time_3.substring(5, 7) + time_3.substring(8, 10));
+                        break;
+                    case R.id.time3_month:
+                        timeType_3 = 3;
+                        timePick03.setText(time_3.substring(0, 7));
+                        InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4) + time_3.substring(5, 7));
+                        break;
+                    case R.id.time3_year:
+                        timeType_3 = 4;
+                        timePick03.setText(time_3.substring(0, 4));
+                        InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4));
+                        break;
                 }
-
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-
-                }
-
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {
-
-                }
-            });
-        }else {
-            RadioGroup mTimeGroup3 = view.findViewById(R.id.time_group3);
-            mTimeGroup3.check(R.id.time3_month);
-            mTimeGroup3.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    switch (checkedId) {
-                        case R.id.time3_day:
-                            timeType_3 = 2;
-                            timePick03.setText(time_3);
-                            InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4) + time_3.substring(5, 7) + time_3.substring(8, 10));
-                            break;
-                        case R.id.time3_month:
-                            timeType_3 = 3;
-                            timePick03.setText(time_3.substring(0, 7));
-                            InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4) + time_3.substring(5, 7));
-                            break;
-                        case R.id.time3_year:
-                            timeType_3 = 4;
-                            timePick03.setText(time_3.substring(0, 4));
-                            InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4));
-                            break;
-                    }
-                }
-            });
-        }
+            }
+        });
         mCutRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -382,11 +363,12 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         title.setText(t);
         String s1 = n + "kWh";
         num.setText(s1);
-        int widthPixels;
-        if (MainActivity.isPad && getResources().getDisplayMetrics().widthPixels > getResources().getDisplayMetrics().heightPixels) {
-            widthPixels = getActivity().getResources().getDisplayMetrics().widthPixels / 3;
-        } else widthPixels = getActivity().getResources().getDisplayMetrics().widthPixels;
-        int width = (int) (widthPixels * n * 0.45f / total);
+        int width;
+        if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+            width = (int) (getActivity().getResources().getDisplayMetrics().widthPixels * n * 0.34f / total);
+        } else {
+            width = (int) (getActivity().getResources().getDisplayMetrics().widthPixels * n * 0.45f / total);
+        }
         progress.setWidth(width);
 //        view.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -416,12 +398,17 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         title.setText(s);
         String s1 = (int) data + "kWh";
         num.setText(s1);
-        int width = (int) (getActivity().getWindowManager().getDefaultDisplay().getWidth() * 0.6f * data / total);
+        int width;
+        if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+            width = (int) (getActivity().getWindowManager().getDefaultDisplay().getWidth() * 0.2f * data / total);
+        }else {
+            width = (int) (getActivity().getWindowManager().getDefaultDisplay().getWidth() * 0.6f * data / total);
+        }
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EnergyConsumeDetailActivity.class);
-                intent.putExtra("path",path);
+                intent.putExtra("path", path);
                 startActivity(intent);
             }
         });
@@ -535,10 +522,10 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
                 bean = msg.list.get(i);
                 eleTotal += bean.ele;
             }
-            addZoneConsumeItem("全部", eleTotal, eleTotal,msg.list.get(0).areaPath);
+            addZoneConsumeItem("全部", eleTotal, eleTotal, msg.list.get(0).areaPath);
             for (int i = 0; i < msg.list.size(); i++) {
                 bean = msg.list.get(i);
-                addZoneConsumeItem(bean.areaName, eleTotal, bean.ele,bean.areaPath);
+                addZoneConsumeItem(bean.areaName, eleTotal, bean.ele, bean.areaPath);
             }
         }
     }

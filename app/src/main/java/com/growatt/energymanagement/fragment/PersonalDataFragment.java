@@ -45,12 +45,19 @@ public class PersonalDataFragment extends Fragment implements View.OnClickListen
         view.findViewById(R.id.person_modify_phone).setOnClickListener(this);
         view.findViewById(R.id.person_modify_email).setOnClickListener(this);
         account = view.findViewById(R.id.user_name);
-        nick = view.findViewById(R.id.nick);
+        nick = view.findViewById(R.id.nick_name);
         role = view.findViewById(R.id.role_classify);
         company = view.findViewById(R.id.company);
         regDate = view.findViewById(R.id.reg_date);
         phone = view.findViewById(R.id.phone);
         email = view.findViewById(R.id.email);
+
+        account.setText(LoginMsg.account);
+        company.setText(LoginMsg.companyName);
+        regDate.setText(getDate(LoginMsg.registTime));
+        nick.setText(LoginMsg.nick);
+        phone.setText(LoginMsg.phone);
+        email.setText(LoginMsg.email);
     }
 
     @Override
@@ -59,7 +66,7 @@ public class PersonalDataFragment extends Fragment implements View.OnClickListen
         if (LoginMsg.cid != 0){
             account.setText(LoginMsg.account);
             company.setText(LoginMsg.companyName);
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",getResources().getConfiguration().locale);
             Date date = new Date(LoginMsg.registTime);
             String s = format.format(date);
             regDate.setText(s);
@@ -80,5 +87,11 @@ public class PersonalDataFragment extends Fragment implements View.OnClickListen
             case R.id.person_modify_email:
                 break;
         }
+    }
+
+    private String getDate(long time) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", getResources().getConfiguration().locale);
+        Date date = new Date(time);
+        return format.format(date);
     }
 }

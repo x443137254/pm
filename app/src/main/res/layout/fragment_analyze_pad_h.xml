@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="ContentDescription"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/bg_h_pad"
+    android:baselineAligned="false"
     android:orientation="horizontal"
-    android:baselineAligned="false">
+    tools:ignore="ContentDescription">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -18,11 +18,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/person_bg_pad"
-            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp">
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/person_bg_pad"
+            android:orientation="vertical">
 
 
             <TextView
@@ -43,15 +43,17 @@
 
 
                 <ImageView
+                    android:id="@+id/time_last"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
                     android:src="@mipmap/last" />
 
                 <TextView
-                    android:layout_width="90dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/time_picker_01"
+                    android:layout_width="105dp"
+                    android:layout_height="22dp"
                     android:layout_gravity="center"
-                    android:layout_margin="3dp"
                     android:background="@drawable/round_dark_blue_edg"
                     android:gravity="center"
                     android:padding="1dp"
@@ -59,9 +61,11 @@
                     android:textColor="@color/colorWhite" />
 
                 <ImageView
+                    android:id="@+id/time_next"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/next" />
+                    android:layout_margin="6dp"
+                    android:src="@mipmap/next_noclick" />
             </LinearLayout>
 
             <LinearLayout
@@ -76,85 +80,108 @@
                     android:layout_marginTop="5dp"
                     android:background="@color/color_bg_06" />
 
-                <android.support.design.widget.TabLayout
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:tabTextColor="@color/colorText_01"
-                    app:tabSelectedTextColor="@color/colorWhite">
+                    android:layout_height="38dp">
 
-                    <android.support.design.widget.TabItem
+                    <android.support.design.widget.TabLayout
+                        android:id="@+id/analyze_tab"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_48"/>
-
-                    <android.support.design.widget.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_49"/>
-
-                    <android.support.design.widget.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_50"/>
-
-                    <android.support.design.widget.TabItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_51"/>
-                </android.support.design.widget.TabLayout>
+                        android:layout_height="38dp"
+                        app:tabSelectedTextColor="@color/colorWhite"
+                        app:tabTextColor="@color/colorBlue" />
+                </HorizontalScrollView>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/color_bg_06" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/temp_ic_05" />
+                <RadioGroup
+                    android:id="@+id/quality_data_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radio_button_1"
+                        style="@style/RadioButtonStyle_05"
+                        android:text="@string/text_81" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_2"
+                        style="@style/RadioButtonStyle_05"
+                        android:text="@string/text_82" />
+
+                    <RadioButton
+                        android:id="@+id/radio_button_3"
+                        style="@style/RadioButtonStyle_05"
+                        android:text="@string/text_83" />
+                </RadioGroup>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/line_chart_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:divider="@drawable/divider"
+            android:showDividers="middle"
             android:background="@drawable/person_bg_pad"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:drawableEnd="@mipmap/more"
+                android:text="@string/warn_classify"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:drawableStart="@mipmap/warm"
-                    android:text="@string/warn_classify"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorWhite"
+                android:text="@string/warm_text_1"
+                android:layout_marginStart="25dp"
+                android:drawablePadding="10dp"
+                android:drawableStart="@mipmap/warm"
+                android:textSize="18sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_24"
-                    android:textColor="@color/colorText_05"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorWhite"
+                android:text="@string/warm_text_2"
+                android:layout_marginStart="25dp"
+                android:drawablePadding="10dp"
+                android:drawableStart="@mipmap/warm"
+                android:textSize="18sp"/>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/more" />
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/colorWhite"
+                android:text="@string/warm_text_3"
+                android:layout_marginStart="25dp"
+                android:drawablePadding="10dp"
+                android:drawableStart="@mipmap/warm"
+                android:textSize="18sp"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -164,50 +191,60 @@
         android:layout_weight="3"
         android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="295dp"
             android:layout_margin="16dp"
-            android:background="@drawable/person_bg_pad"
-            android:orientation="vertical">
+            android:background="@drawable/person_bg_pad">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginTop="22dp"
                 android:text="@string/ene_con_data"
-                android:layout_margin="10dp"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:src="@mipmap/statistics_total" />
+                    android:src="@mipmap/icon_home4" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_13"
-                        android:textColor="@color/colorWhite" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/ele_total"
+                            style="@style/TextStyle_21"
+                            android:text="@string/text_0" />
+
+                        <TextView
+                            style="@style/TextStyle_22"
+                            android:text="@string/text_39" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -215,29 +252,43 @@
                         android:text="@string/total_save_ele"
                         android:textColor="@color/colorText_01" />
                 </LinearLayout>
+            </LinearLayout>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="340dp"
+                android:layout_marginTop="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:src="@mipmap/statistics_earn" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
                     android:orientation="vertical">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_31"
-                        android:textColor="@color/colorWhite" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/TextStyle_22"
+                            android:text="@string/text_63" />
+
+                        <TextView
+                            android:id="@+id/fee_total"
+                            style="@style/TextStyle_21"
+                            android:text="@string/text_0" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -245,129 +296,176 @@
                         android:text="@string/total_save_fee"
                         android:textColor="@color/colorText_01" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"/>
             </LinearLayout>
 
             <View
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/color_bg_06" />
+                android:layout_marginTop="112dp"
+                android:background="@color/divider"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
                 android:text="@string/compare"
                 android:textColor="@color/colorText_01"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/text_06"
-                android:layout_margin="10dp"
-                android:textColor="@color/colorWhite"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/divider" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:divider="@drawable/divider"
-                android:gravity="center"
-                android:layout_marginBottom="15dp"
+                android:layout_marginTop="44dp"
                 android:orientation="horizontal"
-                android:showDividers="middle">
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/divider">
 
-                <GridLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <TextView
+                    android:id="@+id/compare"
+                    style="@style/TextStyle_21"
+                    android:text="@string/text_0" />
+
+                <TextView
+                    style="@style/TextStyle_22"
+                    android:text="@string/text_39" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="33dp"
+                android:layout_marginTop="98dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/divider">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:columnCount="2">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ele_con_month"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/colorText_01" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_23"
-                        android:textColor="@color/colorWhite" />
+                        android:id="@+id/ele_curr"
+                        style="@style/TextStyle_21"
+                        android:text="@string/text_0" />
+
+                    <TextView
+                        style="@style/TextStyle_22"
+                        android:text="@string/text_39" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:text="@string/ele_con_last_month"
                         android:textColor="@color/colorText_01" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_13"
-                        android:textColor="@color/colorWhite" />
-                </GridLayout>
+                        android:id="@+id/ele_last"
+                        style="@style/TextStyle_21"
+                        android:text="@string/text_0" />
 
-                <com.growatt.energymanagement.view.CircleProgressBar
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    app:roundColor="#0443AF"
-                    app:roundProgressColor="#5E93FF"
-                    app:roundWidth="6dp"
-                    android:layout_gravity="center" />
+                    <TextView
+                        style="@style/TextStyle_22"
+                        android:text="@string/text_39" />
+                </LinearLayout>
+            </LinearLayout>
 
-                <GridLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+            <com.growatt.energymanagement.view.CircleProgressBar
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:layout_constraintTop_toTopOf="@id/divider"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="75dp"
+                app:roundColor="#0443AF"
+                app:roundProgressColor="#5E93FF"
+                app:roundWidth="6dp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="356dp"
+                android:layout_marginTop="98dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/divider">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:columnCount="2">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ele_fee_month"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/colorText_01" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_31"
-                        android:textColor="@color/colorWhite" />
+                        style="@style/TextStyle_22"
+                        android:text="@string/text_63" />
+
+                    <TextView
+                        android:id="@+id/fee_curr"
+                        style="@style/TextStyle_21"
+                        android:text="@string/text_0" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:text="@string/ele_fee_last_month"
                         android:textColor="@color/colorText_01" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/text_31"
-                        android:textColor="@color/colorWhite" />
-                </GridLayout>
+                        style="@style/TextStyle_22"
+                        android:text="@string/text_63" />
+
+                    <TextView
+                        android:id="@+id/fee_last"
+                        style="@style/TextStyle_21"
+                        android:text="@string/text_0" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/person_bg_pad"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -384,45 +482,37 @@
                 android:orientation="horizontal">
 
                 <RadioGroup
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/time_group"
+                    android:layout_width="180dp"
+                    android:layout_height="22dp"
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:background="@drawable/round_dark_blue_edg"
+                    android:divider="@drawable/radio_divider"
                     android:orientation="horizontal"
-                    android:padding="1dp">
+                    android:padding="1dp"
+                    android:showDividers="middle">
 
                     <RadioButton
+                        android:id="@+id/time_cur"
                         style="@style/RadioButtonStyle_01"
                         android:background="@drawable/radio_day_selector"
                         android:text="@string/now" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorText_03" />
-
                     <RadioButton
+                        android:id="@+id/time_day"
                         style="@style/RadioButtonStyle_01"
                         android:background="@drawable/radio_month_selector"
                         android:text="@string/day" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorText_03" />
-
                     <RadioButton
+                        android:id="@+id/time_month"
                         style="@style/RadioButtonStyle_01"
                         android:background="@drawable/radio_month_selector"
                         android:text="@string/month" />
 
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorText_03" />
-
                     <RadioButton
+                        android:id="@+id/time_year"
                         style="@style/RadioButtonStyle_01"
                         android:background="@drawable/radio_year_selector"
                         android:text="@string/year" />
@@ -435,11 +525,11 @@
 
                 <TextView
                     android:id="@+id/time_pick"
-                    android:layout_width="90dp"
-                    android:layout_height="20dp"
+                    android:layout_width="105dp"
+                    android:layout_height="22dp"
                     android:layout_gravity="center"
-                    android:layout_margin="3dp"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/round_dark_blue_edg"
                     android:gravity="center"
                     android:padding="1dp"
@@ -447,10 +537,10 @@
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
 
-            <ImageView
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart_2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/temp_ic"/>
+                android:layout_height="170dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -460,6 +550,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/from_bms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_13"
@@ -471,6 +562,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/from_grid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_26"
@@ -478,6 +570,7 @@
             </LinearLayout>
 
             <ProgressBar
+                android:id="@+id/progress_percent"
                 style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="12dp"
@@ -494,6 +587,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/from_bms_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_52"
@@ -505,6 +599,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/from_grid_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_53"

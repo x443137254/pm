@@ -440,4 +440,7 @@
     <string name="modify_success">修改成功</string>
     <string name="clare_cache_success">清除缓存成功</string>
     <string name="clare_cache_fail">清除缓存失败</string>
+    <string name="warm_text_1">逆变器告警</string>
+    <string name="warm_text_2">设备掉线告警</string>
+    <string name="warm_text_3">用电告警</string>
 </resources>

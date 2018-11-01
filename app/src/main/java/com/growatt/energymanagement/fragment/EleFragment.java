@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
@@ -516,7 +517,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             power_pv = dynamicView_pad_2.findViewById(R.id.power_pv);
             pv_in = dynamicView_pad_1.findViewById(R.id.pv_in);
             pv_out = dynamicView_pad_1.findViewById(R.id.pv_out);
-            status = dynamicView_pad_2.findViewById(R.id.status);
+            status = mRootView.findViewById(R.id.status);
             pv_in_percent = dynamicView_pad_1.findViewById(R.id.pv_in_percent);
             pv_out_percent = dynamicView_pad_1.findViewById(R.id.pv_out_percent);
             pv_total = dynamicView_pad_1.findViewById(R.id.pv_total);
@@ -619,6 +620,8 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             container_pad_1.removeViewAt(1);
             container_pad_1.addView(dynamicView_pad_1, 1);
             container_pad_2.removeViewAt(1);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+            dynamicView_pad_2.setLayoutParams(params);
             container_pad_2.addView(dynamicView_pad_2, 1);
         }else {
             container.removeViewAt(1);
