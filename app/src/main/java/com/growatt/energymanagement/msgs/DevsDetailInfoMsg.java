@@ -4,8 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by Administrator on 2018/10/24.
- *
+ * Created by Administrator on 2018/10/24
  */
 
 public class DevsDetailInfoMsg {

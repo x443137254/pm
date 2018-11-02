@@ -78,7 +78,7 @@ public class MsgFragment extends Fragment {
             case 1:
                 ListView listView = new ListView(getContext());
                 listView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                listView.setAdapter(new WarmListAdapter(getContext()));
+//                listView.setAdapter(new WarmListAdapter(getContext()));
                 msgDetail.removeAllViews();
                 msgDetail.addView(listView);
                 break;

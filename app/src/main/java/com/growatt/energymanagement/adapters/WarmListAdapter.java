@@ -12,23 +12,37 @@ import android.widget.TextView;
 import com.growatt.energymanagement.activity.MainActivity;
 import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.activity.WarmDetailActivity;
+import com.growatt.energymanagement.msgs.NoticeListMsg;
 import com.growatt.energymanagement.msgs.NoticeMsg;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 告警列表数据适配器
  */
 public class WarmListAdapter extends BaseAdapter {
-    private Context mContext;
 
-    public WarmListAdapter(Context mContext) {
-        this.mContext = mContext;
+    private Context mContext;
+    private List<NoticeListMsg.NoticeListBean> list;
+
+    public WarmListAdapter(Context context, List<NoticeListMsg.NoticeListBean> list) {
+        this.mContext = context;
+        this.list = list;
+    }
+
+    public void setList(List<NoticeListMsg.NoticeListBean> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return 2;
+        if (list == null) return 0;
+        return list.size();
     }
 
     @Override
@@ -43,33 +57,52 @@ public class WarmListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.list_item_warm,parent,false);
-        ImageView ic = view.findViewById(R.id.warm_item_ic);
-        TextView time = view.findViewById(R.id.warm_item_time);
-        TextView title = view.findViewById(R.id.warm_item_title);
-        TextView sn = view.findViewById(R.id.warm_item_sn);
-        TextView num = view.findViewById(R.id.warm_item_num);
-        if (position == 0) {
-            ic.setImageResource(R.mipmap.notice_02);
-            time.setText("02:31");
-            title.setText("逆变器");
-            sn.setText("机器编号：AD5697");
-            num.setText("故障码：123");
-        }else {
-            ic.setImageResource(R.mipmap.notice_02);
-            time.setText("2018年7月28日02:31");
-            title.setText("逆变器");
-            sn.setText("机器编号：AD5697");
-            num.setText("故障码：123");
-        }
-        view.setOnClickListener(new View.OnClickListener() {
+        NoticeListHolder holder;
+        if (convertView == null){
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.list_item_warm, parent, false);
+            holder = new NoticeListHolder();
+            holder.ic = convertView.findViewById(R.id.warm_item_ic);
+            holder.time = convertView.findViewById(R.id.warm_item_time);
+            holder.title = convertView.findViewById(R.id.warm_item_title);
+            holder.sn = convertView.findViewById(R.id.warm_item_sn);
+            holder.num = convertView.findViewById(R.id.warm_item_num);
+            convertView.setTag(holder);
+        }else holder = (NoticeListHolder) convertView.getTag();
+
+        final NoticeListMsg.NoticeListBean bean = list.get(position);
+        holder.ic.setImageResource(R.mipmap.notice_02);
+        holder.time.setText(new SimpleDateFormat("yyyy年MM月dd日 HH:mm"
+                ,mContext.getResources().getConfiguration().locale)
+                .format(new Date(bean.time)));
+        holder.title.setText(changeName(bean.type));
+        holder.sn.setText(bean.sn);
+        holder.num.setText(String.valueOf(bean.event));
+
+        convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.isPad){
+                if (MainActivity.isPad) {
                     EventBus.getDefault().post(new NoticeMsg(-1));
-                }else mContext.startActivity(new Intent(mContext, WarmDetailActivity.class));
+                } else {
+                    Intent intent = new Intent(mContext, WarmDetailActivity.class);
+                    intent.putExtra("cid",bean.id);
+                    intent.putExtra("devType",bean.type);
+                    mContext.startActivity(intent);
+                }
             }
         });
-        return view;
+        return convertView;
+    }
+
+    public class NoticeListHolder {
+        public ImageView ic;
+        public TextView time;
+        public TextView title;
+        public TextView sn;
+        public TextView num;
+    }
+    private String changeName(String s){
+        if (s.equals("ammeter")) return "电表";
+        else return "逆变器";
     }
 }

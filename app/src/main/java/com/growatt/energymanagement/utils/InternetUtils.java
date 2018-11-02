@@ -29,6 +29,8 @@ import com.growatt.energymanagement.msgs.GetDevWarningNumMsg;
 import com.growatt.energymanagement.msgs.GreenBenifitMsg;
 import com.growatt.energymanagement.msgs.HomeMsg;
 import com.growatt.energymanagement.msgs.LoginMsg;
+import com.growatt.energymanagement.msgs.NoticeInfoMsg;
+import com.growatt.energymanagement.msgs.NoticeListMsg;
 import com.growatt.energymanagement.msgs.NotificationMsg;
 import com.growatt.energymanagement.msgs.OutputAndInputOfEleMsg;
 import com.growatt.energymanagement.msgs.PowerStationMsg;
@@ -151,7 +153,8 @@ public class InternetUtils {
      * @param addr 地址
      * @param installerCode 安装商编码
      */
-    public static void regist(String password, String phone, String country, String language,  String company, String addr, String installerCode) {
+    public static void regist(String password, String phone, String country, String language
+            , String company, String addr, String installerCode) {
         final String url = host + "regist";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1033,7 +1036,7 @@ public class InternetUtils {
      * @param timeType 日/月/年
      * @param time     时间
      */
-    public static void eleCost(String uniqueId, final int timeType, final String time) {
+    public static void eleCost(String uniqueId, final int timeType, final String time, String path) {
         if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "eleCost";
         final JSONObject jsonObject = new JSONObject();
@@ -1041,6 +1044,7 @@ public class InternetUtils {
             jsonObject.put("uniqueId", uniqueId);
             jsonObject.put("timeType", timeType);
             jsonObject.put("time", time);
+            jsonObject.put("path", path);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1048,7 +1052,7 @@ public class InternetUtils {
             @Override
             public void run() {
                 String s = InternetUtils.access(url, jsonObject.toString());
-                EventBus.getDefault().post(new EleCostMsg(s, timeType, time));
+                EventBus.getDefault().post(new EleCostMsg(s));
             }
         }).start();
     }
@@ -1152,6 +1156,16 @@ public class InternetUtils {
         }).start();
     }
 
+    /**
+     * 根据区域id和时间（日月年）获取区域详细耗电量信息
+     * @param uniqueId 用户ID
+     * @param timeType 时间类型(2\3\4)
+     * @param time 时间值格式
+    timeType:2/3/4
+    time:日/月/年
+    time:20181010/201810/2018
+     * @param path 区域路径
+     */
     public static void areaEleInfo(String uniqueId, final int timeType, final String time,String path) {
         if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "areaEleInfo";
@@ -1203,6 +1217,54 @@ public class InternetUtils {
             public void run() {
                 String s = InternetUtils.access(url, jsonObject.toString());
                 EventBus.getDefault().post(new ForgetPwdMsg(s));
+            }
+        }).start();
+    }
+
+    /**
+     * 根据告警类型获取对应告警列表
+     * @param uniqueId 用户ID
+     * @param type 0、1、2、3 对应 全部、发电设备告警、掉线告警、用电告警
+     */
+    public static void noticeList(String uniqueId,int type) {
+        final String url = host + "noticeList";
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("uniqueId", uniqueId);
+            jsonObject.put("type", type);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = InternetUtils.access(url, jsonObject.toString());
+                EventBus.getDefault().post(new NoticeListMsg(s));
+            }
+        }).start();
+    }
+
+    /**
+     * 根据通知id获取详情数据
+     * @param noticeType 消息类型(report、warning)
+     * @param cid 消息id
+     * @param devType 设备类型(ameter、inverter)
+     */
+    public static void noticeInfo(String noticeType,int cid,String devType) {
+        final String url = host + "noticeInfo";
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("noticeType", noticeType);
+            jsonObject.put("cid", cid);
+            jsonObject.put("devType", devType);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = InternetUtils.access(url, jsonObject.toString());
+                EventBus.getDefault().post(new NoticeInfoMsg(s));
             }
         }).start();
     }

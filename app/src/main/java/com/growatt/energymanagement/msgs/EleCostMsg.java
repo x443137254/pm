@@ -12,8 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/10/24.
- *
+ * Created by Administrator on 2018/10/24
  */
 
 public class EleCostMsg {
@@ -21,12 +20,8 @@ public class EleCostMsg {
     public String code;
     public String errMsg;
     public List<Entry> list;
-    private int timeType;
-    private String time;
 
-    public EleCostMsg(String s, int timeType, String time) {
-        this.time = time;
-        this.timeType = timeType;
+    public EleCostMsg(String s) {
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(s);

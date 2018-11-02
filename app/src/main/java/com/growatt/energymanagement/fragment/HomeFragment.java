@@ -42,6 +42,7 @@ import com.growatt.energymanagement.msgs.EnergyTendencyMsg;
 import com.growatt.energymanagement.msgs.GreenBenifitMsg;
 import com.growatt.energymanagement.msgs.HomeMsg;
 import com.growatt.energymanagement.msgs.LoginMsg;
+import com.growatt.energymanagement.msgs.NoticeListMsg;
 import com.growatt.energymanagement.msgs.NotificationMsg;
 import com.growatt.energymanagement.msgs.PopMsg;
 import com.growatt.energymanagement.msgs.WeatherMsg;
@@ -109,6 +110,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ImageView floatRight;
     private TextView warnNum;
 
+    private List<NoticeListMsg.NoticeListBean> noticelist;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -132,6 +135,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         InternetUtils.notice(LoginMsg.uniqueId,1,"warning","");
         InternetUtils.greenBenifit(LoginMsg.uniqueId);
         InternetUtils.home(LoginMsg.uniqueId);
+        InternetUtils.noticeList(LoginMsg.uniqueId,0);
         if (MainActivity.isPad) return;
         if (LoginMsg.cid != 0 && LoginMsg.hasMsg) {
             newsPoint.setVisibility(View.VISIBLE);
@@ -343,7 +347,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     if (manager != null)
                         manager.beginTransaction().replace(R.id.fl, fragment).commit();
                 } else {
-                    startActivity(new Intent(getActivity(), NoticeActivity.class));
+                    Intent intent = new Intent(getActivity(), NoticeActivity.class);
+                    if (noticelist != null && noticelist.size() > 0){
+                        NoticeListMsg.NoticeListBean bean = noticelist.get(0);
+                        intent.putExtra("devType", bean.type);
+                        intent.putExtra("time", bean.time);
+                        long t = bean.time;
+                        for (int i = 1; i < noticelist.size(); i++) {
+                            bean = noticelist.get(i);
+                            if (t < bean.time) {
+                                t = bean.time;
+                                intent.putExtra("devType", bean.type);
+                                intent.putExtra("time", bean.time);
+                            }
+                        }
+                    }
+                    startActivity(intent);
                     if (newsPoint.getVisibility() == View.VISIBLE) {
                         LoginMsg.hasMsg = false;
                         newsPoint.setVisibility(View.INVISIBLE);
@@ -354,7 +373,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 TimePickerView pvTime = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd",getResources().getConfiguration().locale);
                         time = format.format(date);
                         if (timeType == 2) {
                             tv_trend.setText(time);
@@ -384,11 +403,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void showWarnNum(NotificationMsg msg) {
+//        if (msg.warnList != null){
+//            String s = String.valueOf(msg.warnList.size());
+//            warnNum.setText(s);
+//        }
+//    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void showWarnNum(NotificationMsg msg) {
-        if (msg.warnList != null){
-            String s = String.valueOf(msg.warnList.size());
-            warnNum.setText(s);
+    public void showWarnNum(NoticeListMsg msg) {
+        if (msg.code.equals("0")){
+            if (msg.list == null)  warnNum.setText("0");
+            else {
+                warnNum.setText(String.valueOf(msg.list.size()));
+                noticelist = msg.list;
+            }
         }
     }
 
@@ -463,4 +493,5 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             floatRight.setImageResource(R.mipmap.float_power_00);
         }
     }
+
 }

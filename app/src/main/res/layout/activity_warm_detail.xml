@@ -51,11 +51,11 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/sn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:layout_margin="10dp"
-            android:text="@string/text_45"/>
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -77,11 +77,11 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:layout_margin="10dp"
-            android:text="@string/inverter"/>
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -103,11 +103,11 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/fault_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:layout_margin="10dp"
-            android:text="@string/text_25"/>
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -129,11 +129,11 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/fault_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:layout_margin="10dp"
-            android:text="@string/text_25"/>
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -155,11 +155,11 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:layout_margin="10dp"
-            android:text="@string/text_36"/>
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
     <View
@@ -174,7 +174,6 @@
         android:text="@string/detail_des"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="3dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp" />
 
     <View
@@ -183,10 +182,10 @@
         android:background="@color/color_bg_03"/>
     
     <TextView
+        android:id="@+id/detail"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/color_bg_05"
-        android:text="@string/text_46"
         android:textColor="@color/colorWhite"
         android:padding="10dp"/>
 
@@ -197,7 +196,6 @@
         android:text="@string/advice"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="3dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"/>
 
     <View
@@ -206,10 +204,10 @@
         android:background="@color/color_bg_03"/>
 
     <TextView
+        android:id="@+id/suggest"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/color_bg_05"
-        android:text="@string/text_46"
         android:textColor="@color/colorWhite"
         android:padding="10dp"/>
 

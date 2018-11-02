@@ -443,4 +443,6 @@
     <string name="warm_text_1">逆变器告警</string>
     <string name="warm_text_2">设备掉线告警</string>
     <string name="warm_text_3">用电告警</string>
+    <string name="warm_msg">告警消息</string>
+    <string name="consume_report">耗电报表</string>
 </resources>

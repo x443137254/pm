@@ -1,5 +1,6 @@
 package com.growatt.energymanagement.fragment;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.activity.MainActivity;
+import com.growatt.energymanagement.activity.WarnListActivity;
 import com.growatt.energymanagement.msgs.AmmetersMsg;
 import com.growatt.energymanagement.msgs.AnalysisDataMsg;
 import com.growatt.energymanagement.msgs.AnalysisInfoMsg;
@@ -129,6 +131,10 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         fromBms = view.findViewById(R.id.from_bms);
         fromBmsPercent = view.findViewById(R.id.from_bms_percent);
         percentProgress = view.findViewById(R.id.progress_percent);
+
+        view.findViewById(R.id.warn_type_1).setOnClickListener(this);
+        view.findViewById(R.id.warn_type_2).setOnClickListener(this);
+        view.findViewById(R.id.warn_type_3).setOnClickListener(this);
 
         tabs.addOnTabSelectedListener(this);
         timeAdd.setOnClickListener(this);
@@ -404,7 +410,22 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
             case R.id.time_next:
                 plusDate();
                 break;
+            case R.id.warn_type_1:
+                jumpToWarnList(1);
+                break;
+            case R.id.warn_type_2:
+                jumpToWarnList(2);
+                break;
+            case R.id.warn_type_3:
+                jumpToWarnList(3);
+                break;
         }
+    }
+
+    private void jumpToWarnList(int i) {
+        Intent intent = new Intent(getContext(), WarnListActivity.class);
+        intent.putExtra("type",i);
+        startActivity(intent);
     }
 
     private void plusDate() {

@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@mipmap/bg"
+    tools:ignore="ContentDescription"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -14,6 +17,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="10dp"
+            android:layout_centerVertical="true"
             android:scaleType="center"
             android:src="@mipmap/back" />
 
@@ -22,14 +26,127 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/notice"
+            android:layout_margin="10dp"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/titleSize" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/notice_list"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="8dp"
-        android:divider="#00000000"/>
+        android:layout_height="75dp"
+        android:background="@color/color_bg_05">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/report_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="24dp"
+            android:src="@mipmap/notice_01"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="@string/consume_report"
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="17dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/report_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText_04"
+            android:textSize="13sp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="47dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/report_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textSize="15sp"
+            android:textColor="@color/colorWhite"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/warn_item"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/color_bg_05">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/warn_ic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="24dp"
+            android:src="@mipmap/notice_02"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:text="@string/warm_msg"
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="17dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/warn_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorText_04"
+            android:textSize="13sp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="47dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/warn_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:textSize="15sp"
+            android:textColor="@color/colorWhite"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 </LinearLayout>

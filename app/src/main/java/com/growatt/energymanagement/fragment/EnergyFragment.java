@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,9 +42,11 @@ import com.growatt.energymanagement.activity.DeviceClassifyActivity;
 import com.growatt.energymanagement.activity.EnergyConsumeDetailActivity;
 import com.growatt.energymanagement.msgs.AreaDevsStateMsg;
 import com.growatt.energymanagement.msgs.AreaEleRankMsg;
+import com.growatt.energymanagement.msgs.AreaInfoMsg;
 import com.growatt.energymanagement.msgs.DevRunningStateMsg;
 import com.growatt.energymanagement.msgs.DevTypeEleCostMsg;
 import com.growatt.energymanagement.msgs.EleCostMsg;
+import com.growatt.energymanagement.msgs.InvertersMsg;
 import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.utils.ChartUtil;
 import com.growatt.energymanagement.utils.InternetUtils;
@@ -80,6 +83,10 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
     private LinearLayout listContainer;
     private DisplayMetrics dm;
 
+    private TextView areaSelector2;
+    private List<AreaInfoMsg.AreaInfo> areaInfoList;
+    private String path = "";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -93,11 +100,12 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        InternetUtils.areaInfo(LoginMsg.uniqueId);
         RadioGroup mCutRadioGroup = view.findViewById(R.id.cut_group);
         RadioGroup mTimeGroup1 = view.findViewById(R.id.ele_trend_radio_group);
         RadioGroup mTimeGroup2 = view.findViewById(R.id.time_group);
 
+        areaSelector2 = view.findViewById(R.id.area_selector_2);
         mZoneConsumeList = view.findViewById(R.id.zone_consume_list);
         mConsumeOrderList = view.findViewById(R.id.consume_order_contain);
         chart_1 = view.findViewById(R.id.line_chart_1);
@@ -124,7 +132,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         setTextEnable(false);
         timePick02.setText(time_2.substring(0, 7));
         timePick03.setText(time_3.substring(0, 7));
-        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10));
+        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10),path);
         InternetUtils.areaEleRank(LoginMsg.uniqueId, timeType_2, time_2.substring(0, 4) + time_2.substring(5, 7));
         InternetUtils.devTypeEleCost(LoginMsg.uniqueId, timeType_3, time_3.substring(0, 4) + time_3.substring(5, 7));
 
@@ -136,25 +144,25 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
                         timeType_1 = 1;
                         timePick01.setText(time_1);
                         setTextEnable(false);
-                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10));
+                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10),path);
                         break;
                     case R.id.ele_trend_radio_day:
                         timeType_1 = 2;
                         timePick01.setText(time_1);
                         setTextEnable(true);
-                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10));
+                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10),path);
                         break;
                     case R.id.ele_trend_radio_mon:
                         timeType_1 = 3;
                         timePick01.setText(time_1.substring(0, 7));
                         setTextEnable(true);
-                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7));
+                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7),path);
                         break;
                     case R.id.ele_trend_radio_year:
                         timeType_1 = 4;
                         timePick01.setText(time_1.substring(0, 4));
                         setTextEnable(true);
-                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4));
+                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4),path);
                         break;
                 }
             }
@@ -220,6 +228,8 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         timePick01.setOnClickListener(this);
         timePick02.setOnClickListener(this);
         timePick03.setOnClickListener(this);
+
+        areaSelector2.setOnClickListener(this);
 
         listContainer = view.findViewById(R.id.list_container);
     }
@@ -401,7 +411,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         int width;
         if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
             width = (int) (getActivity().getWindowManager().getDefaultDisplay().getWidth() * 0.2f * data / total);
-        }else {
+        } else {
             width = (int) (getActivity().getWindowManager().getDefaultDisplay().getWidth() * 0.6f * data / total);
         }
         view.setOnClickListener(new View.OnClickListener() {
@@ -448,7 +458,65 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
             case R.id.time_picker_03:
                 pickTime(timePick03);
                 break;
+            case R.id.area_selector_2:
+                dropMenu();
+                break;
         }
+    }
+
+    private void dropMenu() {
+        if (areaInfoList == null || areaInfoList.size() <= 0) return;
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        int size;
+        layout.setLayoutParams(new ViewGroup.LayoutParams(areaSelector2.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT));
+        size = areaInfoList.size();
+        final PopupWindow popupWindow = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TextView textView;
+        for (int i = 0; i < size; i++) {
+            textView = new TextView(getContext());
+            textView.setPadding(10, 2, 10, 2);
+            textView.setTextColor(0xFFFFFFFF);
+            textView.setBackgroundColor(0xff022632);
+            textView.setTextSize(15);
+            layout.addView(textView);
+            final AreaInfoMsg.AreaInfo info = areaInfoList.get(i);
+            textView.setText(info.name);
+            path = info.path;
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popupWindow.dismiss();
+                    areaSelector2.setText(info.name);
+                    switch (timeType_1) {
+                        case 1:
+                            InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1
+                                    ,time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10)
+                                    ,path);
+                            break;
+                        case 2:
+                            InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1
+                                    ,time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10)
+                                    ,path);
+                            break;
+                        case 3:
+                            InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1
+                                    ,time_1.substring(0, 4) + time_1.substring(5, 7)
+                                    ,path);
+                            break;
+                        case 4:
+                            InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1
+                                    ,time_1.substring(0, 4)
+                                    ,path);
+                            break;
+                    }
+                }
+            });
+        }
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.showAsDropDown(areaSelector2);
     }
 
     private void pickTime(final TextView textView) {
@@ -460,13 +528,13 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
                     time_1 = format.format(date);
                     if (timeType_1 == 2) {
                         textView.setText(time_1);
-                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10));
+                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10),path);
                     } else if (timeType_1 == 3) {
                         textView.setText(time_1.substring(0, 7));
-                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7));
+                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7),path);
                     } else {
                         textView.setText(time_1.substring(0, 4));
-                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4));
+                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4),path);
                     }
                 } else if (textView == timePick02) {
                     time_2 = format.format(date);
@@ -615,6 +683,15 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getContext(), msg.errMsg, Toast.LENGTH_SHORT).show();
         } else {
             showChart1(msg.list);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void d1s(AreaInfoMsg msg) {
+        if (msg.code.equals("0")) {
+            areaInfoList = msg.list;
+        } else {
+            Toast.makeText(getContext(), msg.errMsg, Toast.LENGTH_SHORT).show();
         }
     }
 }
