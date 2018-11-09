@@ -15,7 +15,7 @@
         android:paddingTop="10dp">
 
         <include layout="@layout/pad_card_warn"
-            android:id="@+id/warn_bar"/>
+            android:id="@+id/iv_notice"/>
 
         <include layout="@layout/pad_card_overview_circle" />
 

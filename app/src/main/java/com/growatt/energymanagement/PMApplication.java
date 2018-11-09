@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
+import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.service.CheckUpdateService;
 import com.growatt.energymanagement.utils.InternetUtils;
 import com.umeng.commonsdk.UMConfigure;
@@ -43,9 +44,8 @@ public class PMApplication extends Application {
      */
     private void readCacheInfo() {
         SharedPreferences sp = getSharedPreferences("userInfo", MODE_PRIVATE);
-        String account = sp.getString("account", "");
-        if (account.equals("")) return;
-        String password = sp.getString("password", "");
-        InternetUtils.login(account, password);
+        String uniqueId = sp.getString("uniqueId", "");
+        if (uniqueId.equals("")) return;
+        LoginMsg.uniqueId = uniqueId;
     }
 }

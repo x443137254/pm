@@ -2,6 +2,7 @@ package com.growatt.energymanagement.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
@@ -44,6 +45,8 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
     private EditText popAccount;
     private EditText popPwd;
     private String pwd;
+    private EditText accountEditText;
+    private EditText pwdEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,17 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
         findViewById(R.id.login_wechat).setOnClickListener(this);
         findViewById(R.id.login).setOnClickListener(this);
         findViewById(R.id.forget_pwd).setOnClickListener(this);
+        accountEditText = findViewById(R.id.account);
+        pwdEditText = findViewById(R.id.pwd);
+    }
+
+    private void readCache() {
+        SharedPreferences sp = getSharedPreferences("userInfo", MODE_PRIVATE);
+        String account = sp.getString("account", "");
+        if (account.equals("")) return;
+        String password = sp.getString("password", "");
+        accountEditText.setText(account);
+        pwdEditText.setText(password);
     }
 
     /**
@@ -119,14 +133,12 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
             case R.id.login:
-                EditText editText = findViewById(R.id.account);
-                String account = editText.getText().toString();
+                String account = accountEditText.getText().toString();
                 if (account.equals("") || account.equals("null")) {
                     Toast.makeText(this, getResources().getString(R.string.account_empty), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                editText = findViewById(R.id.pwd);
-                pwd = editText.getText().toString();
+                pwd = pwdEditText.getText().toString();
                 if (pwd.equals("") || pwd.equals("null")) {
                     Toast.makeText(this, getResources().getString(R.string.reg_pwd_empty), Toast.LENGTH_SHORT).show();
                     return;
@@ -256,5 +268,11 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
         } else {
             InternetUtils.login(msg.username,msg.pwd);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        readCache();
     }
 }

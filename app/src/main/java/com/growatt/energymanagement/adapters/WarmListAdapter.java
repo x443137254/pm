@@ -14,6 +14,7 @@ import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.activity.WarmDetailActivity;
 import com.growatt.energymanagement.msgs.NoticeListMsg;
 import com.growatt.energymanagement.msgs.NoticeMsg;
+import com.growatt.energymanagement.utils.InternetUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -82,7 +83,7 @@ public class WarmListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (MainActivity.isPad) {
-                    EventBus.getDefault().post(new NoticeMsg(-1));
+                    InternetUtils.noticeInfo("warning",bean.id,bean.type);
                 } else {
                     Intent intent = new Intent(mContext, WarmDetailActivity.class);
                     intent.putExtra("cid",bean.id);

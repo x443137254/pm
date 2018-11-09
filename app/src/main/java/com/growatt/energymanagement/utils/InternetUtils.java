@@ -12,6 +12,7 @@ import com.growatt.energymanagement.msgs.AreaEleRankMsg;
 import com.growatt.energymanagement.msgs.AreaInfoMsg;
 import com.growatt.energymanagement.msgs.BindingMsg;
 import com.growatt.energymanagement.msgs.CountryDataMsg;
+import com.growatt.energymanagement.msgs.DevDetailInfoMsg;
 import com.growatt.energymanagement.msgs.DevRunningStateMsg;
 import com.growatt.energymanagement.msgs.DevTypeEleCostMsg;
 import com.growatt.energymanagement.msgs.DevsDetailInfoMsg;
@@ -37,6 +38,7 @@ import com.growatt.energymanagement.msgs.PowerStationMsg;
 import com.growatt.energymanagement.msgs.QualityDataMsg;
 import com.growatt.energymanagement.msgs.RegistMsg;
 import com.growatt.energymanagement.msgs.InvertersMsg;
+import com.growatt.energymanagement.msgs.SettingMsg;
 import com.growatt.energymanagement.msgs.StatisticsDataMsg;
 import com.growatt.energymanagement.msgs.StorageSystemDataMsg;
 import com.growatt.energymanagement.msgs.ThirdLoginMsg;
@@ -54,6 +56,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -69,7 +72,11 @@ import okhttp3.ResponseBody;
 
 public class InternetUtils {
     private static final String host = "http://chat.growatt.com/eic_web/energy/";
-    private static OkHttpClient client = new OkHttpClient();
+    private static OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(30,TimeUnit.SECONDS)
+            .writeTimeout(30,TimeUnit.SECONDS)
+            .build();
     private static MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
 
     private static String access(String url, String params) {
@@ -989,7 +996,7 @@ public class InternetUtils {
      */
     public static void devsDetailInfo(String uniqueId, String devType) {
         if (uniqueId == null || uniqueId.length() <= 0) return;
-        final String url = host + "devRunningState";
+        final String url = host + "devsDetailInfo";
         final JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("uniqueId", uniqueId);
@@ -1265,6 +1272,55 @@ public class InternetUtils {
             public void run() {
                 String s = InternetUtils.access(url, jsonObject.toString());
                 EventBus.getDefault().post(new NoticeInfoMsg(s));
+            }
+        }).start();
+    }
+
+    /**
+     * 根据设备id和时间获取能耗详细数据
+     * @param devId 设备id(序列号)
+     * @param devType 设备类型
+     */
+    public static void devDetailInfo(String devId,String devType) {
+        final String url = host + "devDetailInfo";
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("devId", devId);
+            jsonObject.put("devType", devType);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = InternetUtils.access(url, jsonObject.toString());
+                EventBus.getDefault().post(new DevDetailInfoMsg(s));
+            }
+        }).start();
+    }
+
+    /**
+     * 修改单个设备各参数信息
+     * @param devId 设备编号
+     * @param devType kt(空调)、wkq(温控器)、cz(插座)
+     * @param onoff 开1 关0
+     */
+    public static void setting(String devId,String devType,int onoff) {
+        final String url = host + "setting";
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("devType", devType);
+            JSONObject settings = new JSONObject();
+            settings.put("devId", devId);
+            settings.put("onoff", onoff);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = InternetUtils.access(url, jsonObject.toString());
+                EventBus.getDefault().post(new SettingMsg(s));
             }
         }).start();
     }

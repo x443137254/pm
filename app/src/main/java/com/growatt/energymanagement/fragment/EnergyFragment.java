@@ -100,6 +100,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.add_device).setOnClickListener(this);
         InternetUtils.areaInfo(LoginMsg.uniqueId);
         RadioGroup mCutRadioGroup = view.findViewById(R.id.cut_group);
         RadioGroup mTimeGroup1 = view.findViewById(R.id.ele_trend_radio_group);

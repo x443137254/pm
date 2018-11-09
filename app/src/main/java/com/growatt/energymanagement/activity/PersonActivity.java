@@ -1,15 +1,21 @@
 package com.growatt.energymanagement.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.utils.CommentUtils;
+import com.growatt.energymanagement.utils.InternetUtils;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,12 +55,11 @@ public class PersonActivity extends BasicActivity implements View.OnClickListene
         regTime = findViewById(R.id.reg_time);
         phone = findViewById(R.id.phone);
         email = findViewById(R.id.email);
-        account.setText(LoginMsg.account);
-        company.setText(LoginMsg.companyName);
-        regTime.setText(getDate(LoginMsg.registTime));
-        nick.setText(LoginMsg.nick);
-        phone.setText(LoginMsg.phone);
-        email.setText(LoginMsg.email);
+
+        SharedPreferences sp = getSharedPreferences("userInfo", MODE_PRIVATE);
+        String uniqueId = sp.getString("uniqueId", "");
+        if (uniqueId.equals("")) return;
+        InternetUtils.login(sp.getString("account",""),sp.getString("password",""));
     }
 
 
@@ -110,6 +115,20 @@ public class PersonActivity extends BasicActivity implements View.OnClickListene
             case MODIFY_COMPANY:
                 company.setText(s);
                 break;
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void loginInfo(LoginMsg msg) {
+        if (msg.code.equals("1")) {
+            Toast.makeText(this, msg.errMsg, Toast.LENGTH_SHORT).show();
+        } else {
+            account.setText(LoginMsg.account);
+            company.setText(LoginMsg.companyName);
+            regTime.setText(getDate(LoginMsg.registTime));
+            nick.setText(LoginMsg.nick);
+            phone.setText(LoginMsg.phone);
+            email.setText(LoginMsg.email);
         }
     }
 }

@@ -45,7 +45,8 @@ public class NoticeActivity extends BasicActivity {
     }
 
     private String changeName(String s){
+        if (s == null) return "";
         if (s.equals("ammeter")) return "电表";
-        else return "逆变器告警";
+        return "逆变器告警";
     }
 }

@@ -45,9 +45,18 @@ public class AnalysisInfoMsg {
             value_all = data.optInt("value_all");
             value_grid = data.optInt("value_grid");
             value_bms = data.optInt("value_bms");
-            JSONArray ele_grid = data.optJSONArray("ele_grid");
-            JSONArray ele_bms = data.optJSONArray("ele_bms");
-            JSONArray ele_all = data.optJSONArray("ele_all");
+            JSONArray ele_grid;
+            JSONArray ele_bms;
+            JSONArray ele_all;
+            if (timeType == 1){
+                ele_grid = data.optJSONArray("power_grid");
+                ele_bms = data.optJSONArray("power_bms");
+                ele_all = data.optJSONArray("power_all");
+            }else {
+                ele_grid = data.optJSONArray("ele_grid");
+                ele_bms = data.optJSONArray("ele_bms");
+                ele_all = data.optJSONArray("ele_all");
+            }
             if (ele_grid != null){
                 gridList = parseArray(ele_grid);
             }

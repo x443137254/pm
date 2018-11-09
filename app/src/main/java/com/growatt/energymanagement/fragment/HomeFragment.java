@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -159,7 +160,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         c3 = view.findViewById(R.id.load_power_circle);
         if (!MainActivity.isPad) view.findViewById(R.id.iv_person).setOnClickListener(this);
         view.findViewById(R.id.iv_notice).setOnClickListener(this);
-        view.findViewById(R.id.warn_bar).setOnClickListener(this);
+        if (!MainActivity.isPad) view.findViewById(R.id.warn_bar).setOnClickListener(this);
         tv_trend = view.findViewById(R.id.trend_time);
         tv_trend.setOnClickListener(this);
         mChart = view.findViewById(R.id.cc_home);
@@ -344,8 +345,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     MsgFragment fragment = new MsgFragment();
                     fragment.setBackData(HomeFragment.this);
                     FragmentManager manager = getFragmentManager();
-                    if (manager != null)
-                        manager.beginTransaction().replace(R.id.fl, fragment).commit();
+                    if (manager != null) {
+                        FragmentTransaction transaction = manager.beginTransaction();
+                        Bundle bundle = new Bundle();
+                        if (noticelist != null && noticelist.size() > 0){
+                            NoticeListMsg.NoticeListBean bean = noticelist.get(0);
+                            bundle.putString("devType", bean.type);
+                            bundle.putLong("time", bean.time);
+                            long t = bean.time;
+                            for (int i = 1; i < noticelist.size(); i++) {
+                                bean = noticelist.get(i);
+                                if (t < bean.time) {
+                                    t = bean.time;
+                                    bundle.putString("devType", bean.type);
+                                    bundle.putLong("time", bean.time);
+                                }
+                            }
+                        }
+                        fragment.setArguments(bundle);
+                        transaction.replace(R.id.fl, fragment).commit();
+                    }
                 } else {
                     Intent intent = new Intent(getActivity(), NoticeActivity.class);
                     if (noticelist != null && noticelist.size() > 0){

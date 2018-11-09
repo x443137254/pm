@@ -128,13 +128,13 @@ public class DeviceDetailActivity extends BasicActivity implements View.OnClickL
         ((TextView)findViewById(R.id.ele_total)).setText(intent.getStringExtra("ele_total"));
         String areaName = intent.getStringExtra("areaName");
         ((TextView)findViewById(R.id.area_name)).setText(areaName);
-        String devName = intent.getStringExtra("devName");
-        ((TextView)findViewById(R.id.device_name)).setText(devName);
+        String sn = intent.getStringExtra("sn");
+        ((TextView)findViewById(R.id.device_name)).setText(sn);
         String installTime = intent.getStringExtra("installTime");
         if (installTime != null && !installTime.equals("null")){
             ((TextView)findViewById(R.id.install_time)).setText(installTime);
         }
-        String s = areaName + devName;
+        String s = areaName + intent.getStringExtra("devName");
         ((TextView)findViewById(R.id.title)).setText(s);
         ImageView imageView = findViewById(R.id.status_circle);
         TextView textView = findViewById(R.id.running_status);

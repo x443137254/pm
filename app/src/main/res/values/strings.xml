@@ -27,9 +27,9 @@
     <string name="text_04">18:00–23:59</string>
     <string name="text_05">20台</string>
     <string name="text_06">300kWh</string>
-    <string name="text_07">全部20</string>
-    <string name="text_08">运行中18</string>
-    <string name="text_09">待机2</string>
+    <string name="text_07">全部0</string>
+    <string name="text_08">运行中0</string>
+    <string name="text_09">待机0</string>
     <string name="text_10">故障0</string>
     <string name="text_11">A栋大楼逆变器</string>
     <string name="text_12">50000W</string>
@@ -43,7 +43,7 @@
     <string name="text_20">210V</string>
     <string name="text_21">26°</string>
     <string name="text_22">A栋</string>
-    <string name="text_23">累计耗电：9722kWh</string>
+    <string name="text_23">累计耗电：0kWh</string>
     <string name="text_24">7</string>
     <string name="text_25">30</string>
     <string name="text_26">石岩10KW</string>
@@ -104,7 +104,7 @@
     <string name="all">全部</string>
     <string name="back">返回</string>
     <string name="reg">注册</string>
-    <string name="login">登陆</string>
+    <string name="login">登录</string>
     <string name="over_view">总览</string>
     <string name="ele_gen">发电</string>
     <string name="energy_consume">能耗</string>
@@ -397,6 +397,8 @@
     <string name="text_82">三相电压不平衡度</string>
     <string name="text_83">功率因数</string>
     <string name="text_84">MWh</string>
+    <string name="text_85">A</string>
+    <string name="text_86">V</string>
     <string name="reg_success">注册成功</string>
     <string name="reg_fail">注册失败</string>
     <string name="reg_account_exist">用户名已存在，请重新输入</string>
@@ -415,7 +417,7 @@
     <string name="send_tips">验证码已发送</string>
     <string name="get_code_again">重新获取</string>
     <string name="code_error">验证码错误</string>
-    <string name="login_success">登陆成功</string>
+    <string name="login_success">登录成功</string>
     <string name="logout_tip">账户未登录</string>
     <string name="h">时</string>
     <string name="m">分</string>
@@ -445,4 +447,5 @@
     <string name="warm_text_3">用电告警</string>
     <string name="warm_msg">告警消息</string>
     <string name="consume_report">耗电报表</string>
+    <string name="consume_cate">消耗分类</string>
 </resources>

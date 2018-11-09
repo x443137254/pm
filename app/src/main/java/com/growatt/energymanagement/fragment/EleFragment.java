@@ -278,6 +278,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
                     intent.putExtra("ele_total", device.ele_total);
                     intent.putExtra("status", device.status);
                     intent.putExtra("devId", device.devId);
+                    intent.putExtra("sn", device.datalog_sn);
                     activity.startActivity(intent);
                 }
             }
@@ -429,7 +430,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
-                Toast.makeText(getContext(), content, Toast.LENGTH_SHORT).show();
+                deviceSn.setText(content);
             }
         }
     }
@@ -450,7 +451,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             if (msg.list != null) {
                 for (int i = 0; i < msg.list.size(); i++) {
                     GenerateElectricitysMsg.Device device = msg.list.get(i);
-                    addDevice(device.areaName + device.devName,
+                    addDevice(device.areaName + device.devName + "(" + device.datalog_sn + ")",
                             device.status,
                             "功率：" + device.power + "w",
                             "当日发电：" + device.ele_day + "kWh", device);

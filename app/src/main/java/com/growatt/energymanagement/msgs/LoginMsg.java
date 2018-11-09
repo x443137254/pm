@@ -51,14 +51,14 @@ public class LoginMsg {
     }
 
     public static void cleanUserInfo(){
-        account = "";
+//        account = "";
         nick = "";
         companyId = "";
         phone = "";
         email = "";
         uniqueId = "";
         companyName = "";
-        password = "";
+//        password = "";
         hasMsg = false;
         cid = 0;
         registTime = 0;

@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="480dp"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="ContentDescription"
+    android:divider="@drawable/divider"
+    android:showDividers="middle"
     android:background="@drawable/pad_dialog_bg"
     android:orientation="vertical">
 
@@ -10,6 +15,7 @@
         android:layout_height="70dp">
 
         <Button
+            android:id="@+id/cancel"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
@@ -18,37 +24,59 @@
             android:text="@string/cancel"
             android:textColor="#058ef0" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/add_price"
-            android:textColor="@color/colorWhite"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
         <Button
-            android:id="@+id/modify_confirm"
+            android:id="@+id/confirm"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_margin="15dp"
             android:layout_centerVertical="true"
             android:background="@drawable/blue_bt_shape"
             android:text="@string/confirm_"
             android:textColor="@color/colorWhite"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/add_price"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
-    <View
+
+    <LinearLayout
+        android:id="@+id/price_cate_bar"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#07455A"/>
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextStyle_25"
+            android:text="@string/price_classify"/>
+
+        <TextView
+            android:id="@+id/price_cate"
+            style="@style/TextStyle_26"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/more"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="15dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -56,24 +84,22 @@
             android:text="@string/price_name" />
 
         <EditText
+            android:id="@+id/price_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@null"
+            android:maxLines="1"
             android:textSize="15sp"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorText_04"
             android:hint="@string/input_price_name"/>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#07455A"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -81,11 +107,14 @@
             android:text="@string/price"/>
 
         <EditText
+            android:id="@+id/price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:background="@null"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
             android:textSize="15sp"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorText_04"
@@ -97,45 +126,47 @@
             android:textColor="@color/colorText_04"
             android:text="@string/text_03"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dp"
             android:layout_marginEnd="15dp"/>
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#07455A"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
             style="@style/TextStyle_25"
-            android:text="@string/start_time"/>
+            android:text="@string/time"/>
+
+        <android.support.v7.widget.GridLayout
+            android:id="@+id/time_array"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:columnCount="2"/>
 
         <TextView
-            style="@style/TextStyle_26"
-            android:text="@string/text_04"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/more"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_marginEnd="15dp"/>
+            android:id="@+id/add_time"
+            android:layout_width="48dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:text="@string/add_time"
+            android:background="@drawable/text_bg_04"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/colorWhite"
+            android:layout_marginEnd="10dp" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#07455A"/>
-
     <LinearLayout
+        android:id="@+id/eff_bar"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -143,6 +174,7 @@
             android:text="@string/valid_time"/>
 
         <TextView
+            android:id="@+id/eff_text"
             style="@style/TextStyle_26"
             android:text="@string/forever"/>
 
@@ -151,18 +183,14 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/more"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dp"
             android:layout_marginEnd="15dp"/>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#07455A"/>
-
     <LinearLayout
+        android:id="@+id/is_eff_bar"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -170,6 +198,7 @@
             android:text="@string/take_effect"/>
 
         <TextView
+            android:id="@+id/is_eff_text"
             style="@style/TextStyle_26"
             android:text="@string/yes"/>
 
@@ -178,7 +207,6 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/more"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dp"
             android:layout_marginEnd="15dp" />
     </LinearLayout>
 </LinearLayout>

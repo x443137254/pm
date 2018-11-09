@@ -4,18 +4,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Created by Administrator on 2018/9/20.
- *
+ * Created by Administrator on 2018/11/7
  */
 
-public class GreenBenifitMsg {
-    public String errMsg;
-    public String code;
-    public String tce;
-    public String plants;
-    public String co2;
+public class SettingMsg {
 
-    public GreenBenifitMsg(String s) {
+    public String code;
+    public String errMsg;
+
+    public SettingMsg(String s) {
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(s);
@@ -24,13 +21,10 @@ public class GreenBenifitMsg {
         }
         if (jsonObject == null) return;
         code = jsonObject.optString("code");
-        if (code.equals("1")) {
+        if (code.equals("1")){
             errMsg = jsonObject.optString("data");
-        } else {
-            JSONObject data = jsonObject.optJSONObject("data");
-            tce = data.optString("TCE");
-            plants = data.optString("plants");
-            co2 = data.optString("CO2");
+        }else {
+
         }
     }
 }

@@ -13,7 +13,7 @@ import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.adapters.DeviceClaLisAdapter;
 
 /**
- * Created by Administrator on 2018/9/11.
+ * Created by Administrator on 2018/9/11
  */
 
 public class DeviceManageFragment extends Fragment {
@@ -34,7 +34,7 @@ public class DeviceManageFragment extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.fl, energyFragment).commit();
             }
         });
-        ((ListView)view.findViewById(R.id.device_classify_list)).setAdapter(new DeviceClaLisAdapter(getContext()));
+        ((ListView)view.findViewById(R.id.device_classify_list)).setAdapter(new DeviceClaLisAdapter(getContext(),null,""));
     }
 
     public void setBack(EnergyFragment energyFragment){
