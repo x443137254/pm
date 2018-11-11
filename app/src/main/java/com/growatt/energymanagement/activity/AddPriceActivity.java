@@ -11,10 +11,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +51,7 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
     private String second = "";
     private static int n = 0;
     private GridLayout timeArray;
+    private AlertDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,7 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.add_price_back:
                 finish();
                 break;
@@ -90,7 +93,8 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
                     if (i == timeArray.getChildCount() - 1) continue;
                     builder.append(",");
                 }
-                InternetUtils.addElePrice(LoginMsg.uniqueId,priceName,builder.toString(),Double.parseDouble(price),effTime,isEff);
+                showProgressDialog();
+                InternetUtils.addElePrice(LoginMsg.uniqueId, priceName, builder.toString(), Double.parseDouble(price), effTime, isEff);
                 break;
             case R.id.price_classify_item:
                 List<String> data = new ArrayList<>();
@@ -98,7 +102,7 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
                 data.add("平时");
                 data.add("峰时");
                 data.add("尖时");
-                CommentUtils.showPickView(this,data,priceClassify,"电价类型");
+                CommentUtils.showPickView(this, data, priceClassify, "电价类型");
                 break;
             case R.id.add_time:
                 startActivityForResult(new Intent(this, EditTimeActivity.class), 700);
@@ -110,7 +114,7 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
                 List<String> data1 = new ArrayList<>(2);
                 data1.add(getResources().getString(R.string.yes));
                 data1.add(getResources().getString(R.string.no));
-                CommentUtils.showPickView(this,data1,isEffective,"是否生效");
+                CommentUtils.showPickView(this, data1, isEffective, "是否生效");
                 break;
             case R.id.pop_cancel:
                 pop.dismiss();
@@ -133,9 +137,14 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void dsd(AddElePriceMsg msg){
-        Toast.makeText(this, msg.msg, Toast.LENGTH_SHORT).show();
-        finish();
+    public void dsd(AddElePriceMsg msg) {
+        dissMissProgressDialog();
+        if (msg.code.equals("1")) {
+            Toast.makeText(this, msg.msg, Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     /**
@@ -411,6 +420,7 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
         textView.setGravity(Gravity.CENTER_VERTICAL);
         textView.setPadding(40, 0, 0, 0);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -450,6 +460,25 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
             if (textView == null) return;
             String s = data.getStringExtra("time");
             textView.setText(s);
+        }
+    }
+
+    private void showProgressDialog(){
+        ProgressBar progressBar = new ProgressBar(this);
+        progressBar.setIndeterminate(true);
+        mProgressDialog = new AlertDialog.Builder(this)
+                .setView(progressBar)
+                .create();
+        Window window = mProgressDialog.getWindow();
+        if (window != null){
+            window.setBackgroundDrawableResource(android.R.color.transparent);
+        }
+        mProgressDialog.show();
+    }
+
+    private void dissMissProgressDialog(){
+        if (mProgressDialog != null){
+            mProgressDialog.dismiss();
         }
     }
 }

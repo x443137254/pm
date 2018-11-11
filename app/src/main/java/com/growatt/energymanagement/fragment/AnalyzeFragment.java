@@ -245,7 +245,7 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
             public String getFormattedValue(float value, AxisBase axis) {
                 switch (timeType) {
                     case 1:
-                        return null;
+                        return (int) value + "时";
                     case 2:
                         return (int) value + "日";
                     case 3:

@@ -168,10 +168,11 @@ public class CommentUtils {
 
     /**
      * 提取字符串中的数字
-     * @param s
+     * @param s .
      * @return 返回数字
      */
     public static String getNumFromString(String s) {
+        if (s == null) return "";
         String regEx = "[^0-9]";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(s);

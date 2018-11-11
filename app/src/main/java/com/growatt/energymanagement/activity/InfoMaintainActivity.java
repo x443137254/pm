@@ -251,8 +251,8 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
                 break;
             case MODIFY_SUBSIDY:
                 try {
-                    double d = Double.parseDouble(s);
-                    s = "￥" + String.format(getResources().getConfiguration().locale, "%2f", d);
+                    float d = Float.parseFloat(s);
+                    s = "￥" + String.format(getResources().getConfiguration().locale,"%.2f", d);
                     subsidy.setText(s);
                 } catch (Exception e) {
                     Toast.makeText(this, getResources().getString(R.string.input_not_legal), Toast.LENGTH_SHORT).show();

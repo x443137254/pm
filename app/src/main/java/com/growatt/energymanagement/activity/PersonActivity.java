@@ -97,9 +97,9 @@ public class PersonActivity extends BasicActivity implements View.OnClickListene
                 intent1.putExtra("key", "company");
                 startActivityForResult(intent1, MODIFY_COMPANY);
                 break;
-//            case R.id.modify_email:
-//                startActivityForResult(new Intent(this,ModifyActivity.class),MODIFY_EMAIL);
-//                break;
+            case R.id.modify_email:
+                startActivityForResult(new Intent(this,ModifyActivity.class),MODIFY_EMAIL);
+                break;
         }
     }
 
@@ -111,9 +111,15 @@ public class PersonActivity extends BasicActivity implements View.OnClickListene
         switch (requestCode) {
             case MODIFY_NICK:
                 nick.setText(s);
+                InternetUtils.updateUser("nick",s);
                 break;
             case MODIFY_COMPANY:
                 company.setText(s);
+                InternetUtils.updateUser("companyName",s);
+                break;
+            case MODIFY_EMAIL:
+                email.setText(s);
+                InternetUtils.updateUser("email",s);
                 break;
         }
     }
