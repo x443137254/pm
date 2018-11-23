@@ -76,19 +76,23 @@ public class AnalysisInfoMsg {
         for (int i = 0; i < array.length(); i++) {
             jsonObject = array.optJSONObject(i);
             entry = new Entry();
-            entry.setY((float) jsonObject.optDouble("ele"));
+
             switch (timeType){
                 case 1:
-                    entry.setX(Integer.parseInt(CommentUtils.getNumFromString(jsonObject.optString("ctime"))));
+                    entry.setX(Integer.parseInt(CommentUtils.getNumFromString(jsonObject.optString("ctime"))) % 100);
+                    entry.setY((float) jsonObject.optDouble("power"));
                     break;
                 case 2:
                     entry.setX(Integer.parseInt(jsonObject.optString("ctime").substring(8)));
+                    entry.setY((float) jsonObject.optDouble("ele"));
                     break;
                 case 3:
                     entry.setX(Integer.parseInt(jsonObject.optString("ctime").substring(5)));
+                    entry.setY((float) jsonObject.optDouble("ele"));
                     break;
                 case 4:
                     entry.setX(jsonObject.optInt("ctime"));
+                    entry.setY((float) jsonObject.optDouble("ele"));
                     break;
             }
             list.add(entry);

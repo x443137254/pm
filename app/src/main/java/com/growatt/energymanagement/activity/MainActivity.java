@@ -124,7 +124,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
             findViewById(R.id.user_item).setOnClickListener(this);
             findViewById(R.id.info_item).setOnClickListener(this);
             findViewById(R.id.conf_item).setOnClickListener(this);
-            findViewById(R.id.setting).setOnClickListener(this);
+            findViewById(R.id.setting_bar).setOnClickListener(this);
         }
         if (isPad) {
             setBackground();
@@ -133,7 +133,34 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
         account = findViewById(R.id.draw_account);
         company = findViewById(R.id.draw_company);
         drawer = findViewById(R.id.drawer);
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+                if (LoginMsg.uniqueId == null || LoginMsg.uniqueId.equals("")) {
+                    account.setText(getResources().getString(R.string.click_login));
+                    company.setText("");
+                } else {
+                    account.setText(LoginMsg.account);
+                    company.setText(LoginMsg.companyName);
+                }
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
         InternetUtils.allArea();
     }
 
@@ -189,13 +216,14 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void showPop(PopMsg msg) {
         drawer.openDrawer(Gravity.START);
-        if (LoginMsg.cid == 0) {
+        if (LoginMsg.uniqueId == null || LoginMsg.uniqueId.equals("")) {
             account.setText(getResources().getString(R.string.click_login));
             company.setText("");
         } else {
             account.setText(LoginMsg.account);
             company.setText(LoginMsg.companyName);
         }
+
     }
 
     @Override
@@ -228,7 +256,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
                 }
                 drawer.closeDrawer(Gravity.START);
                 break;
-            case R.id.setting:
+            case R.id.setting_bar:
                 startActivity(new Intent(this, SettingActivity.class));
                 drawer.closeDrawer(Gravity.START);
                 break;

@@ -36,6 +36,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.growatt.energymanagement.R;
+import com.growatt.energymanagement.activity.DeviceClassifyActivity;
 import com.growatt.energymanagement.activity.MainActivity;
 import com.growatt.energymanagement.activity.NoticeActivity;
 import com.growatt.energymanagement.activity.WarnListActivity;
@@ -202,6 +203,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         });
 
         setAnimation();
+
+        view.findViewById(R.id.inverter_item).setOnClickListener(this);
+        view.findViewById(R.id.ammeter_item).setOnClickListener(this);
+        view.findViewById(R.id.airCondition_item).setOnClickListener(this);
+        view.findViewById(R.id.socket_item).setOnClickListener(this);
     }
 
     private void showChart(int id) {
@@ -418,6 +424,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.warn_bar:
                 startActivity(new Intent(getContext(), WarnListActivity.class));
+                break;
+            case R.id.inverter_item:
+                Intent intent1 = new Intent(getContext(), DeviceClassifyActivity.class);
+                intent1.putExtra("devType","inverter");
+                startActivity(intent1);
+                break;
+            case R.id.ammeter_item:
+                Intent intent2 = new Intent(getContext(), DeviceClassifyActivity.class);
+                intent2.putExtra("devType","ammeter");
+                startActivity(intent2);
+                break;
+            case R.id.airCondition_item:
+                Intent intent3 = new Intent(getContext(), DeviceClassifyActivity.class);
+                intent3.putExtra("devType","airCondition");
+                startActivity(intent3);
+                break;
+            case R.id.socket_item:
+                Intent intent4 = new Intent(getContext(), DeviceClassifyActivity.class);
+                intent4.putExtra("devType","socket");
+                startActivity(intent4);
                 break;
         }
     }

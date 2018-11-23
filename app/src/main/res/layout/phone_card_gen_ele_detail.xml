@@ -33,10 +33,11 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.growatt.energymanagement.view.CircleCake
+        android:id="@+id/percent_cake"
         android:layout_width="80dp"
         android:layout_height="80dp"
         app:maxPercent="100"
-        app:percent="25"
+        app:percent="0"
         app:restColor="#1975f2"
         app:percentColor="#0fffc4"
         android:layout_marginTop="57dp"
@@ -49,7 +50,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="67dp"
-        android:layout_marginLeft="120dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="120dp" >
@@ -61,22 +61,22 @@
             android:background="@drawable/circle5" />
 
         <TextView
-            android:layout_width="68dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorText_04"
             android:text="@string/online_ele"
             android:layout_gravity="center_vertical"
             android:textSize="15sp"
-            android:layout_marginLeft="11dp"
             android:layout_marginStart="11dp" />
 
         <TextView
+            android:id="@+id/pv_grid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:layout_gravity="center_vertical"
             android:textColor="@color/colorWhite"
-            android:text="35365"/>
+            android:text="@string/text_0"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -87,7 +87,6 @@
             android:text="@string/text_39"
             android:layout_marginBottom="1dp"
             tools:ignore="SmallSp"
-            android:layout_marginLeft="3dp"
             android:layout_marginStart="3dp" />
     </LinearLayout>
 
@@ -97,7 +96,6 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_marginTop="108dp"
-        android:layout_marginLeft="120dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="120dp" >
@@ -108,21 +106,21 @@
             android:background="@drawable/circle6" />
 
         <TextView
-            android:layout_width="68dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textColor="@color/colorText_04"
             android:text="@string/consume_self"
             android:textSize="15sp"
-            android:layout_marginLeft="11dp"
             android:layout_marginStart="11dp" />
 
         <TextView
+            android:id="@+id/pv_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:layout_gravity="center_vertical"
             android:textColor="@color/colorWhite"
-            android:text="68461"/>
+            android:text="@string/text_0"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -133,7 +131,6 @@
             android:text="@string/text_39"
             android:layout_marginBottom="1dp"
             tools:ignore="SmallSp"
-            android:layout_marginLeft="3dp"
             android:layout_marginStart="3dp" />
     </LinearLayout>
 
@@ -177,10 +174,11 @@
             android:text="@string/text_63"/>
 
         <TextView
+            android:id="@+id/benefit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:textColor="@color/colorWhite"
-            android:text="@string/text_02"/>
+            android:text="@string/text_0"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

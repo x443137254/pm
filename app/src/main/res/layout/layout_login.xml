@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:ignore="ContentDescription"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
@@ -29,10 +31,10 @@
             android:background="@null"
             android:textSize="15sp"
             android:gravity="center"
-            android:drawableLeft="@mipmap/login_user"
+            android:drawableStart="@mipmap/login_user"
             android:hint="@string/login_input_username"
             android:textColorHint="@color/colorText_04"
-            android:textColor="@color/colorText_04"/>
+            android:textColor="@color/colorWhite"/>
 
         <View
             android:layout_width="match_parent"
@@ -48,9 +50,10 @@
             android:layout_gravity="center"
             android:background="@null"
             android:textSize="15sp"
+            android:inputType="textPassword"
             android:gravity="center"
-            android:textColor="@color/colorText_04"
-            android:drawableLeft="@mipmap/login_pwd"
+            android:textColor="@color/colorWhite"
+            android:drawableStart="@mipmap/login_pwd"
             android:layout_marginTop="29dp"
             android:layout_marginBottom="9dp"
             android:hint="@string/input_pwd"

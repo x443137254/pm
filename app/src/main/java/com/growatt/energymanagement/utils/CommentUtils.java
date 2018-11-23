@@ -112,7 +112,7 @@ public class CommentUtils {
      * @param title    选择器标题
      */
     public static void showPickView(final Activity context, final List<String> data, final TextView textView, String title) {
-        OptionsPickerView<String> pvOptions = new OptionsPickerBuilder(context, new OnOptionsSelectListener() {
+         OptionsPickerView<String> pvOptions = new OptionsPickerBuilder(context, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 final String tx = data.get(options1);

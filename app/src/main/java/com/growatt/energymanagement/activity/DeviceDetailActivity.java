@@ -63,6 +63,7 @@ public class DeviceDetailActivity extends BasicActivity implements View.OnClickL
     private TextView timeTypeText;
     private Intent intent;
     private LineChart mChart;
+    private TextView unit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +79,13 @@ public class DeviceDetailActivity extends BasicActivity implements View.OnClickL
     private void findViews() {
         mChart = findViewById(R.id.chart);
         infoText = findViewById(R.id.info_name);
-        timeTypeText = findViewById(R.id.time_type_text);
+        timeTypeText = findViewById(R.id.time_picker);
         infoText.setOnClickListener(this);
         timeTypeText.setOnClickListener(this);
-        RadioGroup timeTypes = findViewById(R.id.time_type_group);
-        timeTypes.check(R.id.time_type_day);
-        switchTimeType(R.id.time_type_day);
+        unit = findViewById(R.id.unit);
+        RadioGroup timeTypes = findViewById(R.id.time_group);
+        timeTypes.check(R.id.time_cur);
+        switchTimeType(R.id.time_cur);
         timeTypes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -94,29 +96,46 @@ public class DeviceDetailActivity extends BasicActivity implements View.OnClickL
 
     private void switchTimeType(int id) {
         if (time.equals("")) {
-            time = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            time = new SimpleDateFormat("yyyy-MM-dd",getResources().getConfiguration().locale).format(new Date());
         }
         switch (id) {
-            case R.id.time_type_day:
+            case R.id.time_cur:
+                timeType = 1;
+                if (timeTypeText.getVisibility() == View.GONE) {
+                    timeTypeText.setVisibility(View.VISIBLE);
+                }
+                timeTypeText.setText(time);
+                InternetUtils.generateElectricity(intent.getStringExtra("devId"), timeType, info[n],
+                        time.substring(0, 4) + time.substring(5, 7) + time.substring(8, 10));
+                infoText.setVisibility(View.VISIBLE);
+                unit.setText("w");
+                break;
+            case R.id.time_day:
                 timeType = 2;
                 if (timeTypeText.getVisibility() == View.GONE) {
                     timeTypeText.setVisibility(View.VISIBLE);
                 }
                 timeTypeText.setText(time.substring(0,7));
                 InternetUtils.generateElectricity(intent.getStringExtra("devId"), timeType, info[n],time.substring(0, 4) + time.substring(5, 7));
+                infoText.setVisibility(View.INVISIBLE);
+                unit.setText("kWh");
                 break;
-            case R.id.time_type_month:
+            case R.id.time_month:
                 timeType = 3;
                 if (timeTypeText.getVisibility() == View.GONE) {
                     timeTypeText.setVisibility(View.VISIBLE);
                 }
                 timeTypeText.setText(time.substring(0,4));
                 InternetUtils.generateElectricity(intent.getStringExtra("devId"), timeType,info[n], time.substring(0, 4));
+                infoText.setVisibility(View.INVISIBLE);
+                unit.setText("kWh");
                 break;
-            case R.id.time_type_year:
+            case R.id.time_year:
                 timeType = 4;
                 timeTypeText.setVisibility(View.GONE);
                 InternetUtils.generateElectricity(intent.getStringExtra("devId"), timeType,info[n], time.substring(0, 4));
+                infoText.setVisibility(View.INVISIBLE);
+                unit.setText("kWh");
                 break;
         }
     }
@@ -158,7 +177,7 @@ public class DeviceDetailActivity extends BasicActivity implements View.OnClickL
             case R.id.info_name:
                 dropMenu();
                 break;
-            case R.id.time_type_text:
+            case R.id.time_picker:
                 selectTime();
                 break;
         }
@@ -258,10 +277,15 @@ public class DeviceDetailActivity extends BasicActivity implements View.OnClickL
         xAxis.setTextSize(10);
         xAxis.setAxisLineColor(getResources().getColor(R.color.colorText_01));
         xAxis.setAxisLineWidth(2f);
+        if (timeType == 3 || timeType == 4) {
+            xAxis.setLabelCount(list.size());
+        }
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
                 switch (timeType) {
+                    case 1:
+                        return (int)value + "时";
                     case 2:
                         return (int)value + "日";
                     case 3:

@@ -28,6 +28,8 @@ public class LocationUtils {
     private static final float METER_POSITION = 0.0f;
     private static ILocationListener mLocationListener;
     private static LocationListener listener = new MyLocationListener();
+    public static double latitude;
+    public static double longitude;
 
     private static class MyLocationListener implements LocationListener {
         @Override
@@ -110,6 +112,11 @@ public class LocationUtils {
             location = manager.getLastKnownLocation(provider);
         }
         if (location == null) location = getNetWorkLocation(context);
+
+        if (location != null) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        }
         return location;
     }
 

@@ -26,13 +26,13 @@
             android:text="@string/month_report_synthesize"/>
 
         <TextView
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_margin="10dp"
             android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:text="7/1~7/31"/>
+            android:textColor="@color/colorWhite"/>
     </LinearLayout>
 
     <LinearLayout
@@ -48,7 +48,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@mipmap/gen_ele"
-            android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp" />
 
         <ImageView
@@ -56,7 +55,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@mipmap/con_ene"
-            android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp" />
     </LinearLayout>
 
@@ -76,9 +74,7 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:layout_marginRight="5dp"
             android:gravity="bottom"
-            android:text="65461"
             android:layout_marginEnd="5dp" />
 
         <TextView
@@ -102,9 +98,7 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:layout_marginRight="5dp"
             android:gravity="bottom"
-            android:text="65461"
             android:layout_marginEnd="5dp" />
 
         <TextView
@@ -139,7 +133,6 @@
             android:textSize="12sp"
             android:textColor="@color/colorWhite"
             android:text="@string/gen_ele_total"
-            android:layout_marginRight="10dp"
             android:gravity="center"
             android:layout_marginEnd="10dp" />
 
@@ -151,7 +144,6 @@
             android:textColor="@color/colorWhite"
             android:text="@string/con_ele_total"
             android:gravity="center"
-            android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp" />
     </LinearLayout>
 </LinearLayout>

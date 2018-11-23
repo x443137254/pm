@@ -161,6 +161,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         areaSelector2 = view.findViewById(R.id.area_selector_2);
         areaSelector1.setOnClickListener(this);
         areaSelector2.setOnClickListener(this);
+        view.findViewById(R.id.add_ic).setOnClickListener(this);
         InternetUtils.generateEleOverview(LoginMsg.uniqueId);
         InternetUtils.generateElectricitys(LoginMsg.uniqueId, "");
         InternetUtils.areaInfo(LoginMsg.uniqueId);
@@ -290,6 +291,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add_device:
+            case R.id.add_ic:
                 pop();
                 break;
             case R.id.drop_menu_bt:
@@ -310,9 +312,9 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             case R.id.pop_confirm:
                 String deviceSnText = deviceSn.getText().toString();
                 String authCodeText = authCode.getText().toString();
-                if (checkTextEmpty(deviceSnText) && checkTextEmpty(authCodeText)) {
-                    InternetUtils.addCollector(LoginMsg.uniqueId, deviceSnText, authCodeText);
-                }
+//                if (checkTextEmpty(deviceSnText) && checkTextEmpty(authCodeText)) {
+                InternetUtils.addCollector(LoginMsg.uniqueId, deviceSnText, authCodeText);
+
                 break;
             case R.id.area_selector_2:
                 dropMenu(MENU_2);
@@ -329,17 +331,17 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         } else if (witch == MENU_2) {
             if (areaInfoList == null || areaInfoList.size() <= 0) return;
         }
-        LinearLayout layout = new LinearLayout(getContext());
-        layout.setOrientation(LinearLayout.VERTICAL);
+        View inflateView = LayoutInflater.from(getContext()).inflate(R.layout.layout_drop_list, null);
+        LinearLayout layout = inflateView.findViewById(R.id.linear_layout);
         int size = 0;
         if (witch == MENU_1) {
-            layout.setLayoutParams(new ViewGroup.LayoutParams(areaSelector1.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT));
+//            layout.setLayoutParams(new ViewGroup.MarginLayoutParams(areaSelector1.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT));
             size = devList.size();
         } else if (witch == MENU_2) {
-            layout.setLayoutParams(new ViewGroup.LayoutParams(areaSelector2.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT));
+//            layout.setLayoutParams(new ViewGroup.MarginLayoutParams(areaSelector2.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT));
             size = areaInfoList.size();
         }
-        final PopupWindow popupWindow = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final PopupWindow popupWindow = new PopupWindow(inflateView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         TextView textView;
         for (int i = 0; i < size; i++) {
             textView = new TextView(getContext());
@@ -448,6 +450,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void d2s(GenerateElectricitysMsg msg) {
         if (msg.code.equals("0")) {
+            deviceList.removeAllViews();
             if (msg.list != null) {
                 for (int i = 0; i < msg.list.size(); i++) {
                     GenerateElectricitysMsg.Device device = msg.list.get(i);

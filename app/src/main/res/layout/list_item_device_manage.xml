@@ -8,7 +8,6 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:src="@mipmap/device_01"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,11 +22,12 @@
         android:text="@string/text_70"
         android:textColor="@color/colorWhite"
         android:textSize="15sp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="12dp"
-        android:layout_marginLeft="69dp"
         android:layout_marginStart="69dp" />
 
     <TextView
@@ -40,7 +40,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="37dp"
-        android:layout_marginLeft="69dp"
         android:layout_marginStart="69dp" />
 
     <TextView
@@ -53,7 +52,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="61dp"
-        android:layout_marginLeft="69dp"
         android:layout_marginStart="69dp"/>
 
     <TextView
@@ -66,7 +64,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="61dp"
-        android:layout_marginLeft="208dp"
         android:layout_marginStart="208dp" />
 
 </android.support.constraint.ConstraintLayout>

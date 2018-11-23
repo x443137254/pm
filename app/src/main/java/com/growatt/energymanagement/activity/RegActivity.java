@@ -70,6 +70,7 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
     private List<String> provinceList;
     private List<List<String>> cityList;
     private List<List<List<String>>> areaList;
+    private OptionsPickerView<String> pvOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,7 +241,7 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
             return;
         }
 
-        addr = address.getText().toString();
+        addr = province.getText().toString();
         if (addr.equals("") || addr.equals("null")) {
             legal = false;
             Toast.makeText(this, getResources().getString(R.string.reg_add_empty), Toast.LENGTH_SHORT).show();
@@ -250,6 +251,11 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
         if (userType.equals("") || userType.equals("null")) {
             legal = false;
             Toast.makeText(this, getResources().getString(R.string.reg_sn_empty), Toast.LENGTH_SHORT).show();
+        }
+
+        if (!agreement.isChecked()){
+            legal = false;
+            Toast.makeText(this, getResources().getString(R.string.reg_agreement), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -310,9 +316,35 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
      * @param msg
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void a2(CountryDataMsg msg){
+    public void a2(final CountryDataMsg msg){
         if (msg.code.equals("0")) {
-            CommentUtils.showPickView(this,msg.countryList,country,"请选择国家");
+            if (pvOptions != null) {
+                pvOptions.show();
+                return;
+            }
+            pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                @Override
+                public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                    final String tx = msg.countryList.get(options1);
+                    RegActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            country.setText(tx);
+                        }
+                    });
+                }
+            })
+                    .setTitleText("请选择国家")
+                    .setTitleBgColor(0xff032d3a)
+                    .setTitleColor(0xffffffff)
+                    .setSubmitColor(0xffffffff)
+                    .setCancelColor(0xff058ef0)
+                    .setBgColor(0xff032d3a)
+                    .setTitleSize(22)
+                    .setTextColorCenter(0xffffffff)
+                    .build();
+            pvOptions.setPicker(msg.countryList);
+            pvOptions.show();
         }else Toast.makeText(this, msg.errMsg, Toast.LENGTH_SHORT).show();
     }
 

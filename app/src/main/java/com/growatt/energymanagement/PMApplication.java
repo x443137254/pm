@@ -47,5 +47,6 @@ public class PMApplication extends Application {
         String uniqueId = sp.getString("uniqueId", "");
         if (uniqueId.equals("")) return;
         LoginMsg.uniqueId = uniqueId;
+        InternetUtils.login(sp.getString("account", ""), sp.getString("password", ""));
     }
 }

@@ -66,20 +66,20 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * Created by Administrator on 2018/9/11.
- *
+ * Created by Administrator on 2018/9/11
  */
 
 public class InternetUtils {
     private static final String host = "http://chat.growatt.com/eic_web/energy/";
     private static OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(30,TimeUnit.SECONDS)
-            .writeTimeout(30,TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
             .build();
     private static MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
 
     private static String access(String url, String params) {
+        params = params.replaceAll("\\\\/","/");
         Request request = new Request.Builder()
                 .url(url)
                 .post(RequestBody.create(mediaType, params))
@@ -152,12 +152,13 @@ public class InternetUtils {
 
     /**
      * 注册
-     * @param password 密码
-     * @param phone 手机号
-     * @param country 国家
-     * @param language 语言
-     * @param company 公司名称
-     * @param addr 地址
+     *
+     * @param password      密码
+     * @param phone         手机号
+     * @param country       国家
+     * @param language      语言
+     * @param company       公司名称
+     * @param addr          地址
      * @param installerCode 安装商编码
      */
     public static void regist(String password, String phone, String country, String language
@@ -1051,7 +1052,9 @@ public class InternetUtils {
             jsonObject.put("uniqueId", uniqueId);
             jsonObject.put("timeType", timeType);
             jsonObject.put("time", time);
-            jsonObject.put("path", path);
+            if (!path.equals("")) {
+                jsonObject.put("path", path);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1151,6 +1154,7 @@ public class InternetUtils {
             for (String key : keySet) {
                 jsonObject.put(key, map.get(key));
             }
+            jsonObject.put("uniqueId", LoginMsg.uniqueId);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1165,15 +1169,16 @@ public class InternetUtils {
 
     /**
      * 根据区域id和时间（日月年）获取区域详细耗电量信息
+     *
      * @param uniqueId 用户ID
      * @param timeType 时间类型(2\3\4)
-     * @param time 时间值格式
-    timeType:2/3/4
-    time:日/月/年
-    time:20181010/201810/2018
-     * @param path 区域路径
+     * @param time     时间值格式
+     *                 timeType:2/3/4
+     *                 time:日/月/年
+     *                 time:20181010/201810/2018
+     * @param path     区域路径
      */
-    public static void areaEleInfo(String uniqueId, final int timeType, final String time,String path) {
+    public static void areaEleInfo(String uniqueId, final int timeType, final String time, String path) {
         if (uniqueId == null || uniqueId.length() <= 0) return;
         final String url = host + "areaEleInfo";
         final JSONObject jsonObject = new JSONObject();
@@ -1207,10 +1212,11 @@ public class InternetUtils {
 
     /**
      * 找回密码
-     * @param phone 手机号
-     * @param password  密码
+     *
+     * @param phone    手机号
+     * @param password 密码
      */
-    public static void forgetPwd(String phone,String password) {
+    public static void forgetPwd(String phone, String password) {
         final String url = host + "forgetPwd";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1230,10 +1236,11 @@ public class InternetUtils {
 
     /**
      * 根据告警类型获取对应告警列表
+     *
      * @param uniqueId 用户ID
-     * @param type 0、1、2、3 对应 全部、发电设备告警、掉线告警、用电告警
+     * @param type     0、1、2、3 对应 全部、发电设备告警、掉线告警、用电告警
      */
-    public static void noticeList(String uniqueId,int type) {
+    public static void noticeList(String uniqueId, int type) {
         final String url = host + "noticeList";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1253,11 +1260,12 @@ public class InternetUtils {
 
     /**
      * 根据通知id获取详情数据
+     *
      * @param noticeType 消息类型(report、warning)
-     * @param cid 消息id
-     * @param devType 设备类型(ameter、inverter)
+     * @param cid        消息id
+     * @param devType    设备类型(ameter、inverter)
      */
-    public static void noticeInfo(String noticeType,int cid,String devType) {
+    public static void noticeInfo(String noticeType, int cid, String devType) {
         final String url = host + "noticeInfo";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1278,10 +1286,11 @@ public class InternetUtils {
 
     /**
      * 根据设备id和时间获取能耗详细数据
-     * @param devId 设备id(序列号)
+     *
+     * @param devId   设备id(序列号)
      * @param devType 设备类型
      */
-    public static void devDetailInfo(String devId,String devType) {
+    public static void devDetailInfo(String devId, String devType) {
         final String url = host + "devDetailInfo";
         final JSONObject jsonObject = new JSONObject();
         try {
@@ -1301,11 +1310,12 @@ public class InternetUtils {
 
     /**
      * 修改单个设备各参数信息
-     * @param devId 设备编号
+     *
+     * @param devId   设备编号
      * @param devType kt(空调)、wkq(温控器)、cz(插座)
-     * @param onoff 开1 关0
+     * @param onoff   开1 关0
      */
-    public static void setting(String devId,String devType,int onoff) {
+    public static void setting(String devId, String devType, int onoff) {
         final String url = host + "setting";
         final JSONObject jsonObject = new JSONObject();
         try {

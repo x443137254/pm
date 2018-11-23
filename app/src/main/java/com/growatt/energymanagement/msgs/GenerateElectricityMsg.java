@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/9/20.
- *
+ * Created by Administrator on 2018/9/20
  */
 
 public class GenerateElectricityMsg {
@@ -36,7 +35,7 @@ public class GenerateElectricityMsg {
         code = jsonObject.optString("code");
         if (code.equals("1")) {
             errMsg = jsonObject.optString("data");
-        }else {
+        } else {
             JSONArray array = jsonObject.optJSONArray("data");
             if (array == null) return;
             list = new ArrayList<>();
@@ -49,7 +48,7 @@ public class GenerateElectricityMsg {
         Entry entry;
         JSONObject jsonObject;
         if (timeType == 4) {
-            int a = Integer.parseInt(time)-5;
+            int a = Integer.parseInt(time) - 5;
             for (int i = a; i < a + 6; i++) {
                 entry = new Entry();
                 entry.setX(i);
@@ -62,11 +61,11 @@ public class GenerateElectricityMsg {
                 }
                 list.add(entry);
             }
-        } else if (timeType == 3){
+        } else if (timeType == 3) {
             for (int i = 1; i <= 12; i++) {
                 entry = new Entry();
                 entry.setX(i);
-                String s = i >= 10 ? time.substring(0,4) + "-" + i : time.substring(0,4) + "-0" + i;
+                String s = i >= 10 ? time.substring(0, 4) + "-" + i : time.substring(0, 4) + "-0" + i;
                 for (int j = 0; j < array.length(); j++) {
                     jsonObject = array.optJSONObject(j);
                     if (jsonObject.optString("time").equals(s)) {
@@ -76,12 +75,22 @@ public class GenerateElectricityMsg {
                 }
                 list.add(entry);
             }
-        }else {
-            int a = CommentUtils.maxDays(Integer.parseInt(time)/100, Integer.parseInt(time)%100);
+        } else if (timeType == 2) {
+            for (int j = 0; j < array.length(); j++) {
+                jsonObject = array.optJSONObject(j);
+                entry = new Entry();
+                String time = jsonObject.optString("time");
+                int energy = jsonObject.optInt("Energy");
+                entry.setY(energy);
+                entry.setX(Float.parseFloat(time.substring(time.length()-2)));
+                list.add(entry);
+            }
+        } else {
+            int a = CommentUtils.maxDays(Integer.parseInt(time) / 100, Integer.parseInt(time) % 100);
             for (int i = 0; i <= a; i++) {
                 entry = new Entry();
                 entry.setX(i);
-                String s = i >= 10 ? time.substring(0,4) + "-" + time.substring(4,6) + "-" + i : time.substring(0,4) + "-" + time.substring(4,6) + "-0" + i;
+                String s = i >= 10 ? time.substring(0, 4) + "-" + time.substring(4, 6) + "-" + i : time.substring(0, 4) + "-" + time.substring(4, 6) + "-0" + i;
                 for (int j = 0; j < array.length(); j++) {
                     jsonObject = array.optJSONObject(j);
                     if (jsonObject.optString("time").equals(s)) {

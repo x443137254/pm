@@ -294,7 +294,7 @@ public class EnergyConsumeDetailActivity extends BasicActivity implements View.O
             if (msg.timeType == 2) {
                 showChart(msg.list);
             } else {
-                adapter.setList(msg.list);
+                adapter.setList(msg.list,timeType);
             }
         }
     }

@@ -27,9 +27,11 @@ public class NotificationMsg {
         }
         if (jsonObject == null) return;
         code = jsonObject.optString("code");
+        JSONObject data = jsonObject.optJSONObject("data");
+        if (data == null) return;
         if (code.equals("0")){
-            JSONArray warning = jsonObject.optJSONArray("warning");
-            JSONArray report = jsonObject.optJSONArray("report");
+            JSONArray warning = data.optJSONArray("warning");
+            JSONArray report = data.optJSONArray("report");
             JSONObject json;
             if (warning != null){
                 warnList = new ArrayList<>();

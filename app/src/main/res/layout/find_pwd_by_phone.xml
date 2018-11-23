@@ -176,7 +176,7 @@
             android:text="@string/confirm_new_pwd"/>
 
         <EditText
-            android:id="@+id/pwd_confirm"
+            android:id="@+id/confirm_pwd"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:background="@null"

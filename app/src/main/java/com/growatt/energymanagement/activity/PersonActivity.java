@@ -47,7 +47,7 @@ public class PersonActivity extends BasicActivity implements View.OnClickListene
         findViewById(R.id.person_modify_pwd).setOnClickListener(this);
         findViewById(R.id.person_modify_phone).setOnClickListener(this);
         findViewById(R.id.logout).setOnClickListener(this);
-        findViewById(R.id.company_edit).setOnClickListener(this);
+//        findViewById(R.id.company_edit).setOnClickListener(this);
         findViewById(R.id.modify_email).setOnClickListener(this);
         account = findViewById(R.id.account);
         nick = findViewById(R.id.nick);

@@ -28,8 +28,9 @@ public class EnergyDetailListAdapter extends BaseAdapter {
 
     }
 
-    public void setList(List<Entry> list) {
+    public void setList(List<Entry> list,int type) {
         this.list = list;
+        this.type = type;
         if (list != null && list.size() > 1) {
             max = list.get(0).getY();
             for (int i = 0; i < list.size(); i++) {

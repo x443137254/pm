@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">powerManager</string>
+    <string name="app_name">瑞能云</string>
     <string-array name="spinner_1">
         <item>全部区域</item>
         <item>A栋</item>
@@ -411,6 +411,7 @@
     <string name="reg_company_empty">公司名称不能为空</string>
     <string name="reg_add_empty">地址不能为空</string>
     <string name="reg_sn_empty">安装商编码不能为空</string>
+    <string name="reg_agreement">需要同意本公司服务条款</string>
     <string name="accredit_fail">授权失败</string>
     <string name="accredit_success">授权成功</string>
     <string name="bind_account">绑定账号</string>

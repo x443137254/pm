@@ -151,13 +151,13 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
                         timeType_1 = 2;
                         timePick01.setText(time_1);
                         setTextEnable(true);
-                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10),path);
+                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7),path);
                         break;
                     case R.id.ele_trend_radio_mon:
                         timeType_1 = 3;
                         timePick01.setText(time_1.substring(0, 7));
                         setTextEnable(true);
-                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4) + time_1.substring(5, 7),path);
+                        InternetUtils.eleCost(LoginMsg.uniqueId, timeType_1, time_1.substring(0, 4),path);
                         break;
                     case R.id.ele_trend_radio_year:
                         timeType_1 = 4;
@@ -229,8 +229,9 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         timePick01.setOnClickListener(this);
         timePick02.setOnClickListener(this);
         timePick03.setOnClickListener(this);
-
         areaSelector2.setOnClickListener(this);
+
+        view.findViewById(R.id.add_ic).setOnClickListener(this);
 
         listContainer = view.findViewById(R.id.list_container);
     }
@@ -239,6 +240,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         EventBus.getDefault().register(this);
+        path = "";
     }
 
     @Override
@@ -267,6 +269,9 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         xAxis.setTextSize(10);
         xAxis.setAxisLineColor(getResources().getColor(R.color.colorText_01));
         xAxis.setAxisLineWidth(2f);
+        if (timeType_1 == 3 || timeType_1 == 4){
+            xAxis.setLabelCount(line.size());
+        }
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -278,7 +283,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
                     case 3:
                         return (int) value + "月";
                     case 4:
-                        return (int) value + "月";
+                        return (int) value + "年";
                 }
                 return null;
             }
@@ -442,6 +447,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
             case R.id.charge_station:
                 break;
             case R.id.add_device:
+            case R.id.add_ic:
                 if (MainActivity.isPad) {
                     Context context = getContext();
                     View view = LayoutInflater.from(context).inflate(R.layout.dialog_add_device, null);

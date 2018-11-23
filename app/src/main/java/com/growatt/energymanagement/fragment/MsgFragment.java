@@ -16,12 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.growatt.energymanagement.R;
-import com.growatt.energymanagement.adapters.NoticeListAdapter;
 import com.growatt.energymanagement.adapters.WarmListAdapter;
 import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.msgs.NoticeInfoMsg;
 import com.growatt.energymanagement.msgs.NoticeListMsg;
-import com.growatt.energymanagement.msgs.NoticeMsg;
 import com.growatt.energymanagement.utils.InternetUtils;
 
 import org.greenrobot.eventbus.EventBus;

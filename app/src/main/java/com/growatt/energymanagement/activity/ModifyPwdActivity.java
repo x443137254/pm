@@ -1,5 +1,6 @@
 package com.growatt.energymanagement.activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.msgs.UpdateUserMsg;
+import com.growatt.energymanagement.utils.CommentUtils;
 import com.growatt.energymanagement.utils.InternetUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -59,6 +61,10 @@ public class ModifyPwdActivity extends BasicActivity {
     public void sda(UpdateUserMsg msg){
         if (msg.code.equals("0")){
             Toast.makeText(this, "密码修改成功", Toast.LENGTH_SHORT).show();
+            LoginMsg.cleanUserInfo();
+            CommentUtils.save(this);
+            startActivity(new Intent(this,LoginActivity.class));
+            finish();
         }else {
             Toast.makeText(this, msg.errMsg, Toast.LENGTH_SHORT).show();
         }

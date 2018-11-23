@@ -20,6 +20,7 @@ import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.msgs.PowerStationMsg;
 import com.growatt.energymanagement.utils.CommentUtils;
 import com.growatt.energymanagement.utils.InternetUtils;
+import com.growatt.energymanagement.utils.LocationUtils;
 import com.growatt.energymanagement.utils.RegionUtil;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -27,6 +28,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +54,7 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
     private final int MODIFY_POWER = 104;
     private final int MODIFY_TIME_AREA = 105;
     private final int MODIFY_SUBSIDY = 106;
+    private OptionsPickerView<String> pvOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,9 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
         power = findViewById(R.id.power);
         timeArea = findViewById(R.id.timeArea);
         city = findViewById(R.id.city);
+
+        String temp = LocationUtils.latitude + "\n" + LocationUtils.longitude;
+        latitude.setText(temp);
     }
 
     @Override
@@ -100,7 +106,37 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
                 startActivityForResult(new Intent(this, ModifyActivity.class), MODIFY_SUBSIDY);
                 break;
             case R.id.time_area_item:
-                startActivityForResult(new Intent(this, ModifyActivity.class), MODIFY_TIME_AREA);
+//                startActivityForResult(new Intent(this, ModifyActivity.class), MODIFY_TIME_AREA);
+                if (pvOptions != null) {
+                    pvOptions.show();
+                    return;
+                }
+                final List<String> data = new ArrayList<>();
+                String[] array = getResources().getStringArray(R.array.time_area);
+                Collections.addAll(data, array);
+                pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        final String tx = data.get(options1);
+                        InfoMaintainActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                timeArea.setText(tx);
+                            }
+                        });
+                    }
+                })
+                        .setTitleText("请选择时区")
+                        .setTitleBgColor(0xff032d3a)
+                        .setTitleColor(0xffffffff)
+                        .setSubmitColor(0xffffffff)
+                        .setCancelColor(0xff058ef0)
+                        .setBgColor(0xff032d3a)
+                        .setTitleSize(22)
+                        .setTextColorCenter(0xffffffff)
+                        .build();
+                pvOptions.setPicker(data);
+                pvOptions.show();
                 break;
             case R.id.install_date:
                 selectTime();
@@ -145,7 +181,7 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
                 .setTitleSize(22)
                 .setTextColorCenter(0xffffffff)
                 .build();
-        pvOptions.setPicker(provinceList,citesList);
+        pvOptions.setPicker(provinceList, citesList);
         pvOptions.show();
     }
 
@@ -186,8 +222,8 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
             city.setText(msg.city);
             temp = "GMT" + msg.timeArea;
             timeArea.setText(temp);
-            temp = msg.latitude + "\n" + msg.longitude;
-            latitude.setText(temp);
+//            temp = msg.latitude + "\n" + msg.longitude;
+//            latitude.setText(temp);
             temp = "￥" + msg.subsidy;
             subsidy.setText(temp);
         }
@@ -252,7 +288,7 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
             case MODIFY_SUBSIDY:
                 try {
                     float d = Float.parseFloat(s);
-                    s = "￥" + String.format(getResources().getConfiguration().locale,"%.2f", d);
+                    s = "￥" + String.format(getResources().getConfiguration().locale, "%.2f", d);
                     subsidy.setText(s);
                 } catch (Exception e) {
                     Toast.makeText(this, getResources().getString(R.string.input_not_legal), Toast.LENGTH_SHORT).show();

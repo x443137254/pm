@@ -125,6 +125,7 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         tabs = view.findViewById(R.id.analyze_tab);
         timePicker01 = view.findViewById(R.id.time_picker_01);
         timeAdd = view.findViewById(R.id.time_next);
+        timeAdd.setEnabled(false);
         timeMinus = view.findViewById(R.id.time_last);
         fromGrid = view.findViewById(R.id.from_grid);
         fromGridPercent = view.findViewById(R.id.from_grid_percent);
@@ -239,6 +240,10 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         xAxis.setTextSize(10);
         xAxis.setAxisLineColor(getResources().getColor(R.color.colorText_01));
         xAxis.setAxisLineWidth(2f);
+
+        if (timeType == 3 || timeType == 4){
+            xAxis.setLabelCount(line_2.size());
+        }
 
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
@@ -460,8 +465,9 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         builder.append(String.valueOf(day));
         time_1 = builder.toString();
         timePicker01.setText(time_1);
-        InternetUtils.qualityData(ammeterDev.sn, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10));
-
+        if (ammeterDev != null) {
+            InternetUtils.qualityData(ammeterDev.sn, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10));
+        }
         if (time_1.equals(time_cur)) {
             timeAdd.setImageResource(R.mipmap.next_noclick);
             timeAdd.setEnabled(false);
@@ -502,7 +508,9 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         builder.append(String.valueOf(day));
         time_1 = builder.toString();
         timePicker01.setText(time_1);
-        InternetUtils.qualityData(ammeterDev.sn, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10));
+        if (ammeterDev != null){
+            InternetUtils.qualityData(ammeterDev.sn, time_1.substring(0, 4) + time_1.substring(5, 7) + time_1.substring(8, 10));
+        }
         timeAdd.setImageResource(R.mipmap.next);
         timeAdd.setEnabled(true);
     }

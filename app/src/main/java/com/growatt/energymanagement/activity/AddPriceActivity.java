@@ -468,6 +468,7 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
         progressBar.setIndeterminate(true);
         mProgressDialog = new AlertDialog.Builder(this)
                 .setView(progressBar)
+                .setCancelable(false)
                 .create();
         Window window = mProgressDialog.getWindow();
         if (window != null){

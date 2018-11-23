@@ -34,6 +34,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/inverter_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -62,6 +63,7 @@
             android:background="#1c3942" />
 
         <LinearLayout
+            android:id="@+id/ammeter_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -90,6 +92,7 @@
             android:background="#1c3942" />
 
         <LinearLayout
+            android:id="@+id/airCondition_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -118,6 +121,7 @@
             android:background="#1c3942" />
 
         <LinearLayout
+            android:id="@+id/socket_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"

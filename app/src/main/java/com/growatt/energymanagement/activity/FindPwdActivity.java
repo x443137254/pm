@@ -67,12 +67,16 @@ public class FindPwdActivity extends BasicActivity implements View.OnClickListen
             }
         });
 
+
+
         relativeLayout = findViewById(R.id.find_pwd_contain);
         leftIn = AnimationUtils.loadAnimation(this, R.anim.move_in_left);
         leftOut = AnimationUtils.loadAnimation(this, R.anim.move_out_left);
         rightIn = AnimationUtils.loadAnimation(this, R.anim.move_in_right);
         rightOut = AnimationUtils.loadAnimation(this, R.anim.move_out_right);
         findViewById(R.id.confirm).setOnClickListener(this);
+
+        switchWay("通过手机号找回");
     }
 
     @Override

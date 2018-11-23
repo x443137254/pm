@@ -91,6 +91,12 @@ public class SettingActivity extends BasicActivity implements View.OnClickListen
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void alerUpdateDialog(final UpdateMsg msg) {
         if (msg.isBig) return;
+
+        if (dialog != null) {
+            dialog.show();
+            return;
+        }
+
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_update, null);
         view.findViewById(R.id.update_dialog_close).setOnClickListener(new View.OnClickListener() {
             @Override

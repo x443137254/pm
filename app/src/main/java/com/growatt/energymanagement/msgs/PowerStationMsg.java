@@ -1,5 +1,6 @@
 package com.growatt.energymanagement.msgs;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,7 +38,9 @@ public class PowerStationMsg {
         if (code.equals("1")){
             errMsg = jsonObject.optString("data");
         }else {
-            JSONObject data = jsonObject.optJSONArray("data").optJSONObject(0);
+            JSONArray array = jsonObject.optJSONArray("data");
+            if (array == null) return;
+            JSONObject data = array.optJSONObject(0);
             if (data == null) return;
             country = data.optString("country");
             city = data.optString("city");

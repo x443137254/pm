@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="time_area">
+        <item>UTC</item>
+        <item>UTC+1</item>
+        <item>UTC+2</item>
+        <item>UTC+3</item>
+        <item>UTC+4</item>
+        <item>UTC+5</item>
+        <item>UTC+6</item>
+        <item>UTC+7</item>
+        <item>UTC+8</item>
+        <item>UTC+9</item>
+        <item>UTC+10</item>
+        <item>UTC+11</item>
+        <item>东西十二区</item>
+        <item>UTC-11</item>
+        <item>UTC-10</item>
+        <item>UTC-9</item>
+        <item>UTC-8</item>
+        <item>UTC-7</item>
+        <item>UTC-6</item>
+        <item>UTC-5</item>
+        <item>UTC-4</item>
+        <item>UTC-3</item>
+        <item>UTC-2</item>
+        <item>UTC-1</item>
+    </string-array>
+</resources>
