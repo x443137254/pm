@@ -44,7 +44,7 @@ import java.util.List;
  */
 public class DeviceDetailActivity extends BasicActivity implements View.OnClickListener {
 
-    private int timeType = 2;
+    private int timeType = 1;
     private String time = "";
     private String[] info = {"PACR","PACS","PACT","IPV1","IPV2","IPV3","VPV1","VPV2","VPV3","PAC"};
     private String[] infoName = {
@@ -116,7 +116,10 @@ public class DeviceDetailActivity extends BasicActivity implements View.OnClickL
                     timeTypeText.setVisibility(View.VISIBLE);
                 }
                 timeTypeText.setText(time.substring(0,7));
-                InternetUtils.generateElectricity(intent.getStringExtra("devId"), timeType, info[n],time.substring(0, 4) + time.substring(5, 7));
+                InternetUtils.generateElectricity(intent.getStringExtra("devId"),
+                        timeType,
+                        info[n],
+                        time.substring(0, 4) + time.substring(5, 7));
                 infoText.setVisibility(View.INVISIBLE);
                 unit.setText("kWh");
                 break;
@@ -189,10 +192,17 @@ public class DeviceDetailActivity extends BasicActivity implements View.OnClickL
             public void onTimeSelect(Date date, View v) {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd",getResources().getConfiguration().locale);
                 time = format.format(date);
-                if (timeType == 2) {
+
+                if (timeType == 1) {
+                    timeTypeText.setText(time);
+                    InternetUtils.generateElectricity(intent.getStringExtra("devId"),
+                            timeType,
+                            info[n],
+                            time.substring(0, 4) + time.substring(5, 7) + time.substring(8, 10));
+                } else if (timeType == 2) {
                     timeTypeText.setText(time);
                     InternetUtils.generateElectricity(intent.getStringExtra("devId"), timeType, info[n],time.substring(0, 4) + time.substring(5, 7));
-                } else {
+                } else  {
                     timeTypeText.setText(time.substring(0, 7));
                     InternetUtils.generateElectricity(intent.getStringExtra("devId"), timeType,info[n], time.substring(0, 4));
                 }
@@ -235,12 +245,20 @@ public class DeviceDetailActivity extends BasicActivity implements View.OnClickL
                     if (time.equals("")) {
                         time = new SimpleDateFormat("yyyy-MM-dd",getResources().getConfiguration().locale).format(new Date());
                     }
-                    if (timeType == 2) {
+                    if (timeType == 1) {
+                        timeTypeText.setText(time);
+                        InternetUtils.generateElectricity(intent.getStringExtra("devId"),
+                                timeType,
+                                info[a],
+                                time.substring(0, 4) + time.substring(5, 7) + time.substring(8, 10));
+                    }else if (timeType == 2) {
                         timeTypeText.setText(time);
                         InternetUtils.generateElectricity(intent.getStringExtra("devId"), timeType, info[a],time.substring(0, 4) + time.substring(5, 7));
-                    } else {
+                    } else if (timeType == 3){
                         timeTypeText.setText(time.substring(0, 7));
                         InternetUtils.generateElectricity(intent.getStringExtra("devId"), timeType,info[a], time.substring(0, 4));
+                    }else {
+
                     }
                 }
             });
