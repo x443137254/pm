@@ -1,16 +1,15 @@
 package com.growatt.energymanagement.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -146,6 +145,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
                     return;
                 }
                 InternetUtils.login(account, pwd);
+                showProgressDialog();
                 break;
             case R.id.bind:
                 String bindUserName = popAccount.getText().toString();
@@ -216,6 +216,15 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
     public void tl(ThirdLoginMsg msg) {
         if (msg.code.equals("1")) {
             pop();
+        }else {
+            Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, MainActivity.class));
+            //LoginMsg.password = pwd;
+            SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putString("uniqueId", LoginMsg.uniqueId);
+            edit.apply();
+            finish();
         }
     }
 
@@ -252,6 +261,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void loginInfo(LoginMsg msg) {
+        disMissProgressDialog();
         if (msg.code.equals("1")) {
             Toast.makeText(this, msg.errMsg, Toast.LENGTH_SHORT).show();
         } else {

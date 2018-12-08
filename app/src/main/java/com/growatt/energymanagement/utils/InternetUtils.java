@@ -70,7 +70,7 @@ import okhttp3.ResponseBody;
  */
 
 public class InternetUtils {
-    private static final String host = "http://chat.growatt.com/eic_web/energy/";
+    private static final String host = "http://chat.growatt.com/energy/";
     private static OkHttpClient client = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)

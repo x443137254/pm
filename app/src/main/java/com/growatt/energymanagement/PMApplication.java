@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.service.CheckUpdateService;
@@ -37,6 +40,13 @@ public class PMApplication extends Application {
         intent.setAction("check_big_version");
         startService(intent);
         readCacheInfo();
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
+        if (connectivityManager == null) return;
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo == null || !networkInfo.isAvailable()) {
+            Toast.makeText(this, "当前网络不可用，请检查你的网络连接", Toast.LENGTH_LONG).show();
+        }
     }
 
     /**

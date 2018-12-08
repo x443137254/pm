@@ -51,7 +51,6 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
     private String second = "";
     private static int n = 0;
     private GridLayout timeArray;
-    private AlertDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,7 +137,7 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void dsd(AddElePriceMsg msg) {
-        dissMissProgressDialog();
+        disMissProgressDialog();
         if (msg.code.equals("1")) {
             Toast.makeText(this, msg.msg, Toast.LENGTH_SHORT).show();
         }else {
@@ -460,26 +459,6 @@ public class AddPriceActivity extends BasicActivity implements View.OnClickListe
             if (textView == null) return;
             String s = data.getStringExtra("time");
             textView.setText(s);
-        }
-    }
-
-    private void showProgressDialog(){
-        ProgressBar progressBar = new ProgressBar(this);
-        progressBar.setIndeterminate(true);
-        mProgressDialog = new AlertDialog.Builder(this)
-                .setView(progressBar)
-                .setCancelable(false)
-                .create();
-        Window window = mProgressDialog.getWindow();
-        if (window != null){
-            window.setBackgroundDrawableResource(android.R.color.transparent);
-        }
-        mProgressDialog.show();
-    }
-
-    private void dissMissProgressDialog(){
-        if (mProgressDialog != null){
-            mProgressDialog.dismiss();
         }
     }
 }
