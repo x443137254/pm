@@ -593,7 +593,6 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
                 .setTextColorCenter(0xffffffff)
                 .setTextColorOut(0x66ffffff)
                 .build();
-
         pvTime.show();
     }
 
