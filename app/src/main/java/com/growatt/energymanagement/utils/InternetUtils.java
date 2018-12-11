@@ -6,6 +6,7 @@ import com.growatt.energymanagement.msgs.AllAreaMsg;
 import com.growatt.energymanagement.msgs.AmmetersMsg;
 import com.growatt.energymanagement.msgs.AnalysisDataMsg;
 import com.growatt.energymanagement.msgs.AnalysisInfoMsg;
+import com.growatt.energymanagement.msgs.AreaDevsDetailInfoMsg;
 import com.growatt.energymanagement.msgs.AreaDevsStateMsg;
 import com.growatt.energymanagement.msgs.AreaEleInfoMsg;
 import com.growatt.energymanagement.msgs.AreaEleRankMsg;
@@ -1331,6 +1332,24 @@ public class InternetUtils {
             public void run() {
                 String s = InternetUtils.access(url, jsonObject.toString());
                 EventBus.getDefault().post(new SettingMsg(s));
+            }
+        }).start();
+    }
+
+    public static void areaDevsDetailInfo(String uniqueId, String path) {
+        final String url = host + "areaDevsDetailInfo";
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("uniqueId", uniqueId);
+            jsonObject.put("path", path);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = InternetUtils.access(url, jsonObject.toString());
+                EventBus.getDefault().post(new AreaDevsDetailInfoMsg(s));
             }
         }).start();
     }

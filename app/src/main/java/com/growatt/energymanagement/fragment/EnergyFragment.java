@@ -86,6 +86,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
     private TextView areaSelector2;
     private List<AreaInfoMsg.AreaInfo> areaInfoList;
     private String path = "";
+    private RadioGroup mCutRadioGroup;
 
     @Nullable
     @Override
@@ -102,7 +103,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.add_device).setOnClickListener(this);
         InternetUtils.areaInfo(LoginMsg.uniqueId);
-        RadioGroup mCutRadioGroup = view.findViewById(R.id.cut_group);
+        mCutRadioGroup = view.findViewById(R.id.cut_group);
         RadioGroup mTimeGroup1 = view.findViewById(R.id.ele_trend_radio_group);
         RadioGroup mTimeGroup2 = view.findViewById(R.id.time_group);
 
@@ -315,7 +316,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         chart_1.setData(data);
     }
 
-    private void addDeviceRunningItem(final String s, int sum, int run, int ele) {
+    private void addDeviceRunningItem(final String s, int sum, int run, int ele, final String path) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.list_item_cate_manage, listContainer, false);
         TextView name = view.findViewById(R.id.device_name);
         TextView total = view.findViewById(R.id.total_num);
@@ -333,30 +334,42 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
             AnimationDrawable animation = (AnimationDrawable) imageView.getDrawable();
             animation.start();
         }
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DeviceClassifyActivity.class);
-                switch (s) {
-                    case "空调":
-                        intent.putExtra("devType", "airCondition");
-                        break;
-                    case "插座":
-                        intent.putExtra("devType", "socket");
-                        break;
-                    case "充电桩":
-                        intent.putExtra("devType", "chargePile");
-                        break;
-                    case "温控器":
-                        intent.putExtra("devType", "thermostat");
-                        break;
-                    case "shineBoost":
-                        intent.putExtra("devType", "shineBoost");
-                        break;
+        if (mCutRadioGroup.getCheckedRadioButtonId() == R.id.radio_device) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), DeviceClassifyActivity.class);
+                    switch (s) {
+                        case "空调":
+                            intent.putExtra("devType", "airCondition");
+                            break;
+                        case "插座":
+                            intent.putExtra("devType", "socket");
+                            break;
+                        case "充电桩":
+                            intent.putExtra("devType", "chargePile");
+                            break;
+                        case "温控器":
+                            intent.putExtra("devType", "thermostat");
+                            break;
+                        case "shineBoost":
+                            intent.putExtra("devType", "shineBoost");
+                            break;
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
-            }
-        });
+            });
+        }else {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), DeviceClassifyActivity.class);
+                    intent.putExtra("path",path);
+                    intent.putExtra("name",s);
+                    startActivity(intent);
+                }
+            });
+        }
         listContainer.addView(view);
     }
 
@@ -646,19 +659,19 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         } else {
             listContainer.removeAllViews();
             if (msg.airCondition != null) {
-                addDeviceRunningItem("空调", msg.airCondition.num_all, msg.airCondition.num_runing, msg.airCondition.ele_cost);
+                addDeviceRunningItem("空调", msg.airCondition.num_all, msg.airCondition.num_runing, msg.airCondition.ele_cost,"");
             }
             if (msg.chargePile != null) {
-                addDeviceRunningItem("充电桩", msg.chargePile.num_all, msg.chargePile.num_runing, msg.chargePile.ele_cost);
+                addDeviceRunningItem("充电桩", msg.chargePile.num_all, msg.chargePile.num_runing, msg.chargePile.ele_cost,"");
             }
             if (msg.socket != null) {
-                addDeviceRunningItem("插座", msg.socket.num_all, msg.socket.num_runing, msg.socket.ele_cost);
+                addDeviceRunningItem("插座", msg.socket.num_all, msg.socket.num_runing, msg.socket.ele_cost,"");
             }
             if (msg.shineBoost != null) {
-                addDeviceRunningItem("shineBoost", msg.shineBoost.num_all, msg.shineBoost.num_runing, msg.shineBoost.ele_cost);
+                addDeviceRunningItem("shineBoost", msg.shineBoost.num_all, msg.shineBoost.num_runing, msg.shineBoost.ele_cost,"");
             }
             if (msg.thermostat != null) {
-                addDeviceRunningItem("温控器", msg.thermostat.num_all, msg.thermostat.num_runing, msg.thermostat.ele_cost);
+                addDeviceRunningItem("温控器", msg.thermostat.num_all, msg.thermostat.num_runing, msg.thermostat.ele_cost,"");
             }
         }
     }
@@ -679,7 +692,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
             AreaDevsStateMsg.ConsumeItem item;
             for (int i = 0; i < msg.list.size(); i++) {
                 item = msg.list.get(i);
-                addDeviceRunningItem(item.areaName, item.num_all, item.num_running, item.ele_cost);
+                addDeviceRunningItem(item.areaName, item.num_all, item.num_running, item.ele_cost,item.path);
             }
         }
     }

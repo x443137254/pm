@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -57,26 +58,6 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     private HomeFragment homeFragment;
     private EleFragment eleFragment;
 
-    public FragmentManager getmFragmentManager() {
-        return mFragmentManager;
-    }
-
-    public HomeFragment getHomeFragment() {
-        return homeFragment;
-    }
-
-    public EleFragment getEleFragment() {
-        return eleFragment;
-    }
-
-    public EnergyFragment getEnergyFragment() {
-        return energyFragment;
-    }
-
-    public AnalyzeFragment getAnalyzeFragment() {
-        return analyzeFragment;
-    }
-
     private EnergyFragment energyFragment;
     private AnalyzeFragment analyzeFragment;
 
@@ -99,6 +80,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     private String accountText;
     private boolean hasMsg;
     private String companyName;
+    private RadioGroup mRadioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +96,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
         readCache();
         init();
 
-        RadioGroup mRadioGroup = findViewById(R.id.tab_radio_group);
+        mRadioGroup = findViewById(R.id.tab_radio_group);
         mRadioGroup.check(R.id.radio_home);
         mRadioGroup.setOnCheckedChangeListener(this);
         mFragmentManager = getSupportFragmentManager();
@@ -414,15 +396,11 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
         }
     }
     public void jumpToEle() {
-        mFragmentManager.beginTransaction().replace(R.id.fl, eleFragment).commit();
-//        eleFragment.getScrollView().smoothScrollTo(0,eleFragment.getLinearLayout().getTop());
-//        eleFragment.jumpTo();
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-//        eleFragment.getLinearLayout().getTop();
-//        eleFragment.getScrollView().smoothScrollTo(0,eleFragment.getLinearLayout().getTop());
+        mRadioGroup.check(R.id.radio_ele);
+        new Handler().postDelayed(new Runnable(){
+            public void run() {
+                eleFragment.jumpTo();
+            }
+        }, 200);
     }
 }

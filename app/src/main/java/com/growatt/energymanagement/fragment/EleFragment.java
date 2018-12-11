@@ -184,7 +184,12 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     }
 
     public void jumpTo(){
-        scrollView.scrollTo(0,-100);
+        scrollView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.scrollTo(0,linearLayout.getTop());
+            }
+        },200);
     }
 
     @Override

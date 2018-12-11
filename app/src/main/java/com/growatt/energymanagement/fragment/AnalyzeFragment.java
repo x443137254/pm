@@ -25,6 +25,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -305,6 +306,7 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         if (dataMsg == null) {
             chart1.clear();
             chart1.getAxisLeft().removeAllLimitLines();
+            chart1.refreshDrawableState();
             return;
         }
         List<Entry> line;
@@ -341,13 +343,12 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         chart1.getDescription().setEnabled(false);
 
         XAxis xAxis = chart1.getXAxis();
-        xAxis.setLabelCount(8);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextColor(0xff0070a3);
         xAxis.setDrawGridLines(false);
         xAxis.setTextSize(10);
         xAxis.setAxisLineColor(getResources().getColor(R.color.colorText_01));
-        xAxis.setAxisLineWidth(2f);
+        xAxis.setAxisLineWidth(2);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -384,7 +385,6 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         limitLine.setLineColor(0xFFFF5252);
         limitLine.setTextColor(Color.WHITE);
         leftYAxis.addLimitLine(limitLine);
-        leftYAxis.setAxisMaximum(1.2f);
 
         YAxis rightYAxis = chart1.getAxisRight();
         rightYAxis.setEnabled(false);
@@ -401,6 +401,11 @@ public class AnalyzeFragment extends Fragment implements View.OnClickListener, T
         dataSets.add(dataSet_1);
         LineData data = new LineData(dataSets);
         chart1.setData(data);
+
+        float max = dataSet_1.getYMax();
+        if (limit > max) max = limit;
+        leftYAxis.setAxisMaximum(max * 1.2f);
+
     }
 
     @Override

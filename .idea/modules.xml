@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pm.iml" filepath="$PROJECT_DIR$/pm.iml" />
       <module fileurl="file://D:\awk\pm\powerManager\pm.iml" filepath="D:\awk\pm\powerManager\pm.iml" />
-      <module fileurl="file://$PROJECT_DIR$/powerManager.iml" filepath="$PROJECT_DIR$/powerManager.iml" />
       <module fileurl="file://D:\AndroidProjects\pm\powerManager.iml" filepath="D:\AndroidProjects\pm\powerManager.iml" />
     </modules>
   </component>
