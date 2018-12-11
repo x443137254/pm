@@ -39,7 +39,7 @@ public class PMApplication extends Application {
         Intent intent = new Intent(this, CheckUpdateService.class);
         intent.setAction("check_big_version");
         startService(intent);
-        readCacheInfo();
+        //readCacheInfo();
 
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
         if (connectivityManager == null) return;

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.DisplayMetrics;
@@ -426,9 +427,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), WarnListActivity.class));
                 break;
             case R.id.inverter_item:
-                Intent intent1 = new Intent(getContext(), DeviceClassifyActivity.class);
-                intent1.putExtra("devType","inverter");
-                startActivity(intent1);
+                MainActivity activity = (MainActivity) getActivity();
+                if (activity == null) break;
+                activity.jumpToEle();
                 break;
             case R.id.ammeter_item:
                 Intent intent2 = new Intent(getContext(), DeviceClassifyActivity.class);

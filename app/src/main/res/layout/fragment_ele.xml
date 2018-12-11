@@ -36,6 +36,7 @@
         android:background="@color/divider" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -80,7 +81,9 @@
 
             <include layout="@layout/layout_inverter_block"/>
 
-            <include layout="@layout/phone_card_device_manage"/>
+            <include
+                android:id="@+id/jump_to"
+                layout="@layout/phone_card_device_manage" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

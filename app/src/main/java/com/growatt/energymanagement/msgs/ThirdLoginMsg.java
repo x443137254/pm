@@ -12,17 +12,17 @@ public class ThirdLoginMsg {
 
     public String code;
     public String errMsg;
-    public static String nick;
-    public static long registTime;
-    public static String password;
-    public static String companyId;
-    public static boolean hasMsg;
-    public static String phone;
-    public static String companyName;
-    public static String account;
-    public static String email;
-    public static String uniqueId;
-    public static int cid = 0;
+    public String nick;
+    public long registTime;
+    public String password;
+    public String companyId;
+    public boolean hasMsg;
+    public String phone;
+    public String companyName;
+    public String account;
+    public String email;
+    public String uniqueId;
+    public int cid = 0;
 
     public ThirdLoginMsg(String s) {
         JSONObject jsonObject = null;

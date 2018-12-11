@@ -147,6 +147,9 @@ public class CommentUtils {
         edit.putString("password", LoginMsg.password);
         edit.putInt("cid", LoginMsg.cid);
         edit.putString("uniqueId", LoginMsg.uniqueId);
+        edit.putBoolean("hasMsg", LoginMsg.hasMsg);
+        edit.putString("nick", LoginMsg.nick);
+        edit.putString("companyName", LoginMsg.companyName);
         edit.apply();
     }
 

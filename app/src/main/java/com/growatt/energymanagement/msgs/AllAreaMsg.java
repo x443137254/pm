@@ -14,30 +14,60 @@ import java.util.List;
 
 public class AllAreaMsg {
 
-    public List<CityInfo> list;
+    public List<String> provinceList;
+    public List<List<String>> cityList;
+    public List<List<List<String>>> areaList;
+    public String originalString;
 
     public AllAreaMsg(String s) {
-        JSONArray array = null;
+        originalString = s;
+        JSONArray array1 = null;
         try {
-            array = new JSONArray(s);
+            array1 = new JSONArray(s);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if (array == null) return;
-        list = new ArrayList<>();
-        CityInfo info;
-        JSONObject jsonObject;
-        for (int i = 0; i < array.length(); i++) {
-            info = new CityInfo();
-            jsonObject = array.optJSONObject(i);
-            info.name = jsonObject.optString("name");
-            info.adCode = jsonObject.optString("adCode");
-            list.add(info);
-        }
-    }
+        if (array1 == null) return;
+        provinceList = new ArrayList<>();
+        cityList = new ArrayList<>();
+        areaList = new ArrayList<>();
+        for (int i = 0; i < array1.length(); i++) {
+            JSONObject jsonObject1 = array1.optJSONObject(i);
+            String province = jsonObject1.optString("name");
+            provinceList.add(province);
+            JSONArray array2 = jsonObject1.optJSONArray("citys");
+            List<String> list = new ArrayList<>();
+            List<List<String>> list2 = new ArrayList<>();
 
-    public class CityInfo {
-        public String name;
-        public String adCode;
+            if (province.equals("北京市") || province.equals("重庆市") || province.equals("天津市") || province.equals("上海市")){
+                list.add(province);
+                List<String> list1 = new ArrayList<>();
+                for (int j = 0; j < array2.length(); j++) {
+                    JSONObject jsonObject2 = array2.optJSONObject(j);
+                    list1.add(jsonObject2.optString("name"));
+                }
+                list2.add(list1);
+                cityList.add(list);
+                areaList.add(list2);
+            }else {
+                for (int j = 0; j < array2.length(); j++) {
+                    JSONObject jsonObject2 = array2.optJSONObject(j);
+                    list.add(jsonObject2.optString("name"));
+                    JSONArray array3 = jsonObject2.optJSONArray("areas");
+                    List<String> list1 = new ArrayList<>();
+                    for (int k = 0; k < array3.length(); k++) {
+                        JSONObject jsonObject3 = array3.optJSONObject(k);
+                        if (jsonObject3 != null){
+                            String name = jsonObject3.optString("name");
+                            if (name == null) name = "";
+                            list1.add(name);
+                        }
+                    }
+                    list2.add(list1);
+                }
+                cityList.add(list);
+                areaList.add(list2);
+            }
+        }
     }
 }

@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -133,6 +134,17 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     private ImageView imageView3;
     private ImageView imageView4;
 
+    public ScrollView getScrollView() {
+        return scrollView;
+    }
+
+    public LinearLayout getLinearLayout() {
+        return linearLayout;
+    }
+
+    private ScrollView scrollView;
+    private LinearLayout linearLayout;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Resources resources = getResources();
@@ -166,6 +178,13 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         InternetUtils.generateElectricitys(LoginMsg.uniqueId, "");
         InternetUtils.areaInfo(LoginMsg.uniqueId);
         InternetUtils.inverters(LoginMsg.uniqueId);
+
+        scrollView = view.findViewById(R.id.scrollView);
+        linearLayout = view.findViewById(R.id.jump_to);
+    }
+
+    public void jumpTo(){
+        scrollView.scrollTo(0,-100);
     }
 
     @Override
@@ -432,7 +451,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String content = data.getStringExtra(Constant.CODED_CONTENT);
-                deviceSn.setText(content);
+                InternetUtils.addCollector(LoginMsg.uniqueId, content, "");
             }
         }
     }
@@ -802,4 +821,5 @@ public class EleFragment extends Fragment implements View.OnClickListener {
 
         pvTime.show();
     }
+
 }

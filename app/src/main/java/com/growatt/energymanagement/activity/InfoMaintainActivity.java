@@ -14,6 +14,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.growatt.energymanagement.R;
+import com.growatt.energymanagement.msgs.AllAreaMsg;
 import com.growatt.energymanagement.msgs.CountryDataMsg;
 import com.growatt.energymanagement.msgs.EditPowerStationMsg;
 import com.growatt.energymanagement.msgs.LoginMsg;
@@ -55,6 +56,13 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
     private final int MODIFY_TIME_AREA = 105;
     private final int MODIFY_SUBSIDY = 106;
     private OptionsPickerView<String> pvOptions;
+
+    private List<String> provinceList;
+    private List<List<String>> cityList;
+    private List<List<List<String>>> areaList;
+
+    private List<String> countryList;
+    private List<List<String>> foreignCityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,28 +150,49 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
                 selectTime();
                 break;
             case R.id.country:
-                InternetUtils.countryData();
+                if (countryList == null) {
+                    showProgressDialog();
+                    InternetUtils.countryData();
+                }else {
+                    CommentUtils.showPickView(this, countryList, country, "请选择国家");
+                }
                 break;
             case R.id.save:
                 save();
                 break;
             case R.id.city_item:
-                selectCity();
+                String s = country.getText().toString();
+                if (s.equals("中国")) {
+                    if (provinceList != null) {
+                        selectCity();
+                    }
+                    else {
+                        showProgressDialog();
+                        InternetUtils.allArea();
+                    }
+                } else {
+                    if (countryList != null) {
+                        int index = 0;
+                        for (int i = 0; i < countryList.size(); i++) {
+                            if (countryList.get(i).equals(country.getText().toString())){
+                                index = i;
+                                break;
+                            }
+                        }
+                        CommentUtils.showPickView(this, foreignCityList.get(index), city, "请选择城市");
+                    }else {
+                        Toast.makeText(this, "请先选择国家", Toast.LENGTH_SHORT).show();
+                    }
+                }
                 break;
         }
     }
 
     private void selectCity() {
-        RegionUtil regionUtil = new RegionUtil(this);
-        final List<String> provinceList = regionUtil.getProvinceList();
-        final List<List<String>> citesList = new ArrayList<>();
-        for (int i = 0; i < provinceList.size(); i++) {
-            citesList.add(regionUtil.getCityList(i));
-        }
         OptionsPickerView<String> pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                final String tx = citesList.get(options1).get(options2);
+                final String tx = cityList.get(options1).get(options2);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -181,8 +210,17 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
                 .setTitleSize(22)
                 .setTextColorCenter(0xffffffff)
                 .build();
-        pvOptions.setPicker(provinceList, citesList);
+        pvOptions.setPicker(provinceList, cityList);
         pvOptions.show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getAllCity(AllAreaMsg msg) {
+        disMissProgressDialog();
+        provinceList = msg.provinceList;
+        cityList = msg.cityList;
+        areaList = msg.areaList;
+        selectCity();
     }
 
     private void save() {
@@ -252,9 +290,12 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void daws(CountryDataMsg msg) {
+        disMissProgressDialog();
         if (msg.code.equals("1")) {
             Toast.makeText(this, msg.errMsg, Toast.LENGTH_SHORT).show();
         } else {
+            countryList = msg.countryList;
+            foreignCityList = msg.cityList;
             CommentUtils.showPickView(this, msg.countryList, country, "请选择国家");
         }
     }

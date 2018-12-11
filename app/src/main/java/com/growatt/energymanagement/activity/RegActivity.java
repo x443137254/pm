@@ -19,6 +19,7 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.growatt.energymanagement.R;
+import com.growatt.energymanagement.msgs.AllAreaMsg;
 import com.growatt.energymanagement.msgs.CountryDataMsg;
 import com.growatt.energymanagement.msgs.GetCodeMsg;
 import com.growatt.energymanagement.msgs.LoginMsg;
@@ -70,7 +71,9 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
     private List<String> provinceList;
     private List<List<String>> cityList;
     private List<List<List<String>>> areaList;
-    private OptionsPickerView<String> pvOptions;
+
+    private List<String> countryList;
+    private List<List<String>> foreignCityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,19 +118,19 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
             }
         });
 
-        RegionUtil regionUtil = new RegionUtil(this);
-        provinceList = regionUtil.getProvinceList();
-        cityList = new ArrayList<>();
-        areaList = new ArrayList<>();
-        for (int i = 0; i < provinceList.size(); i++) {
-            List<String> city_list = regionUtil.getCityList(i);
-            cityList.add(city_list);
-            List<List<String>> list = new ArrayList<>();
-            for (int j = 0; j < city_list.size(); j++) {
-                list.add(regionUtil.getAreaList(i, j));
-            }
-            areaList.add(list);
-        }
+//        RegionUtil regionUtil = new RegionUtil(this);
+//        provinceList = regionUtil.getProvinceList();
+//        cityList = new ArrayList<>();
+//        areaList = new ArrayList<>();
+//        for (int i = 0; i < provinceList.size(); i++) {
+//            List<String> city_list = regionUtil.getCityList(i);
+//            cityList.add(city_list);
+//            List<List<String>> list = new ArrayList<>();
+//            for (int j = 0; j < city_list.size(); j++) {
+//                list.add(regionUtil.getAreaList(i, j));
+//            }
+//            areaList.add(list);
+//        }
     }
 
     @Override
@@ -157,7 +160,12 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
                 }
                 break;
             case R.id.country:
-                InternetUtils.countryData();
+                if (countryList == null) {
+                    showProgressDialog();
+                    InternetUtils.countryData();
+                }else {
+                    CommentUtils.showPickView(this, countryList, country, "请选择国家");
+                }
                 break;
             case R.id.get_code:
                 account = phone.getText().toString();
@@ -194,7 +202,29 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
                 timer.schedule(timerTask, 0, 1000);
                 break;
             case R.id.select_city_bar:
-                showPickView();
+                String s = country.getText().toString();
+                if (s.equals("中国")) {
+                    if (provinceList != null) {
+                        selectCity();
+                    }
+                    else {
+                        showProgressDialog();
+                        InternetUtils.allArea();
+                    }
+                } else {
+                    if (countryList != null) {
+                        int index = 0;
+                        for (int i = 0; i < countryList.size(); i++) {
+                            if (countryList.get(i).equals(country.getText().toString())){
+                                index = i;
+                                break;
+                            }
+                        }
+                        CommentUtils.showPickView(this, foreignCityList.get(index), city, "请选择城市");
+                    }else {
+                        Toast.makeText(this, "请先选择国家", Toast.LENGTH_SHORT).show();
+                    }
+                }
                 break;
         }
     }
@@ -316,36 +346,24 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
      * @param msg
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void a2(final CountryDataMsg msg){
-        if (msg.code.equals("0")) {
-            if (pvOptions != null) {
-                pvOptions.show();
-                return;
-            }
-            pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
-                @Override
-                public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                    final String tx = msg.countryList.get(options1);
-                    RegActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            country.setText(tx);
-                        }
-                    });
-                }
-            })
-                    .setTitleText("请选择国家")
-                    .setTitleBgColor(0xff032d3a)
-                    .setTitleColor(0xffffffff)
-                    .setSubmitColor(0xffffffff)
-                    .setCancelColor(0xff058ef0)
-                    .setBgColor(0xff032d3a)
-                    .setTitleSize(22)
-                    .setTextColorCenter(0xffffffff)
-                    .build();
-            pvOptions.setPicker(msg.countryList);
-            pvOptions.show();
-        }else Toast.makeText(this, msg.errMsg, Toast.LENGTH_SHORT).show();
+    public void daws(CountryDataMsg msg) {
+        disMissProgressDialog();
+        if (msg.code.equals("1")) {
+            Toast.makeText(this, msg.errMsg, Toast.LENGTH_SHORT).show();
+        } else {
+            countryList = msg.countryList;
+            foreignCityList = msg.cityList;
+            CommentUtils.showPickView(this, msg.countryList, country, "请选择国家");
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void getAllCity(AllAreaMsg msg) {
+        disMissProgressDialog();
+        provinceList = msg.provinceList;
+        cityList = msg.cityList;
+        areaList = msg.areaList;
+        selectCity();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -364,21 +382,27 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
         } else Toast.makeText(this, getResources().getString(R.string.reg_fail), Toast.LENGTH_SHORT).show();
     }
 
-    private void showPickView() {
+    private void selectCity() {
         OptionsPickerView<String> pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(final int options1, final int options2, final int options3, View v) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        province.setText(provinceList.get(options1));
-                        city.setText(cityList.get(options1).get(options2));
-                        area.setText(areaList.get(options1).get(options2).get(options3));
+                        String s = provinceList.get(options1);
+                        if (s == null) s = "";
+                        province.setText(s);
+                        s = cityList.get(options1).get(options2);
+                        if (s == null) s = "";
+                        city.setText(s);
+                        s = areaList.get(options1).get(options2).get(options3);
+                        if (s == null) s = "";
+                        area.setText(s);
                     }
                 });
             }
         })
-                .setTitleText("请选择：")
+                .setTitleText("请选择城市")
                 .setTitleBgColor(0xff032d3a)
                 .setTitleColor(0xffffffff)
                 .setSubmitColor(0xffffffff)
@@ -387,8 +411,7 @@ public class RegActivity extends BasicActivity implements View.OnClickListener {
                 .setTitleSize(22)
                 .setTextColorCenter(0xffffffff)
                 .build();
-        pvOptions.setPicker(provinceList,cityList,areaList);
+        pvOptions.setPicker(provinceList, cityList, areaList);
         pvOptions.show();
-
     }
 }

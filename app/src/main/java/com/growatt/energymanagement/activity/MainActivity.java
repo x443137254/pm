@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -45,7 +46,6 @@ import com.growatt.energymanagement.utils.LocationUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -56,6 +56,27 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     private FragmentManager mFragmentManager;
     private HomeFragment homeFragment;
     private EleFragment eleFragment;
+
+    public FragmentManager getmFragmentManager() {
+        return mFragmentManager;
+    }
+
+    public HomeFragment getHomeFragment() {
+        return homeFragment;
+    }
+
+    public EleFragment getEleFragment() {
+        return eleFragment;
+    }
+
+    public EnergyFragment getEnergyFragment() {
+        return energyFragment;
+    }
+
+    public AnalyzeFragment getAnalyzeFragment() {
+        return analyzeFragment;
+    }
+
     private EnergyFragment energyFragment;
     private AnalyzeFragment analyzeFragment;
 
@@ -70,10 +91,14 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     private AlertDialog dialog;
     private ProgressBar updateProgress;
     private String city;
-    private List<AllAreaMsg.CityInfo> mAllCitylist;
     private TextView weather;
     private TextView temperature;
     private TextView wind_speed;
+    private String uniqueId;
+    private String nick;
+    private String accountText;
+    private boolean hasMsg;
+    private String companyName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +110,8 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.hide();
+
+        readCache();
         init();
 
         RadioGroup mRadioGroup = findViewById(R.id.tab_radio_group);
@@ -105,6 +132,21 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
         if (CommentUtils.checkPermission(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 888)) {
             LocationUtils.getAddress(this);
         }
+
+    }
+
+    private void readCache() {
+        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        uniqueId = sp.getString("uniqueId","");
+        if (uniqueId.equals("")){
+            startActivity(new Intent(this,LoginActivity.class));
+            finish();
+        }
+        nick = sp.getString("nick","");
+        accountText = sp.getString("account","");
+        hasMsg = sp.getBoolean("hasMsg",false);
+        companyName = sp.getString("companyName","");
+        LoginMsg.uniqueId = uniqueId;
     }
 
     @Override
@@ -133,6 +175,9 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
         account = findViewById(R.id.draw_account);
         company = findViewById(R.id.draw_company);
         drawer = findViewById(R.id.drawer);
+
+
+
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -142,12 +187,16 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
 
             @Override
             public void onDrawerOpened(@NonNull View drawerView) {
-                if (LoginMsg.uniqueId == null || LoginMsg.uniqueId.equals("")) {
+                if (uniqueId.equals("")) {
                     account.setText(getResources().getString(R.string.click_login));
                     company.setText("");
                 } else {
-                    account.setText(LoginMsg.account);
-                    company.setText(LoginMsg.companyName);
+                    company.setText(companyName);
+                    if (nick.equals("")){
+                        account.setText(nick);
+                    }else {
+                        account.setText(accountText);
+                    }
                 }
             }
 
@@ -161,7 +210,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
 
             }
         });
-        InternetUtils.allArea();
+
     }
 
     private void setBackground() {
@@ -216,12 +265,12 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void showPop(PopMsg msg) {
         drawer.openDrawer(Gravity.START);
-        if (LoginMsg.uniqueId == null || LoginMsg.uniqueId.equals("")) {
+        if (uniqueId.equals("")) {
             account.setText(getResources().getString(R.string.click_login));
             company.setText("");
         } else {
-            account.setText(LoginMsg.account);
-            company.setText(LoginMsg.companyName);
+            account.setText(accountText);
+            company.setText(companyName);
         }
 
     }
@@ -230,7 +279,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.user_item:
-                if (LoginMsg.cid == 0) {
+                if (uniqueId.equals("")) {
                     startActivity(new Intent(this, LoginActivity.class));
                     finish();
                 } else {
@@ -239,7 +288,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
                 drawer.closeDrawer(Gravity.START);
                 break;
             case R.id.info_item:
-                if (LoginMsg.cid == 0) {
+                if (uniqueId.equals("")) {
                     startActivity(new Intent(this, LoginActivity.class));
                     finish();
                 } else {
@@ -248,7 +297,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
                 drawer.closeDrawer(Gravity.START);
                 break;
             case R.id.conf_item:
-                if (LoginMsg.cid == 0) {
+                if (uniqueId.equals("")) {
                     startActivity(new Intent(this, LoginActivity.class));
                     finish();
                 } else {
@@ -343,25 +392,15 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getLocalCity(GetAddressMsg msg) {
         city = msg.city;
-        if (mAllCitylist == null) return;
-        getWeather();
+        InternetUtils.allArea();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getAllCity(AllAreaMsg msg) {
-        mAllCitylist = msg.list;
-        if (city == null || city.equals("")) return;
-        getWeather();
-    }
-
-    private void getWeather() {
-        for (int i = 0; i < mAllCitylist.size(); i++) {
-            AllAreaMsg.CityInfo info = mAllCitylist.get(i);
-            if (info.name.equals(city)) {
-                InternetUtils.weather(info.adCode);
-                break;
-            }
-        }
+        if (msg.originalString.equals("")) return;
+        int index = msg.originalString.indexOf(city);
+        String adCode = msg.originalString.substring(index - 16, index - 10);
+        InternetUtils.weather(adCode);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -373,5 +412,17 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
             temperature.setText(s);
             weather.setText(msg.weather);
         }
+    }
+    public void jumpToEle() {
+        mFragmentManager.beginTransaction().replace(R.id.fl, eleFragment).commit();
+//        eleFragment.getScrollView().smoothScrollTo(0,eleFragment.getLinearLayout().getTop());
+//        eleFragment.jumpTo();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+//        eleFragment.getLinearLayout().getTop();
+//        eleFragment.getScrollView().smoothScrollTo(0,eleFragment.getLinearLayout().getTop());
     }
 }

@@ -184,7 +184,7 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
      */
     @Override
     public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-        Toast.makeText(this, getResources().getString(R.string.accredit_success), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, getResources().getString(R.string.accredit_success), Toast.LENGTH_SHORT).show();
         appType = share_media.toString();
         thirdUnique = map.get("uid");
         InternetUtils.thirdLogin(appType, thirdUnique);
@@ -218,12 +218,15 @@ public class LoginActivity extends BasicActivity implements View.OnClickListener
             pop();
         }else {
             Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, MainActivity.class));
             //LoginMsg.password = pwd;
             SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
             SharedPreferences.Editor edit = sp.edit();
-            edit.putString("uniqueId", LoginMsg.uniqueId);
+            edit.putString("uniqueId", msg.uniqueId);
+            edit.putString("nick", msg.nick);
+            edit.putString("companyName", msg.companyName);
+            edit.putBoolean("hasMsg", msg.hasMsg);
             edit.apply();
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
     }
