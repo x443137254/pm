@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
@@ -133,6 +132,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     private CircleProgressBar c2;
     private ImageView imageView3;
     private ImageView imageView4;
+    private View mBatteryCard;
 
     public ScrollView getScrollView() {
         return scrollView;
@@ -171,6 +171,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         deviceList = view.findViewById(R.id.device_list);
         areaSelector1 = view.findViewById(R.id.drop_menu_bt);
         areaSelector2 = view.findViewById(R.id.area_selector_2);
+        mBatteryCard = view.findViewById(R.id.battery_card);
         areaSelector1.setOnClickListener(this);
         areaSelector2.setOnClickListener(this);
         view.findViewById(R.id.add_ic).setOnClickListener(this);
@@ -376,7 +377,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             layout.addView(textView);
             if (witch == MENU_1) {
                 final InvertersMsg.DevBean bean = devList.get(i);
-                textView.setText(bean.datalog_sn);
+                textView.setText(bean.devId);
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -509,15 +510,16 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    //TODO
     private void changeView(InvertersMsg.DevBean bean) {
         if (bean == null) return;
-        areaSelector1.setText(bean.datalog_sn);
-        InternetUtils.statisticsData(LoginMsg.uniqueId, bean.inverterId);
-        InternetUtils.storageSystemData(LoginMsg.uniqueId, bean.inverterId);
+        areaSelector1.setText(bean.devId);
+        InternetUtils.statisticsData(LoginMsg.uniqueId, bean.devId);
+        InternetUtils.storageSystemData(LoginMsg.uniqueId, bean.devId);
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
-        switch (bean.type) {
-            case "INVERTER":
+        switch (bean.systemType) {
+            case 1:
                 sysType = INVERTER;
                 title.setText("光伏系统运行图");
                 if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
@@ -525,17 +527,30 @@ public class EleFragment extends Fragment implements View.OnClickListener {
                     dynamicView_pad_2 = LayoutInflater.from(getContext()).inflate(R.layout.layout_inverter_block_pad_2, container, false);
                 } else {
                     dynamicView_phone = LayoutInflater.from(getContext()).inflate(R.layout.layout_inverter_block, container, false);
+                    mBatteryCard.setVisibility(View.GONE);
                 }
                 break;
-            case "BIG_HPS":
+            case 3:
                 sysType = BIG_HPS;
                 title.setText("光储系统运行图");
-                dynamicView_phone = LayoutInflater.from(getContext()).inflate(R.layout.layout_big_hps_block, container, false);
+                if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+
+                } else {
+                    dynamicView_phone = LayoutInflater.from(getContext()).inflate(R.layout.layout_big_hps_block, container, false);
+                    mBatteryCard.setVisibility(View.VISIBLE);
+                }
+
                 break;
-            case "BATTERY":
+            case 2:
                 sysType = BATTERY;
                 title.setText("储能系统运行图");
-                dynamicView_phone = LayoutInflater.from(getContext()).inflate(R.layout.layout_battery_block, container, false);
+                if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
+
+                } else {
+                    dynamicView_phone = LayoutInflater.from(getContext()).inflate(R.layout.layout_battery_block, container, false);
+                    mBatteryCard.setVisibility(View.VISIBLE);
+                }
+
                 break;
         }
 
@@ -665,14 +680,23 @@ public class EleFragment extends Fragment implements View.OnClickListener {
                     setInverterData(msg);
                     break;
                 case BIG_HPS:
+                    setBigHPpsData(msg);
                     break;
                 case BATTERY:
+                    setBatteryData(msg);
                     break;
-
             }
         } else {
             Toast.makeText(getContext(), msg.errMsg, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void setBatteryData(StatisticsDataMsg msg) {
+
+    }
+
+    private void setBigHPpsData(StatisticsDataMsg msg) {
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

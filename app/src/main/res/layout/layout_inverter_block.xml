@@ -255,7 +255,7 @@
 
                     <TextView
                         android:id="@+id/ele_total"
-                        android:text="@string/text_02"
+                        android:text="@string/text_0"
                         style="@style/TextStyle_12"/>
 
                     <TextView
@@ -291,7 +291,7 @@
 
                     <TextView
                         android:id="@+id/benifit_total"
-                        android:text="@string/text_02"
+                        android:text="@string/text_0"
                         style="@style/TextStyle_12"/>
                 </LinearLayout>
 
@@ -324,7 +324,7 @@
                         android:id="@+id/cost_pv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_25"
+                        android:text="@string/text_0"
                         android:textSize="15sp"
                         android:textColor="#ffeba600" />
 
@@ -347,7 +347,7 @@
                     android:id="@+id/cost_pv_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_56"
+                    android:text="@string/text_0"
                     android:textSize="12sp"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
@@ -437,7 +437,7 @@
                         android:id="@+id/cost_grid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_25"
+                        android:text="@string/text_0"
                         android:textSize="15sp"
                         android:textColor="#fff35833" />
 
@@ -460,7 +460,7 @@
                     android:id="@+id/cost_grid_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_56"
+                    android:text="@string/text_0"
                     android:textSize="12sp"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>

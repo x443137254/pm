@@ -33,6 +33,7 @@ public class StorageSystemDataMsg {
             errMsg = jsonObject.optString("data");
         }else {
             JSONObject data = jsonObject.optJSONObject("data");
+            if (data == null) return;
             power_grid = data.optString("power_grid");
             power_cost = data.optString("power_cost");
             power_pv = data.optString("power_pv");

@@ -38,19 +38,17 @@ public class InvertersMsg {
             for (int i = 0; i < array.length(); i++) {
                 jsonItem = array.optJSONObject(i);
                 bean = new DevBean();
-                bean.name = jsonItem.optString("name");
-                bean.datalog_sn = jsonItem.optString("datalog_sn");
-                bean.type = jsonItem.optString("type");
-                bean.inverterId = jsonItem.optString("inverterId");
+                bean.devId = jsonItem.optString("devId");
+                bean.devType = jsonItem.optString("devType");
+                bean.systemType = jsonItem.optInt("systemType");
                 devList.add(bean);
             }
         }
     }
 
     public class DevBean{
-        public String name;
-        public String datalog_sn;
-        public String type;
-        public String inverterId;
+        public String devId;
+        public String devType;
+        public int systemType;
     }
 }

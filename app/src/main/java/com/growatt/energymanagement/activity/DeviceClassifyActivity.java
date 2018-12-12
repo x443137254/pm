@@ -43,6 +43,10 @@ public class DeviceClassifyActivity extends BasicActivity {
         setContentView(R.layout.activity_device_classify);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.hide();
+        mTitle = findViewById(R.id.title);
+        devTotal = findViewById(R.id.dev_total);
+        consTotal = findViewById(R.id.consume_total);
+        tabs = findViewById(R.id.tabs);
         findViewById(R.id.device_classify_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,10 +56,6 @@ public class DeviceClassifyActivity extends BasicActivity {
 
         initData();
 
-        mTitle = findViewById(R.id.title);
-        devTotal = findViewById(R.id.dev_total);
-        consTotal = findViewById(R.id.consume_total);
-        tabs = findViewById(R.id.tabs);
         ((ListView) findViewById(R.id.device_classify_list)).setAdapter(adapter);
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

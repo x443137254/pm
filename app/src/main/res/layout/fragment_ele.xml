@@ -84,6 +84,10 @@
             <include
                 android:id="@+id/jump_to"
                 layout="@layout/phone_card_device_manage" />
+
+            <include
+                android:id="@+id/battery_card"
+                layout="@layout/phone_card_sys_battery"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
