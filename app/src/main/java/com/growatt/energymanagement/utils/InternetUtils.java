@@ -41,6 +41,8 @@ import com.growatt.energymanagement.msgs.RegistMsg;
 import com.growatt.energymanagement.msgs.InvertersMsg;
 import com.growatt.energymanagement.msgs.SettingMsg;
 import com.growatt.energymanagement.msgs.StatisticsDataMsg;
+import com.growatt.energymanagement.msgs.StorageDetailMsg;
+import com.growatt.energymanagement.msgs.StorageMsg;
 import com.growatt.energymanagement.msgs.StorageSystemDataMsg;
 import com.growatt.energymanagement.msgs.ThirdLoginMsg;
 import com.growatt.energymanagement.msgs.ThirdRegistMsg;
@@ -1350,6 +1352,40 @@ public class InternetUtils {
             public void run() {
                 String s = InternetUtils.access(url, jsonObject.toString());
                 EventBus.getDefault().post(new AreaDevsDetailInfoMsg(s));
+            }
+        }).start();
+    }
+
+    public static void storageDetail(String uniqueId) {
+        final String url = host + "storageDetail";
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("uniqueId", uniqueId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = InternetUtils.access(url, jsonObject.toString());
+                EventBus.getDefault().post(new StorageDetailMsg(s));
+            }
+        }).start();
+    }
+
+    public static void storage(String uniqueId) {
+        final String url = host + "storage";
+        final JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("uniqueId", uniqueId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String s = InternetUtils.access(url, jsonObject.toString());
+                EventBus.getDefault().post(new StorageMsg(s));
             }
         }).start();
     }

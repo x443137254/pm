@@ -47,12 +47,12 @@
             android:src="@mipmap/system_bat"/>
 
         <ImageView
-            android:id="@+id/anim_08"
+            android:id="@+id/anim_06"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:src="@mipmap/system_bat_arrow1" />
+            android:src="@mipmap/system_bat_arrow2" />
 
         <ImageView
             android:layout_width="0dp"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:src="@mipmap/system_load_arrow3" />
+            android:src="@mipmap/system_load_arrow2" />
 
         <ImageView
             android:layout_width="0dp"
@@ -88,6 +88,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/power_discharger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_60"
@@ -97,8 +98,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_56"
+                android:text="@string/text_0"
                 android:textSize="13sp"
+                android:visibility="gone"
                 android:textColor="@color/colorBlue" />
         </LinearLayout>
 
@@ -110,11 +112,11 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/anim_06"
+                android:id="@+id/anim_08"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@mipmap/system_grid_arrow1" />
+                android:src="@mipmap/system_grid_arrow2" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -141,7 +143,8 @@
                 android:id="@+id/power_cost_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_56"
+                android:text="@string/text_0"
+                android:visibility="gone"
                 android:textSize="13sp"
                 android:textColor="@color/colorBlue" />
         </LinearLayout>
@@ -151,7 +154,7 @@
         android:id="@+id/power_grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_62"
+        android:text="@string/text_61"
         android:layout_gravity="center"
         android:textColor="@color/colorBlue"
         android:textSize="13sp"

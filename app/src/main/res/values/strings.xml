@@ -80,10 +80,10 @@
     <string name="text_56">80%</string>
     <string name="text_57">光伏产出</string>
     <string name="text_58">来自光伏</string>
-    <string name="text_59">PV功率：0.6W</string>
-    <string name="text_60">放电功率：26W</string>
-    <string name="text_61">电网功率：0.56W</string>
-    <string name="text_62">用电功率：12.5W</string>
+    <string name="text_59">PV功率：0W</string>
+    <string name="text_60">放电功率：0W</string>
+    <string name="text_61">电网功率：0W</string>
+    <string name="text_62">用电功率：0W</string>
     <string name="text_63">¥</string>
     <string name="text_64">W</string>
     <string name="text_65">光伏功率</string>

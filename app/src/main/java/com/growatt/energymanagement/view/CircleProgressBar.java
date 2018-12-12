@@ -119,4 +119,18 @@ public class CircleProgressBar extends View {
         }
 
     }
+
+    public void setSecondProgress(int progress) {
+        if (progress < 0) {
+            throw new IllegalArgumentException("进度progress不能小于0");
+        }
+        if (progress > max) {
+            progress = max;
+        }
+        if (progress <= max) {
+            this.secondProgress = progress;
+            postInvalidate();
+        }
+
+    }
 }

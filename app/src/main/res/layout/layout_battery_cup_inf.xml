@@ -27,11 +27,12 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/drop_1"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/round_dark_blue_edg"
-            android:drawableRight="@mipmap/drop"
+            android:drawableEnd="@mipmap/drop"
             android:paddingBottom="2dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
@@ -40,6 +41,7 @@
             android:textColor="@color/colorWhite" />
 
         <ImageView
+            android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -61,6 +63,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/soh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -69,6 +72,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/volt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -77,6 +81,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/max_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -85,6 +90,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/max_volt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -93,6 +99,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/max_diff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/max_vol_def"
@@ -107,6 +114,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/soc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -115,6 +123,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/cur_charge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -123,6 +132,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/low_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -131,6 +141,7 @@
                 android:textSize="13sp" />
 
             <TextView
+                android:id="@+id/min_volt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/min_vol"

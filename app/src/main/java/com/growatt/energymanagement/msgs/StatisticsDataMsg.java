@@ -12,13 +12,13 @@ public class StatisticsDataMsg {
 
     public String code;
     public String errMsg;
-    public String power_theory;
-    public String ele_total;
-    public String benifit_total;
-    public String ele_cost;
-    public String cost_pv;
-    public String cost_grid;
-    public String cost_battery;
+    public double power_theory = 0;
+    public double ele_total = 0;
+    public double benifit_total = 0;
+    public double ele_cost = 0;
+    public double cost_pv = 0;
+    public double cost_grid = 0;
+    public double cost_battery = 0;
 
     public StatisticsDataMsg(String s) {
         JSONObject jsonObject = null;
@@ -33,13 +33,14 @@ public class StatisticsDataMsg {
             errMsg = jsonObject.optString("data");
         }else {
             JSONObject data = jsonObject.optJSONObject("data");
-            power_theory = data.optString("power_theory");
-            ele_total = data.optString("ele_total");
-            benifit_total = data.optString("benifit_total");
-            ele_cost = data.optString("ele_cost");
-            cost_pv = data.optString("cost_pv");
-            cost_grid = data.optString("cost_grid");
-            cost_battery = data.optString("cost_battery");
+            if (data == null) return;
+            power_theory = data.optDouble("power_theory");
+            ele_total = data.optDouble("ele_total");
+            benifit_total = data.optDouble("benifit_total");
+            ele_cost = data.optDouble("ele_cost");
+            cost_pv = data.optDouble("cost_pv");
+            cost_grid = data.optDouble("cost_grid");
+            cost_battery = data.optDouble("cost_battery");
         }
     }
 }

@@ -263,7 +263,7 @@ public class EnergyFragment extends Fragment implements View.OnClickListener {
         chart_1.getDescription().setEnabled(false);
 
         XAxis xAxis = chart_1.getXAxis();
-        xAxis.setLabelCount(9);
+        xAxis.setLabelCount(line.size());
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextColor(0xff0070a3);
         xAxis.setDrawGridLines(false);

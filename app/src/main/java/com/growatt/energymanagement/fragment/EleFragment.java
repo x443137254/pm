@@ -52,6 +52,8 @@ import com.growatt.energymanagement.msgs.InvertersMsg;
 import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.msgs.OutputAndInputOfEleMsg;
 import com.growatt.energymanagement.msgs.StatisticsDataMsg;
+import com.growatt.energymanagement.msgs.StorageDetailMsg;
+import com.growatt.energymanagement.msgs.StorageMsg;
 import com.growatt.energymanagement.msgs.StorageSystemDataMsg;
 import com.growatt.energymanagement.utils.ChartUtil;
 import com.growatt.energymanagement.utils.CommentUtils;
@@ -96,10 +98,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     private View dynamicView_phone;
     private View dynamicView_pad_1;
     private View dynamicView_pad_2;
-    private String sysType;
-    private final String INVERTER = "INVERTER"; //光伏系统
-    private final String BIG_HPS = "BIG_HPS";   //光储系统
-    private final String BATTERY = "BATTERY";   //储能系统
+    private int sysType = 1;
 
     private int timeType = 1;
     private String time = "";
@@ -107,6 +106,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     private TextView power_grid;
     private TextView power_cost;
     private TextView power_pv;
+    private TextView power_discharger;
     private TextView pv_in;
     private TextView pv_out;
     private TextView status;
@@ -118,6 +118,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     private ImageView imageView6;
     private ImageView imageView7;
     private ImageView imageView8;
+    private ImageView imageView9;
     private ImageView imageView1;
     private ImageView imageView2;
     private RadioGroup timeGroup;
@@ -127,12 +128,25 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     private TextView ele_cost;
     private TextView cost_pv;
     private TextView cost_grid;
+    private TextView cost_battery;
     private TextView cost_pv_percent;
     private TextView cost_grid_percent;
+    private TextView cost_battery_percent;
     private CircleProgressBar c2;
     private ImageView imageView3;
     private ImageView imageView4;
+    private ImageView imageView5;
     private View mBatteryCard;
+    private ImageView mBatteryImg;
+    private TextView mBatteryState;
+    private TextView valtage_max;
+    private TextView temp_min;
+    private TextView current;
+    private TextView voltage_all;
+    private TextView soc;
+    private TextView temp_max;
+    private TextView soh;
+    private TextView valtage_min;
 
     public ScrollView getScrollView() {
         return scrollView;
@@ -165,32 +179,44 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
             container_pad_1 = view.findViewById(R.id.pad_container_left);
             container_pad_2 = view.findViewById(R.id.container_2);
-        }else {
+        } else {
             container = view.findViewById(R.id.container);
         }
         deviceList = view.findViewById(R.id.device_list);
         areaSelector1 = view.findViewById(R.id.drop_menu_bt);
         areaSelector2 = view.findViewById(R.id.area_selector_2);
         mBatteryCard = view.findViewById(R.id.battery_card);
+        mBatteryImg = view.findViewById(R.id.battery_img);
+        mBatteryState = view.findViewById(R.id.battery_status);
+        valtage_max = view.findViewById(R.id.valtage_max);
+        temp_min = view.findViewById(R.id.temp_min);
+        current = view.findViewById(R.id.current);
+        voltage_all = view.findViewById(R.id.voltage_all);
+        soc = view.findViewById(R.id.soc);
+        temp_max = view.findViewById(R.id.temp_max);
+        soh = view.findViewById(R.id.soh);
+        valtage_min = view.findViewById(R.id.valtage_min);
         areaSelector1.setOnClickListener(this);
         areaSelector2.setOnClickListener(this);
         view.findViewById(R.id.add_ic).setOnClickListener(this);
+        view.findViewById(R.id.battery_ic).setOnClickListener(this);
         InternetUtils.generateEleOverview(LoginMsg.uniqueId);
         InternetUtils.generateElectricitys(LoginMsg.uniqueId, "");
         InternetUtils.areaInfo(LoginMsg.uniqueId);
         InternetUtils.inverters(LoginMsg.uniqueId);
+        InternetUtils.storage(LoginMsg.uniqueId);
 
         scrollView = view.findViewById(R.id.scrollView);
         linearLayout = view.findViewById(R.id.jump_to);
     }
 
-    public void jumpTo(){
+    public void jumpTo() {
         scrollView.postDelayed(new Runnable() {
             @Override
             public void run() {
-                scrollView.scrollTo(0,linearLayout.getTop());
+                scrollView.scrollTo(0, linearLayout.getTop());
             }
-        },200);
+        }, 200);
     }
 
     @Override
@@ -347,6 +373,9 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             case R.id.time_picker:
                 selectTime();
                 break;
+            case R.id.battery_ic:
+                InternetUtils.storageDetail(LoginMsg.uniqueId);
+                break;
         }
     }
 
@@ -451,6 +480,31 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         authCode = view.findViewById(R.id.auth_code);
     }
 
+    private void popBattery(StorageDetailMsg msg) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_battery_cup_inf, null);
+        if (!MainActivity.isPad) {
+            PopupWindow batteryPop = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            batteryPop.setOutsideTouchable(true);
+            batteryPop.setTouchable(true);
+            batteryPop.setFocusable(true);
+            batteryPop.showAtLocation(mRootView, Gravity.BOTTOM, 0, 0);
+            final WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+            lp.alpha = 0.5f;
+            getActivity().getWindow().setAttributes(lp);
+            batteryPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    lp.alpha = 1;
+                    getActivity().getWindow().setAttributes(lp);
+                }
+            });
+        } else {
+            AlertDialog dialog = new AlertDialog.Builder(getContext()).setView(view).create();
+        }
+
+        view.findViewById(R.id.close).setOnClickListener(this);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -469,6 +523,15 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             addDevicePop.dismiss();
         } else {
             Toast.makeText(getContext(), msg.data, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void dqs(StorageDetailMsg msg) {
+        if (msg.code.equals("0")) {
+            popBattery(msg);
+        } else {
+            Toast.makeText(getContext(), msg.errMsg, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -516,11 +579,12 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         areaSelector1.setText(bean.devId);
         InternetUtils.statisticsData(LoginMsg.uniqueId, bean.devId);
         InternetUtils.storageSystemData(LoginMsg.uniqueId, bean.devId);
+        InternetUtils.storage(LoginMsg.uniqueId);
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
         switch (bean.systemType) {
             case 1:
-                sysType = INVERTER;
+                sysType = 1;
                 title.setText("光伏系统运行图");
                 if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
                     dynamicView_pad_1 = LayoutInflater.from(getContext()).inflate(R.layout.layout_inverter_block_pad_1, container, false);
@@ -531,7 +595,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case 3:
-                sysType = BIG_HPS;
+                sysType = 3;
                 title.setText("光储系统运行图");
                 if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
 
@@ -542,7 +606,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case 2:
-                sysType = BATTERY;
+                sysType = 2;
                 title.setText("储能系统运行图");
                 if (MainActivity.isPad && dm.widthPixels > dm.heightPixels) {
 
@@ -585,10 +649,11 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             c2 = dynamicView_pad_1.findViewById(R.id.circle_percent);
             imageView3 = dynamicView_pad_1.findViewById(R.id.anim_03);
             imageView4 = dynamicView_pad_1.findViewById(R.id.anim_04);
-        }else {
+        } else {
             power_grid = dynamicView_phone.findViewById(R.id.power_grid);
             power_cost = dynamicView_phone.findViewById(R.id.power_cost);
             power_pv = dynamicView_phone.findViewById(R.id.power_pv);
+            power_discharger = dynamicView_phone.findViewById(R.id.power_discharger);
             pv_in = dynamicView_phone.findViewById(R.id.pv_in);
             pv_out = dynamicView_phone.findViewById(R.id.pv_out);
             status = dynamicView_phone.findViewById(R.id.status);
@@ -600,6 +665,7 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             imageView6 = dynamicView_phone.findViewById(R.id.anim_06);
             imageView7 = dynamicView_phone.findViewById(R.id.anim_07);
             imageView8 = dynamicView_phone.findViewById(R.id.anim_08);
+            imageView9 = dynamicView_phone.findViewById(R.id.anim_09);
             imageView1 = dynamicView_phone.findViewById(R.id.anim_01);
             imageView2 = dynamicView_phone.findViewById(R.id.anim_02);
             timeText = dynamicView_phone.findViewById(R.id.time_picker);
@@ -611,11 +677,14 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             ele_cost = dynamicView_phone.findViewById(R.id.ele_cost);
             cost_pv = dynamicView_phone.findViewById(R.id.cost_pv);
             cost_grid = dynamicView_phone.findViewById(R.id.cost_grid);
+            cost_battery = dynamicView_phone.findViewById(R.id.cost_battery);
             cost_pv_percent = dynamicView_phone.findViewById(R.id.cost_pv_percent);
             cost_grid_percent = dynamicView_phone.findViewById(R.id.cost_grid_percent);
+            cost_battery_percent = dynamicView_phone.findViewById(R.id.cost_battery_percent);
             c2 = dynamicView_phone.findViewById(R.id.circle_percent);
             imageView3 = dynamicView_phone.findViewById(R.id.anim_03);
             imageView4 = dynamicView_phone.findViewById(R.id.anim_04);
+            imageView5 = dynamicView_phone.findViewById(R.id.anim_05);
         }
 
         timeText.setOnClickListener(this);
@@ -663,10 +732,10 @@ public class EleFragment extends Fragment implements View.OnClickListener {
             container_pad_1.removeViewAt(1);
             container_pad_1.addView(dynamicView_pad_1, 1);
             container_pad_2.removeViewAt(1);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             dynamicView_pad_2.setLayoutParams(params);
             container_pad_2.addView(dynamicView_pad_2, 1);
-        }else {
+        } else {
             container.removeViewAt(1);
             container.addView(dynamicView_phone, 1);
         }
@@ -676,13 +745,13 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     public void d3231s(StatisticsDataMsg msg) {
         if (msg.code.equals("0")) {
             switch (sysType) {
-                case INVERTER:
+                case 1:
                     setInverterData(msg);
                     break;
-                case BIG_HPS:
+                case 3:
                     setBigHPpsData(msg);
                     break;
-                case BATTERY:
+                case 2:
                     setBatteryData(msg);
                     break;
             }
@@ -692,11 +761,68 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setBatteryData(StatisticsDataMsg msg) {
-
+        Locale locale = getResources().getConfiguration().locale;
+        String tempString;
+        tempString = String.format(locale, "%.1f", msg.power_theory);
+        power_theory.setText(tempString);
+        tempString = String.format(locale, "%.1f", msg.ele_total);
+        ele_total.setText(tempString);
+        tempString = String.format(locale, "%.1f", msg.benifit_total);
+        benifit_total.setText(tempString);
     }
 
     private void setBigHPpsData(StatisticsDataMsg msg) {
 
+        Locale locale = getResources().getConfiguration().locale;
+        String tempString;
+        tempString = String.format(locale, "%.1f", msg.power_theory);
+        power_theory.setText(tempString);
+        tempString = String.format(locale, "%.1f", msg.ele_total);
+        ele_total.setText(tempString);
+        tempString = String.format(locale, "%.1f", msg.benifit_total);
+        benifit_total.setText(tempString);
+
+        double d = msg.ele_cost;
+        tempString = String.format(locale, "%.1f", d);
+        ele_cost.setText(tempString);
+        double d1 = msg.cost_pv;
+        tempString = String.format(locale, "%.1f", d1);
+        cost_pv.setText(tempString);
+        double d2 = msg.cost_grid;
+        tempString = String.format(locale, "%.1f", d2);
+        cost_grid.setText(tempString);
+        double d3 = msg.cost_battery;
+        tempString = String.format(locale, "%.1f", d3);
+        cost_battery.setText(tempString);
+
+        if (d == 0) return;
+
+        tempString = String.valueOf(Math.round(d2 * 100 / d)) + "%";
+        cost_grid_percent.setText(tempString);
+        tempString = String.valueOf(Math.round(d1 * 100 / d)) + "%";
+        cost_pv_percent.setText(tempString);
+        tempString = String.valueOf(Math.round(d3 * 100 / d)) + "%";
+        cost_battery_percent.setText(tempString);
+
+        c2.setProgress((int) (d2 * 100));
+        c2.setSecondProgress((int) (d3 * 100));
+
+        if (d1 > 0) {
+            imageView3.setImageResource(R.drawable.anim_05);
+            AnimationDrawable animation3 = (AnimationDrawable) imageView3.getDrawable();
+            animation3.start();
+        }
+        if (d2 > 0) {
+            imageView4.setImageResource(R.drawable.anim_06);
+            AnimationDrawable animation4 = (AnimationDrawable) imageView4.getDrawable();
+            animation4.start();
+        }
+
+        if (d3 > 0) {
+            imageView5.setImageResource(R.drawable.anim_11);
+            AnimationDrawable animation4 = (AnimationDrawable) imageView5.getDrawable();
+            animation4.start();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -709,15 +835,50 @@ public class EleFragment extends Fragment implements View.OnClickListener {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
+    public void k1s(StorageMsg msg) {
+        if (msg.code.equals("1")) {
+            Toast.makeText(getContext(), msg.errMsg, Toast.LENGTH_SHORT).show();
+        } else {
+            if (msg.state.equals("charge_in")) {
+                mBatteryImg.setImageResource(R.mipmap.charging);
+                mBatteryState.setText("充电中");
+                mBatteryState.setTextColor(0xFF00FFA8);
+            } else {
+                mBatteryImg.setImageResource(R.mipmap.discharging);
+                mBatteryState.setText("放电中");
+                mBatteryState.setTextColor(0xfffbf31c);
+            }
+            String tempString = msg.soc + "%";
+            soc.setText(tempString);
+            tempString = msg.soh + "%";
+            soh.setText(tempString);
+            tempString = msg.voltage_all + "V";
+            voltage_all.setText(tempString);
+            tempString = msg.current + "A";
+            current.setText(tempString);
+            tempString = msg.temp_max + "°";
+            temp_max.setText(tempString);
+            tempString = msg.temp_min + "°";
+            temp_min.setText(tempString);
+            tempString = msg.valtage_max + "V";
+            valtage_max.setText(tempString);
+            tempString = msg.valtage_min + "V";
+            valtage_min.setText(tempString);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void d231s(StorageSystemDataMsg msg) {
         if (msg.code.equals("0")) {
             switch (sysType) {
-                case INVERTER:
+                case 1:
                     setInverterData(msg);
                     break;
-                case BIG_HPS:
+                case 3:
+                    setBigHpsData(msg);
                     break;
-                case BATTERY:
+                case 2:
+                    setBatteryData(msg);
                     break;
 
             }
@@ -726,26 +887,128 @@ public class EleFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void setBigHpsData(StorageSystemDataMsg msg) {
+        Locale locale = getResources().getConfiguration().locale;
+        String tempString;
+        double parseDouble1 = msg.power_grid;
+        tempString = "电网功率：" + String.format(locale, "%.1f", parseDouble1) + "W";
+        power_grid.setText(tempString);
+        double parseDouble2 = msg.power_cost;
+        tempString = "用电功率：" + String.format(locale, "%.1f", parseDouble2) + "W";
+        power_cost.setText(tempString);
+        double parseDouble3 = msg.power_pv;
+        tempString = "PV功率：" + String.format(locale, "%.1f", parseDouble3) + "W";
+        power_pv.setText(tempString);
+        double parseDouble4 = msg.power_discharger;
+        tempString = "放电功率：" + String.format(locale, "%.1f", parseDouble4) + "W";
+        power_discharger.setText(tempString);
+
+        double d1 = msg.pv_in;
+        tempString = String.format(locale, "%.1f", d1);
+        pv_in.setText(tempString);
+        double d2 = msg.pv_out;
+        tempString = String.format(locale, "%.1f", d2);
+        pv_out.setText(tempString);
+        if (msg.status) status.setText("并网");
+        else status.setText("离网");
+        double total = d1 + d2;
+        pv_total.setText(String.format(locale, "%.1f", total));
+        tempString = String.valueOf(Math.round(d1 * 100 / total)) + "%";
+        pv_in_percent.setText(tempString);
+        tempString = String.valueOf(Math.round(d2 * 100 / total)) + "%";
+        pv_out_percent.setText(tempString);
+        c1.setProgress((int) (d2 * 100 / total));
+
+        AnimationDrawable animation;
+        if (parseDouble1 > 0) {
+            imageView8.setImageResource(R.drawable.anim_12);
+            animation = (AnimationDrawable) imageView8.getDrawable();
+            animation.start();
+        }
+        if (parseDouble2 > 0) {
+            imageView7.setImageResource(R.drawable.anim_14);
+            animation = (AnimationDrawable) imageView7.getDrawable();
+            animation.start();
+        }
+        if (parseDouble3 > 0) {
+            imageView9.setImageResource(R.drawable.anim_07);
+            animation = (AnimationDrawable) imageView9.getDrawable();
+            animation.start();
+        }
+        if (parseDouble4 > 0) {
+            imageView6.setImageResource(R.drawable.anim_13);
+            animation = (AnimationDrawable) imageView6.getDrawable();
+            animation.start();
+        }
+
+
+        if (d1 > 0) {
+            imageView1.setImageResource(R.drawable.anim_03);
+            animation = (AnimationDrawable) imageView1.getDrawable();
+            animation.start();
+        }
+        if (d2 > 0) {
+            imageView2.setImageResource(R.drawable.anim_04);
+            animation = (AnimationDrawable) imageView2.getDrawable();
+            animation.start();
+        }
+    }
+
+    private void setBatteryData(StorageSystemDataMsg msg) {
+
+        Locale locale = getResources().getConfiguration().locale;
+        String tempString;
+        double parseDouble1 = msg.power_grid;
+        tempString = "电网功率：" + String.format(locale, "%.1f", parseDouble1) + "W";
+        power_grid.setText(tempString);
+        double parseDouble2 = msg.power_cost;
+        tempString = "用电功率：" + String.format(locale, "%.1f", parseDouble2) + "W";
+        power_cost.setText(tempString);
+        double parseDouble3 = msg.power_discharger;
+        tempString = "放电功率：" + String.format(locale, "%.1f", parseDouble3) + "W";
+        power_discharger.setText(tempString);
+
+        if (msg.status) status.setText("并网");
+        else status.setText("离网");
+
+        AnimationDrawable animation;
+        if (parseDouble1 > 0) {
+            imageView8.setImageResource(R.drawable.anim_12);
+            animation = (AnimationDrawable) imageView8.getDrawable();
+            animation.start();
+        }
+        if (parseDouble2 > 0) {
+            imageView7.setImageResource(R.drawable.anim_14);
+            animation = (AnimationDrawable) imageView7.getDrawable();
+            animation.start();
+        }
+        if (parseDouble3 > 0) {
+            imageView6.setImageResource(R.drawable.anim_13);
+            animation = (AnimationDrawable) imageView6.getDrawable();
+            animation.start();
+        }
+    }
+
     private void setInverterData(StorageSystemDataMsg msg) {
 
         Locale locale = getResources().getConfiguration().locale;
         String tempString;
-        double parseDouble1 = Double.parseDouble(msg.power_grid);
+        double parseDouble1 = msg.power_grid;
         tempString = "电网功率：" + String.format(locale, "%.1f", parseDouble1) + "W";
         power_grid.setText(tempString);
-        double parseDouble2 = Double.parseDouble(msg.power_cost);
+        double parseDouble2 = msg.power_cost;
         tempString = "用电功率：" + String.format(locale, "%.1f", parseDouble2) + "W";
         power_cost.setText(tempString);
-        double parseDouble3 = Double.parseDouble(msg.power_pv);
+        double parseDouble3 = msg.power_pv;
         tempString = "PV功率：" + String.format(locale, "%.1f", parseDouble3) + "W";
         power_pv.setText(tempString);
-        double d1 = Double.parseDouble(msg.pv_in);
+        double d1 = msg.pv_in;
         tempString = String.format(locale, "%.1f", d1);
         pv_in.setText(tempString);
-        double d2 = Double.parseDouble(msg.pv_out);
+        double d2 = msg.pv_out;
         tempString = String.format(locale, "%.1f", d2);
         pv_out.setText(tempString);
-        if (msg.status.equals("true")) status.setText("并网");
+        if (msg.status) status.setText("并网");
         else status.setText("离网");
         double total = d1 + d2;
         pv_total.setText(String.format(locale, "%.1f", total));
@@ -787,19 +1050,19 @@ public class EleFragment extends Fragment implements View.OnClickListener {
 
         Locale locale = getResources().getConfiguration().locale;
         String tempString;
-        tempString = String.format(locale, "%.1f", Double.parseDouble(msg.power_theory));
+        tempString = String.format(locale, "%.1f", msg.power_theory);
         power_theory.setText(tempString);
-        tempString = String.format(locale, "%.1f", Double.parseDouble(msg.ele_total));
+        tempString = String.format(locale, "%.1f", msg.ele_total);
         ele_total.setText(tempString);
-        tempString = String.format(locale, "%.1f", Double.parseDouble(msg.benifit_total));
+        tempString = String.format(locale, "%.1f", msg.benifit_total);
         benifit_total.setText(tempString);
-        double d = Double.parseDouble(msg.ele_cost);
+        double d = msg.ele_cost;
         tempString = String.format(locale, "%.1f", d);
         ele_cost.setText(tempString);
-        double d1 = Double.parseDouble(msg.cost_pv);
+        double d1 = msg.cost_pv;
         tempString = String.format(locale, "%.1f", d1);
         cost_pv.setText(tempString);
-        double d2 = Double.parseDouble(msg.cost_grid);
+        double d2 = msg.cost_grid;
         tempString = String.format(locale, "%.1f", d2);
         cost_grid.setText(tempString);
         tempString = String.valueOf(Math.round(d2 * 100 / d)) + "%";

@@ -12,13 +12,13 @@ public class StorageSystemDataMsg {
 
     public String code;
     public String errMsg;
-    public String power_grid;
-    public String power_cost;
-    public String power_pv;
-    public String power_discharger;
-    public String pv_in;
-    public String pv_out;
-    public String status;
+    public double power_grid = 0;
+    public double power_cost = 0;
+    public double power_pv = 0;
+    public double power_discharger = 0;
+    public double pv_in = 0;
+    public double pv_out = 0;
+    public boolean status;
 
     public StorageSystemDataMsg(String s) {
         JSONObject jsonObject = null;
@@ -34,13 +34,13 @@ public class StorageSystemDataMsg {
         }else {
             JSONObject data = jsonObject.optJSONObject("data");
             if (data == null) return;
-            power_grid = data.optString("power_grid");
-            power_cost = data.optString("power_cost");
-            power_pv = data.optString("power_pv");
-            power_discharger = data.optString("power_discharger");
-            pv_in = data.optString("pv_in");
-            pv_out = data.optString("pv_out");
-            status = data.optString("status");
+            power_grid = data.optDouble("power_grid");
+            power_cost = data.optDouble("power_cost");
+            power_pv = data.optDouble("power_pv");
+            power_discharger = data.optDouble("power_discharger");
+            pv_in = data.optDouble("pv_in");
+            pv_out = data.optDouble("pv_out");
+            status = data.optBoolean("status");
         }
     }
 }
