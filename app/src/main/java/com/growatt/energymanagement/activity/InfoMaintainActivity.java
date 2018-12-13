@@ -22,7 +22,6 @@ import com.growatt.energymanagement.msgs.PowerStationMsg;
 import com.growatt.energymanagement.utils.CommentUtils;
 import com.growatt.energymanagement.utils.InternetUtils;
 import com.growatt.energymanagement.utils.LocationUtils;
-import com.growatt.energymanagement.utils.RegionUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

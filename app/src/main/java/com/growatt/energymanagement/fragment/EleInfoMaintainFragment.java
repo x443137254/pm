@@ -1,6 +1,5 @@
 package com.growatt.energymanagement.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,29 +10,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
-import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.growatt.energymanagement.R;
-import com.growatt.energymanagement.activity.ModifyActivity;
 import com.growatt.energymanagement.msgs.CountryDataMsg;
 import com.growatt.energymanagement.msgs.LoginMsg;
 import com.growatt.energymanagement.msgs.PowerStationMsg;
 import com.growatt.energymanagement.utils.CommentUtils;
 import com.growatt.energymanagement.utils.InternetUtils;
-import com.growatt.energymanagement.utils.RegionUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Administrator on 2018/9/10.
@@ -88,37 +80,37 @@ public class EleInfoMaintainFragment extends Fragment implements View.OnClickLis
         EventBus.getDefault().unregister(this);
     }
 
-    private void selectCity() {
-        RegionUtil regionUtil = new RegionUtil(getContext());
-        final List<String> provinceList = regionUtil.getProvinceList();
-        final List<List<String>> citesList = new ArrayList<>();
-        for (int i = 0; i < provinceList.size(); i++) {
-            citesList.add(regionUtil.getCityList(i));
-        }
-        OptionsPickerView<String> pvOptions = new OptionsPickerBuilder(getContext(), new OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                final String tx = citesList.get(options1).get(options2);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        city.setText(tx);
-                    }
-                });
-            }
-        })
-                .setTitleText("请选择城市")
-                .setTitleBgColor(0xff032d3a)
-                .setTitleColor(0xffffffff)
-                .setSubmitColor(0xffffffff)
-                .setCancelColor(0xff058ef0)
-                .setBgColor(0xff032d3a)
-                .setTitleSize(22)
-                .setTextColorCenter(0xffffffff)
-                .build();
-        pvOptions.setPicker(provinceList,citesList);
-        pvOptions.show();
-    }
+//    private void selectCity() {
+//        RegionUtil regionUtil = new RegionUtil(getContext());
+//        final List<String> provinceList = regionUtil.getProvinceList();
+//        final List<List<String>> citesList = new ArrayList<>();
+//        for (int i = 0; i < provinceList.size(); i++) {
+//            citesList.add(regionUtil.getCityList(i));
+//        }
+//        OptionsPickerView<String> pvOptions = new OptionsPickerBuilder(getContext(), new OnOptionsSelectListener() {
+//            @Override
+//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+//                final String tx = citesList.get(options1).get(options2);
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        city.setText(tx);
+//                    }
+//                });
+//            }
+//        })
+//                .setTitleText("请选择城市")
+//                .setTitleBgColor(0xff032d3a)
+//                .setTitleColor(0xffffffff)
+//                .setSubmitColor(0xffffffff)
+//                .setCancelColor(0xff058ef0)
+//                .setBgColor(0xff032d3a)
+//                .setTitleSize(22)
+//                .setTextColorCenter(0xffffffff)
+//                .build();
+//        pvOptions.setPicker(provinceList,citesList);
+//        pvOptions.show();
+//    }
 
     private void selectTime() {
         TimePickerView pvTime = new TimePickerBuilder(getContext(), new OnTimeSelectListener() {
@@ -182,7 +174,7 @@ public class EleInfoMaintainFragment extends Fragment implements View.OnClickLis
                 InternetUtils.countryData();
                 break;
             case R.id.city_item:
-                selectCity();
+                //selectCity();
                 break;
         }
     }

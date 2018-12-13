@@ -28,12 +28,10 @@ import com.growatt.energymanagement.msgs.ThirdRegistMsg;
 import com.growatt.energymanagement.msgs.UserNameExistMsg;
 import com.growatt.energymanagement.utils.CommentUtils;
 import com.growatt.energymanagement.utils.InternetUtils;
-import com.growatt.energymanagement.utils.RegionUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
