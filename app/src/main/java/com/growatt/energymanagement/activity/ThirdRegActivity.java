@@ -27,39 +27,43 @@ import com.growatt.energymanagement.utils.InternetUtils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ThirdRegActivity extends BasicActivity implements View.OnClickListener {
 
     private EditText phone;
-    private EditText phone_code;
     private EditText pwd;
+    private EditText confirmPwd;
     private EditText companyName;
     private EditText address;
     private EditText install_sn;
-    private TextView getCode;
     private TextView country;
+    private TextView getCode;
     private TextView province;
     private TextView city;
     private TextView area;
     private TextView language;
-    private ImageView country_ic;
-    private ImageView province_ic;
-    private ImageView city_ic;
-    private ImageView area_ic;
-    private ImageView language_ic;
     private CheckBox agreement;
     private boolean legal = true;
     private String account;
     private String password;
     private String company;
     private String addr;
-    private String userType;
     private String phoneCode;
+    private String userType;
     private Timer timer;
     private int countDown = 60;
     private String CODE = "";
+    private EditText phone_code;
+
+    private List<String> provinceList;
+    private List<List<String>> cityList;
+    private List<List<List<String>>> areaList;
+
+    private List<String> countryList;
+    private List<List<String>> foreignCityList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,30 +79,24 @@ public class ThirdRegActivity extends BasicActivity implements View.OnClickListe
     private void initViews() {
         phone = findViewById(R.id.phone);
         phone_code = findViewById(R.id.phone_code);
+        getCode = findViewById(R.id.get_code);
         pwd = findViewById(R.id.pwd);
+        confirmPwd = findViewById(R.id.reg_input_pwd_again);
         companyName = findViewById(R.id.company);
         address = findViewById(R.id.address);
         install_sn = findViewById(R.id.sn);
-        getCode = findViewById(R.id.get_code);
         country = findViewById(R.id.country);
         province = findViewById(R.id.province);
         city = findViewById(R.id.city);
         area = findViewById(R.id.area);
         language = findViewById(R.id.language);
-        country_ic = findViewById(R.id.country_ic);
-        province_ic = findViewById(R.id.province_ic);
-        city_ic = findViewById(R.id.city_ic);
-        area_ic = findViewById(R.id.area_ic);
-        language_ic = findViewById(R.id.language_ic);
         agreement = findViewById(R.id.agreement);
         findViewById(R.id.reg_back).setOnClickListener(this);
         findViewById(R.id.next_step).setOnClickListener(this);
         findViewById(R.id.cancel).setOnClickListener(this);
-        country_ic.setOnClickListener(this);
-        province_ic.setOnClickListener(this);
-        city_ic.setOnClickListener(this);
-        area_ic.setOnClickListener(this);
-        language_ic.setOnClickListener(this);
+        findViewById(R.id.country).setOnClickListener(this);
+        findViewById(R.id.select_city_bar).setOnClickListener(this);
+        if (MainActivity.isPad) findViewById(R.id.back_to_login).setOnClickListener(this);
         getCode.setOnClickListener(this);
         phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -113,10 +111,18 @@ public class ThirdRegActivity extends BasicActivity implements View.OnClickListe
     }
 
     private void checkLegal() {
+        legal = true;
         account = phone.getText().toString();
         if (account.equals("") || account.equals("null")) {
             legal = false;
             Toast.makeText(this, getResources().getString(R.string.reg_account_empty), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        phoneCode = phone_code.getText().toString();
+        if (phoneCode.equals("") || phoneCode.equals("null")) {
+            legal = false;
+            Toast.makeText(this, getResources().getString(R.string.phone_code_empty), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -132,10 +138,10 @@ public class ThirdRegActivity extends BasicActivity implements View.OnClickListe
             return;
         }
 
-        phoneCode = phone_code.getText().toString();
-        if (phoneCode.equals("") || phoneCode.equals("null")) {
+        String s = confirmPwd.getText().toString();
+        if (s.equals("") || s.equals("null") || !s.equals(password)) {
             legal = false;
-            Toast.makeText(this, getResources().getString(R.string.phone_code_empty), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.reg_pwd_diff), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -146,7 +152,7 @@ public class ThirdRegActivity extends BasicActivity implements View.OnClickListe
             return;
         }
 
-        addr = address.getText().toString();
+        addr = province.getText().toString();
         if (addr.equals("") || addr.equals("null")) {
             legal = false;
             Toast.makeText(this, getResources().getString(R.string.reg_add_empty), Toast.LENGTH_SHORT).show();
@@ -156,6 +162,11 @@ public class ThirdRegActivity extends BasicActivity implements View.OnClickListe
         if (userType.equals("") || userType.equals("null")) {
             legal = false;
             Toast.makeText(this, getResources().getString(R.string.reg_sn_empty), Toast.LENGTH_SHORT).show();
+        }
+
+        if (!agreement.isChecked()){
+            legal = false;
+            Toast.makeText(this, getResources().getString(R.string.reg_agreement), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -194,7 +205,7 @@ public class ThirdRegActivity extends BasicActivity implements View.OnClickListe
     public void b1(ThirdRegistMsg msg) {
         if (msg.code.equals("0")) {
             Toast.makeText(this, getResources().getString(R.string.reg_success), Toast.LENGTH_SHORT).show();
-            InternetUtils.login(account,password);
+            //InternetUtils.login(account,password);
         } else Toast.makeText(this, getResources().getString(R.string.reg_fail), Toast.LENGTH_SHORT).show();
     }
 
