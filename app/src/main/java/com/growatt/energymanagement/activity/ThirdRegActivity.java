@@ -215,9 +215,11 @@ public class ThirdRegActivity extends BasicActivity implements View.OnClickListe
             Toast.makeText(this, msg.errMsg, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, getResources().getString(R.string.login_success), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, MainActivity.class));
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("isFirst",true);
+            startActivity(intent);
             CommentUtils.save(this);
-            pop();
+            //pop();
         }
     }
 

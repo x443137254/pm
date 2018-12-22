@@ -20,7 +20,10 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -115,6 +118,10 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
             LocationUtils.getAddress(this);
         }
 
+        if (!isPad && getIntent().getBooleanExtra("isFirst",false)){
+            pop();
+        }
+
     }
 
     private void readCache() {
@@ -174,7 +181,7 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
                     company.setText("");
                 } else {
                     company.setText(companyName);
-                    if (nick.equals("")){
+                    if (!nick.equals("")){
                         account.setText(nick);
                     }else {
                         account.setText(accountText);
@@ -193,6 +200,29 @@ public class MainActivity extends BasicActivity implements RadioGroup.OnCheckedC
             }
         });
 
+    }
+
+    private void pop() {
+        View view = LayoutInflater.from(this).inflate(R.layout.layout_tip_add_device,null);
+        if (!MainActivity.isPad) {
+            PopupWindow pop = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            pop.setOutsideTouchable(true);
+            pop.setTouchable(true);
+            pop.setFocusable(true);
+            pop.showAtLocation(getWindow().getDecorView().findViewById(android.R.id.content), Gravity.BOTTOM, 0, 0);
+            final WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.alpha = 0.5f;
+            getWindow().setAttributes(lp);
+            pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    lp.alpha = 1;
+                    getWindow().setAttributes(lp);
+                }
+            });
+        }else {
+            new AlertDialog.Builder(this).setView(view).show();
+        }
     }
 
     private void setBackground() {

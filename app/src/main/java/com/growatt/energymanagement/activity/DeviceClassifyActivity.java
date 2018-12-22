@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.growatt.energymanagement.R;
 import com.growatt.energymanagement.adapters.DeviceClaLisAdapter;
+import com.growatt.energymanagement.adapters.DeviceClaLisAdapter2;
 import com.growatt.energymanagement.msgs.AreaDevsDetailInfoMsg;
 import com.growatt.energymanagement.msgs.DevsDetailInfoMsg;
 import com.growatt.energymanagement.msgs.LoginMsg;
@@ -29,13 +30,21 @@ public class DeviceClassifyActivity extends BasicActivity {
     private TextView devTotal;
     private TextView consTotal;
     private DeviceClaLisAdapter adapter;
+    private DeviceClaLisAdapter2 adapter2;
     private TabLayout tabs;
 
     private List<DevsDetailInfoMsg.Dev> all_list;
     private List<DevsDetailInfoMsg.Dev> running_list;
     private List<DevsDetailInfoMsg.Dev> error_list;
     private List<DevsDetailInfoMsg.Dev> sleeping_list;
+
     private TextView mTitle;
+
+    private List<AreaDevsDetailInfoMsg.DevsDetailInfo> all_list2;
+    private List<AreaDevsDetailInfoMsg.DevsDetailInfo> running_list2;
+    private List<AreaDevsDetailInfoMsg.DevsDetailInfo> error_list2;
+    private List<AreaDevsDetailInfoMsg.DevsDetailInfo> sleeping_list2;
+    private ListView mDevList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +65,7 @@ public class DeviceClassifyActivity extends BasicActivity {
 
         initData();
 
-        ((ListView) findViewById(R.id.device_classify_list)).setAdapter(adapter);
+        mDevList = findViewById(R.id.device_classify_list);
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -86,6 +95,8 @@ public class DeviceClassifyActivity extends BasicActivity {
         Intent intent = getIntent();
         String devType = intent.getStringExtra("devType");
         adapter = new DeviceClaLisAdapter(this, all_list, devType);
+        adapter2 = new DeviceClaLisAdapter2(this, all_list2);
+
         if (devType == null || devType.equals("") || devType.equals("null")) {
             mTitle.setText(intent.getStringExtra("name"));
             InternetUtils.areaDevsDetailInfo(LoginMsg.uniqueId,intent.getStringExtra("path"));
@@ -145,6 +156,9 @@ public class DeviceClassifyActivity extends BasicActivity {
             tabs.addTab(tab_running);
             tabs.addTab(tab_sleep);
             tabs.addTab(tab_error);
+
+            mDevList.setAdapter(adapter);
+
             all_list = msg.all.devs;
             running_list = msg.running.devs;
             error_list = msg.error.devs;
@@ -179,11 +193,14 @@ public class DeviceClassifyActivity extends BasicActivity {
             tabs.addTab(tab_running);
             tabs.addTab(tab_sleep);
             tabs.addTab(tab_error);
-//            all_list = msg.allDev;
-//            running_list = msg.running.devs;
-//            error_list = msg.error.devs;
-//            sleeping_list = msg.sleeping.devs;
-//            adapter.setList(all_list);
+
+            mDevList.setAdapter(adapter2);
+
+            all_list2 = msg.allDev;
+            running_list2 = msg.runningDev;
+            error_list2 = msg.errorDev;
+            sleeping_list2 = msg.sleepingDev;
+            adapter2.setList(all_list2);
         }
     }
 }

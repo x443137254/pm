@@ -49,6 +49,8 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
     private TextView timeArea;
     private TextView city;
 
+    private int id = 0;
+
     private final int MODIFY_NAME = 102;
     private final int MODIFY_DESIGN = 103;
     private final int MODIFY_POWER = 104;
@@ -234,6 +236,7 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
         double subsidy = Double.parseDouble(this.subsidy.getText().toString().substring(1));
         Map<String, Object> map = new HashMap<>();
         map.put("name", name);
+        map.put("id", id);
         map.put("setDate", setDate);
         map.put("designCompany", designCompany);
         map.put("power", power);
@@ -263,6 +266,7 @@ public class InfoMaintainActivity extends BasicActivity implements View.OnClickL
 //            latitude.setText(temp);
             temp = "￥" + msg.subsidy;
             subsidy.setText(temp);
+            id = msg.id;
         }
     }
 

@@ -53,7 +53,9 @@ public class EnergyDetailActivity extends BasicActivity implements View.OnClickL
         if (intent == null) return;
         devId = intent.getStringExtra("devId");
         devType = intent.getStringExtra("devType");
+
         InternetUtils.devDetailInfo(devId, devType);
+
         title = findViewById(R.id.dev_name);
         runningStatus = findViewById(R.id.running_status);
         power = findViewById(R.id.power);
